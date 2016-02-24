@@ -1,0 +1,12 @@
+.main_pro_big{width:699px;border:1px solid #D1D1D1;background:#fff;padding:0 20px;overflow:hidden;}
+.main_pro_big .title_wrap{width:663px;border-bottom:1px solid #dcdcdc;}
+.main_pro_big .title_wrap h2{font-size:18px;font-weight:bold;text-align:center;height:35px;}
+.main_pro_big .zhiliang{height:25px;line-height:25px;background:#f7f7f7;text-align:left;border-bottom:1px solid #e7e7e7;padding-left:10px;}
+.main_pro_big .zhiliang h2{font-size:12px;font-weight:bold;color:#333;}
+.main_pro_big .quality_detail{margin:5px 10px 0;line-height:28px;font-size:12px;}
+.box_c{margin-left: 15px; float: left; display: inline; margin-top: 20px;  font-size: 12px;width:300px; }
+.box_c th{ width: 100px; text-align: left;}
+.box_c .leibie{width:62px;}
+.box_c .detail{width:130px;word-break:break-all; word-wrap:break-all;}
+.box_title{height:28px;line-height:28px;padding-left:16px;width:664px;font-size:13px;color:#fff;background:url(../images/026.png) no-repeat 0px 0;margin-left:10px;}
+.box_title span{ font-weight: normal; color: #666; }

@@ -1,0 +1,13 @@
+.main_pro_big{width:699px;border:1px solid #D1D1D1;background:#fff;padding:0 20px;overflow:hidden;}
+.main_pro_big .title_wrap{width:663px;border-bottom:1px solid #dcdcdc;}
+.about_content{ width: 100%; line-height: 24px; color: #555;}
+.r_pro th{padding:3px; text-align: right; font-size: 12px; color: #666;}
+.r_pro th{padding:3px; text-align: right;  font-size: 12px; color: #666;}
+.r_pro td{padding-left: 5px; color: #333; }
+.about_box .message_title{font-size:26px;font-weight:bold;padding-left:30px;height:140px;font-family:'微软雅黑';color:#F60 ;background:url(../images/success.gif) no-repeat 200px 45px;border-bottom:1px solid #EBEBEB;}
+.main_pro{width:648px;height:221px;padding-left:30px;border:1px solid #DCDCDC;margin-left:10px;border-top:none;}
+.main_pro .main_pro_top{height:42px;line-height:42px;padding-left:20px;font-weight:bold;color:#339143;background:url(../images/026.gif) no-repeat left center;}
+.pro_t{background:url(../images/026_2.png) no-repeat 0 0;height:28px;font-size:13px;line-height:28px;color:#fff;padding-left:12px;width:687px;}
+.pro_wrap_s{padding:30px 0 0 30px;width:666px;height:169px;background:#fff;border:1px solid #baafaf;border-top:none;}
+.pro_wrap_s .pro{width:100px;height:142px;line-height:18px;margin-right:33px;float:left;}
+.pro_wrap_s .pro_detail{width:100px;height:100px;text-align:center;}
