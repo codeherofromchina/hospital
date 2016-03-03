@@ -72,6 +72,9 @@ public class ObjectTransUtil {
 		return _result;
 	}
 	
+	/*
+	 * 递归调用处理xml中节点元素
+	 */
 	private static JSON parseElement(Element ele){
 		JSONObject jsonObject = new JSONObject();
 		String parentName = ele.getName();

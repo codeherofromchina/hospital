@@ -16,7 +16,8 @@
 	</context:component-scan>
 	<!--开启AOP自动代理 -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
-
+	
+	<!-- webService 服务工厂类 -->
 	<bean id="registrationServiceFactory" class="com.hospital.pojo.stub.RegistrationService"></bean>
 	<bean id="registrationServiceSoap" factory-bean="registrationServiceFactory" factory-method="getRegistrationServiceSoap"></bean>
 </beans>
