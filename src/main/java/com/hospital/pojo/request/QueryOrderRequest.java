@@ -4,44 +4,44 @@ import com.hospital.pojo.enum_.TradeCode;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
- * ²éÑ¯»¼ÕßÔ¤Ô¼¼ÇÂ¼ÇëÇóĞÅÏ¢
+ * æŸ¥è¯¢æ‚£è€…é¢„çº¦è®°å½•è¯·æ±‚ä¿¡æ¯
  * 
  * @author wxd
  *
  */
 @XStreamAlias("Request")
 public class QueryOrderRequest extends ParentRequest {
-	// ¿¨ºÅ
+	// å¡å·
 	@XStreamAlias("CardNo")
 	public String cardNo;
-	// ¿¨ÀàĞÍ
+	// å¡ç±»å‹
 	@XStreamAlias("CardType")
 	public String cardType;
-	// Ö¤¼şÀàĞÍ
+	// è¯ä»¶ç±»å‹
 	@XStreamAlias("CredTypeCode")
 	public String credTypeCode;
-	// Ö¤¼şºÅÂë
+	// è¯ä»¶å·ç 
 	@XStreamAlias("IDCardNo")
 	public String idCardNo;
-	// ²¡ÈËÖ÷Ë÷ÒıºÅ
+	// ç—…äººä¸»ç´¢å¼•å·
 	@XStreamAlias("PatientNo")
 	public String patientNo;
-	// ¿ªÊ¼ÈÕÆÚ (YYYY-MM-DD)
+	// å¼€å§‹æ—¥æœŸ (YYYY-MM-DD)
 	@XStreamAlias("OrderApptStartDate")
 	public String orderApptStartDate;
-	// ½áÊøÈÕÆÚ (YYYY-MM-DD)
+	// ç»“æŸæ—¥æœŸ (YYYY-MM-DD)
 	@XStreamAlias("OrderApptEndDate")
 	public String orderApptEndDate;
-	// ²éÑ¯ÈÕÆÚ±ê¼Ç AppDate:Ô¤Ô¼ÉêÇëÈÕÆÚ AdmDate:Ô¤Ô¼¾ÍÕïÈÕÆÚ ¡°¡±:²éÑ¯Ã»ÓĞ¹ıÆÚµÄÔ¤Ô¼¼ÇÂ¼£¬²»ĞèÒª¿ªÊ¼ÈÕÆÚºÍ½áÊøÈÕÆÚÌõ¼ş¡£
+	// æŸ¥è¯¢æ—¥æœŸæ ‡è®° AppDate:é¢„çº¦ç”³è¯·æ—¥æœŸ AdmDate:é¢„çº¦å°±è¯Šæ—¥æœŸ â€œâ€:æŸ¥è¯¢æ²¡æœ‰è¿‡æœŸçš„é¢„çº¦è®°å½•ï¼Œä¸éœ€è¦å¼€å§‹æ—¥æœŸå’Œç»“æŸæ—¥æœŸæ¡ä»¶ã€‚
 	@XStreamAlias("QueryDateFlag")
 	public String queryDateFlag;
-	// ²éÑ¯ÓÃ»§ÀàĞÍ£º ORG£º·ÇHISµÄ»ú¹¹(Ö»²éÑ¯±¾»ú¹¹Ô¤Ô¼µÄ¼ÇÂ¼) OWN£º¸öÈË HIS£º¿ÉÒÔ²éÑ¯Ô¤Ô¼ÁË±¾HISÏµÍ³ÅÅ°àµÄÔ¤Ô¼¼ÇÂ¼
+	// æŸ¥è¯¢ç”¨æˆ·ç±»å‹ï¼š ORGï¼šéHISçš„æœºæ„(åªæŸ¥è¯¢æœ¬æœºæ„é¢„çº¦çš„è®°å½•) OWNï¼šä¸ªäºº HISï¼šå¯ä»¥æŸ¥è¯¢é¢„çº¦äº†æœ¬HISç³»ç»Ÿæ’ç­çš„é¢„çº¦è®°å½•
 	@XStreamAlias("QueryUserType")
 	public String queryUserType;
-	// Ô¤Ô¼µ¥×´Ì¬(normal Õı³£; cancel ÍËºÅ)
+	// é¢„çº¦å•çŠ¶æ€(normal æ­£å¸¸; cancel é€€å·)
 	@XStreamAlias("OrderStatus")
 	public String orderStatus;
-	// Ô¤Ô¼µ¥ºÅ
+	// é¢„çº¦å•å·
 	@XStreamAlias("OrderCode")
 	public String orderCode;
 

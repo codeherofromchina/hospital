@@ -4,17 +4,17 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * Ò½Ôº¿ÆÊÒ¼òµ¥¶ÔÏóĞÅÏ¢
+ * åŒ»é™¢ç§‘å®¤ç®€å•å¯¹è±¡ä¿¡æ¯
  * 
  * @author wxd
  *
  */
 public class Department {
-	// ¿ÆÊÒ´úÂë
+	// ç§‘å®¤ä»£ç 
 	private String departmentCode;
-	// ¿ÆÊÒÃû³Æ
+	// ç§‘å®¤åç§°
 	private String departmentName;
-	// ¿ÆÊÒ×é±êÖ¾ Y:¿ÆÊÒ×é£¬¾ßÓĞ¶ş¼¶¿ÆÊÒ
+	// ç§‘å®¤ç»„æ ‡å¿— Y:ç§‘å®¤ç»„ï¼Œå…·æœ‰äºŒçº§ç§‘å®¤
 	private String departmentGroup;
 
 	public String getDepartmentCode() {

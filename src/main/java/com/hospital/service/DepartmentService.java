@@ -8,7 +8,7 @@ import com.hospital.pojo.request.QueryDepartmentGroupRequest;
 import com.hospital.pojo.request.QueryDepartmentRequest;
 
 /**
- * ¿ÆÊÒ²Ù×÷½Ó¿Ú¹æ·¶
+ * ç§‘å®¤æ“ä½œæ¥å£è§„èŒƒ
  * 
  * @author wxd
  *
@@ -16,7 +16,7 @@ import com.hospital.pojo.request.QueryDepartmentRequest;
 public interface DepartmentService {
 
 	/**
-	 * ²éÑ¯Ò»¼¶¿ÆÊÒĞÅÏ¢ÁĞ±í
+	 * æŸ¥è¯¢ä¸€çº§ç§‘å®¤ä¿¡æ¯åˆ—è¡¨
 	 * 
 	 * @param request
 	 * @return
@@ -25,7 +25,7 @@ public interface DepartmentService {
 			QueryDepartmentGroupRequest request) throws TradeErrorException;
 
 	/**
-	 * ²éÑ¯¶ş¼¶¿ÆÊÒĞÅÏ¢ÁĞ±í
+	 * æŸ¥è¯¢äºŒçº§ç§‘å®¤ä¿¡æ¯åˆ—è¡¨
 	 * 
 	 * @param request
 	 * @return

@@ -4,7 +4,7 @@ import com.hospital.pojo.enum_.TradeCode;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
- * Í¨¹ı¿¨ºÅ»ñÈ¡»¼Õß»ù±¾ĞÅÏ¢ ÇëÇóĞÅÏ¢
+ * é€šè¿‡å¡å·è·å–æ‚£è€…åŸºæœ¬ä¿¡æ¯ è¯·æ±‚ä¿¡æ¯
  * 
  * @author wxd
  *
@@ -12,24 +12,24 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("Request")
 public class GetPatInfoRequest extends ParentRequest {
 
-	// ½»Ò×Á÷Ë®
+	// äº¤æ˜“æµæ°´
 	@XStreamAlias("TransactionId")
 	protected String transactionId;
-	// ÖÕ¶Ë±àÂë
+	// ç»ˆç«¯ç¼–ç 
 	@XStreamAlias("TerminalID")
 	protected String terminalID = "";
-	// ¿¨ºÅ
+	// å¡å·
 	@XStreamAlias("PatientCard")
 	protected String patientCard = "";
-	// ¿¨ÀàĞÍ
+	// å¡ç±»å‹
 	@XStreamAlias("CardType")
 	protected String cardType = "";
-	// ²¡ÈËID
+	// ç—…äººID
 	@XStreamAlias("PatientID")
 	protected String patientID;
 
 	public GetPatInfoRequest() {
-		// ³õÊ¼»¯µÄÍ¬Ê±ÉèÖÃ½»Ò×´úÂëÎªÍ¨¹ı¿¨ºÅ»ñÈ¡»¼Õß¼²²¡ĞÅÏ¢±àÂë
+		// åˆå§‹åŒ–çš„åŒæ—¶è®¾ç½®äº¤æ˜“ä»£ç ä¸ºé€šè¿‡å¡å·è·å–æ‚£è€…ç–¾ç—…ä¿¡æ¯ç¼–ç 
 		this.tradeCode = TradeCode.GETPATINFO.getCode();
 	}
 

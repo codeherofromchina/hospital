@@ -7,14 +7,14 @@ import com.hospital.pojo.Doctor;
 import com.hospital.pojo.request.QueryDoctorRequest;
 
 /**
- * 医生接口操作规范
+ * 鍖荤敓鎺ュ彛鎿嶄綔瑙勮寖
  * @author wxd
  *
  */
 public interface DoctorService {
 	
 	/**
-	 * 获取医生列表信息
+	 * 鑾峰彇鍖荤敓鍒楄〃淇℃伅
 	 * @param request
 	 * @return
 	 */

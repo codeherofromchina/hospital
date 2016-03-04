@@ -3,27 +3,27 @@ package com.hospital.pojo.request;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
- * ÇëÇóÊı¾İ¹²ÓĞ²ÎÊı
+ * è¯·æ±‚æ•°æ®å…±æœ‰å‚æ•°
  * 
  * @author wxd
  *
  */
 public abstract class ParentRequest {
-	// ½»Ò×´úÂë
+	// äº¤æ˜“ä»£ç 
 	@XStreamAlias("TradeCode")
 	protected String tradeCode;
 
-	// Ô¤Ô¼»ú¹¹
+	// é¢„çº¦æœºæ„
 	@XStreamAlias("ExtOrgCode")
 	protected String extOrgCode = "";
-	// ¿Í»§¶ËÀàĞÍ
+	// å®¢æˆ·ç«¯ç±»å‹
 	@XStreamAlias("ClientType")
 	protected String clientType = "";
 
-	// Ò½ÔºÎ¨Ò»±àºÅ
+	// åŒ»é™¢å”¯ä¸€ç¼–å·
 	@XStreamAlias("HospitalId")
 	protected String hospitalId = "";
-	// ²Ù×÷Ô±´úÂë
+	// æ“ä½œå‘˜ä»£ç 
 	@XStreamAlias("ExtUserID")
 	protected String extUserID = "";
 

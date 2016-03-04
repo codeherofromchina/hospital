@@ -4,57 +4,57 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * ²¡ÈËÔ¤Ô¼µ¥ºÅĞÅÏ¢¼òµ¥¶ÔÏó
+ * ç—…äººé¢„çº¦å•å·ä¿¡æ¯ç®€å•å¯¹è±¡
  * 
  * @author wxd
  *
  */
 public class Order {
-	// Ô¤Ô¼µ¥ºÅ
+	// é¢„çº¦å•å·
 	public String orderCode;
-	// ÉêÇëÈÕÆÚ(YYYY-MM-DD)
+	// ç”³è¯·æ—¥æœŸ(YYYY-MM-DD)
 	public String orderApptDate;
-	// Ô¤Ô¼µ¥×´Ì¬(normal Õı³£; cancel ÍËºÅ)
+	// é¢„çº¦å•çŠ¶æ€(normal æ­£å¸¸; cancel é€€å·)
 	public String orderStatus;
-	// Ô¤Ô¼µ¥ÉêÇëÈË£¨»¼ÕßĞÕÃû£©
+	// é¢„çº¦å•ç”³è¯·äººï¼ˆæ‚£è€…å§“åï¼‰
 	public String orderApptUser;
-	// ²¡ÈËÖ÷Ë÷ÒıºÅ£¨²¡ÈËID£©
+	// ç—…äººä¸»ç´¢å¼•å·ï¼ˆç—…äººIDï¼‰
 	public String patientNo;
-	// Ô¤Ô¼¾ÍÕïÈÕÆÚ(YYYY-MM-DD)
+	// é¢„çº¦å°±è¯Šæ—¥æœŸ(YYYY-MM-DD)
 	public String admitDate;
-	// ¾ÍÕï¿ÆÊÒ
+	// å°±è¯Šç§‘å®¤
 	public String department;
-	// Ò½Éú
+	// åŒ»ç”Ÿ
 	public String doctor;
-	// Ò½ÉúÖ°³Æ
+	// åŒ»ç”ŸèŒç§°
 	public String doctorTitle;
-	// ×Ü·ÑÓÃ
+	// æ€»è´¹ç”¨
 	public String regFee;
-	// ¾ÍÕïĞòºÅ
+	// å°±è¯Šåºå·
 	public String seqCode;
-	// ºòÕïµØµã
+	// å€™è¯Šåœ°ç‚¹
 	public String admitAddress;
-	// ¾ÍÕïÊ±¶Î
+	// å°±è¯Šæ—¶æ®µ
 	public String sessionName;
-	// Ô¤Ô¼µ¥ÄÚÈİ
+	// é¢„çº¦å•å†…å®¹
 	public String orderContent;
-	// ºòÕïÊ±¼ä
+	// å€™è¯Šæ—¶é—´
 	public String admitRange;
-	// ÁªÏµµç»°
+	// è”ç³»ç”µè¯
 	public String telePhoneNo;
-	// ÊÖ»ú
+	// æ‰‹æœº
 	public String mobileNo;
-	// ÔÊĞíÍËºÅ±êÖ¾ Y£ºÔÊĞíÍËºÅ
+	// å…è®¸é€€å·æ ‡å¿— Yï¼šå…è®¸é€€å·
 	public String allowRefundFlag;
-	// Ö§¸¶×´Ì¬ P:ÒÑÖ§¸¶ TB£ºÎ´Ö§¸¶ R£ºÒÑÍË·Ñ
+	// æ”¯ä»˜çŠ¶æ€ P:å·²æ”¯ä»˜ TBï¼šæœªæ”¯ä»˜ Rï¼šå·²é€€è´¹
 	public String payFlag;
-	// Ò½Ôº
+	// åŒ»é™¢
 	public String hospitalName;
-	// ×¨Òµ
+	// ä¸“ä¸š
 	public String serviceName;
-	// ½»Ò×Á÷Ë®ºÅ
+	// äº¤æ˜“æµæ°´å·
 	public String transactionId;
-	// Ô¤Ô¼ºÅ
+	// é¢„çº¦å·
 	public String appID;
 
 	public String getOrderCode() {

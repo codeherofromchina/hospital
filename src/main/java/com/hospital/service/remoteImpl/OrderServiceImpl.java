@@ -16,7 +16,7 @@ import com.hospital.tools.ObjectTransUtil;
 import com.hospital.tools.ServiceHelper;
 
 /**
- * ¶©µ¥¹ÒºÅĞÅÏ¢·şÎñÊµÏÖÀà
+ * è®¢å•æŒ‚å·ä¿¡æ¯æœåŠ¡å®ç°ç±»
  * @author wxd
  *
  */
@@ -27,7 +27,7 @@ public class OrderServiceImpl implements OrderService{
 	private RegistrationServiceSoap registrationService;
 	
 	/**
-	 * ²éÑ¯»¼ÕßÔ¤Ô¼¼ÇÂ¼
+	 * æŸ¥è¯¢æ‚£è€…é¢„çº¦è®°å½•
 	 */
 	public List<Order> queryOrder(QueryOrderRequest request) throws TradeErrorException {
 		String requestXML = ObjectTransUtil.beanToXMLString(request);
@@ -37,7 +37,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	/**
-	 * ²¡ÈËÈ¡ºÅÈ·ÈÏ
+	 * ç—…äººå–å·ç¡®è®¤
 	 */
 	public Order opAppArrive(OPAppArriveRequest request) throws TradeErrorException {
 		String requestXML = ObjectTransUtil.beanToXMLString(request);

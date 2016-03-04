@@ -8,7 +8,7 @@ import com.hospital.pojo.request.OPAppArriveRequest;
 import com.hospital.pojo.request.QueryOrderRequest;
 
 /**
- * ¶©µ¥¹ÒºÅĞÅÏ¢²éÑ¯·şÎñ½Ó¿Ú¹æ·¶
+ * è®¢å•æŒ‚å·ä¿¡æ¯æŸ¥è¯¢æœåŠ¡æ¥å£è§„èŒƒ
  * 
  * @author wxd
  *
@@ -16,7 +16,7 @@ import com.hospital.pojo.request.QueryOrderRequest;
 public interface OrderService {
 
 	/**
-	 * ²éÑ¯²¡ÈËÔ¤Ô¼¹ÒºÅĞÅÏ¢
+	 * æŸ¥è¯¢ç—…äººé¢„çº¦æŒ‚å·ä¿¡æ¯
 	 * 
 	 * @param request
 	 * @return
@@ -25,7 +25,7 @@ public interface OrderService {
 	public List<Order> queryOrder(QueryOrderRequest request) throws TradeErrorException;
 
 	/**
-	 * ²¡ÈËÈ¡ºÅºó£¬HISÏòÔ¤Ô¼»ú¹¹·¢ËÍÒÑÈ¡ºÅµÄÏûÏ¢¡££¨µ±Ô¤Ô¼»ú¹¹ÔÚ×Ô¼ºµÄÏµÍ³ÖĞ´æ´¢ÅÅ°àĞÅÏ¢ºÍÔ¤Ô¼¼ÇÂ¼Ê±Ê¹ÓÃ£©
+	 * ç—…äººå–å·åï¼ŒHISå‘é¢„çº¦æœºæ„å‘é€å·²å–å·çš„æ¶ˆæ¯ã€‚ï¼ˆå½“é¢„çº¦æœºæ„åœ¨è‡ªå·±çš„ç³»ç»Ÿä¸­å­˜å‚¨æ’ç­ä¿¡æ¯å’Œé¢„çº¦è®°å½•æ—¶ä½¿ç”¨ï¼‰
 	 * 
 	 * @param request
 	 * @return

@@ -1,4 +1,0 @@
-.big_pro_wrap{width:739px;border:1px solid #D1D1D1;background:#fff;}
-.big_pro_wrap .pro{width:100px;height:150px;margin-left:38px;line-height:18px;float:left;background:#EEFCFF;padding:15px 12px  10px;border:1px solid #E1E1E1; overflow:hidden; line-height:16px;}
-.big_pro_wrap .pro h2{height:50px;overflow:hidden;}
-.big_pro_wrap .pro_detail{width:100px;height:100px;text-align:center;}

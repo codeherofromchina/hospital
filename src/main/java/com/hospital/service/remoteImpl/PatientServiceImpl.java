@@ -12,7 +12,7 @@ import com.hospital.service.PatientService;
 import com.hospital.tools.ObjectTransUtil;
 import com.hospital.tools.ServiceHelper;
 /**
- * ²¡ÈË·şÎñ½Ó¿ÚÊµÏÖÀà
+ * ç—…äººæœåŠ¡æ¥å£å®ç°ç±»
  * @author wxd
  *
  */
@@ -20,13 +20,13 @@ import com.hospital.tools.ServiceHelper;
 public class PatientServiceImpl implements PatientService{
 	
 	/**
-	 * ´ËÀàÊÇwebService²Ù×÷Àà
+	 * æ­¤ç±»æ˜¯webServiceæ“ä½œç±»
 	 */
 	@Resource(name="registrationServiceSoap")
 	private RegistrationServiceSoap registrationService;
 
 	public Patient getPatInfo(GetPatInfoRequest request) throws TradeErrorException{
-		// ½«¶ÔÏó×ª»»Îª½Ó¿ÚĞèÒªµÄxml×Ö·û´®¸ñÊ½
+		// å°†å¯¹è±¡è½¬æ¢ä¸ºæ¥å£éœ€è¦çš„xmlå­—ç¬¦ä¸²æ ¼å¼
 		String requestXML = ObjectTransUtil.beanToXMLString(request);
 		
 		String patInfoXml = registrationService.opRegistration(requestXML);

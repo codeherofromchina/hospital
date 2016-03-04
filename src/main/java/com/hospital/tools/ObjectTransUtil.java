@@ -20,7 +20,7 @@ public class ObjectTransUtil {
 	private static Logger logger = Logger.getLogger(ObjectTransUtil.class);
 
 	/**
-	 * ½«¶ÔÏó×ª»»ÎªXML×Ö·û´®
+	 * å°†å¯¹è±¡è½¬æ¢ä¸ºXMLå­—ç¬¦ä¸²
 	 * 
 	 * @param obj
 	 * @return
@@ -28,7 +28,7 @@ public class ObjectTransUtil {
 	public static String beanToXMLString(Object bean)
 			throws NullPointerException {
 		if (bean == null) {
-			throw new NullPointerException("ÇëÇó²ÎÊı×ª»»´íÎó");
+			throw new NullPointerException("è¯·æ±‚å‚æ•°è½¬æ¢é”™è¯¯");
 		}
 
 		XStream xstream = new XStream();
@@ -36,7 +36,7 @@ public class ObjectTransUtil {
 		return xstream.toXML(bean);
 
 		/*
-		 * ²âÊÔ´úÂë QueryDoctorRequest qdRequest = new QueryDoctorRequest();
+		 * æµ‹è¯•ä»£ç  QueryDoctorRequest qdRequest = new QueryDoctorRequest();
 		 * qdRequest.setExtOrgCode("extOrgCode");
 		 * qdRequest.setExtUserID("extUserID");
 		 * qdRequest.setClientType(ClientType.ATM.getCode());
@@ -51,13 +51,13 @@ public class ObjectTransUtil {
 
 	
 	/**
-	 * ½«xml×Ö·û´®×ª»»Îªjava¶ÔÏó
+	 * å°†xmlå­—ç¬¦ä¸²è½¬æ¢ä¸ºjavaå¯¹è±¡
 	 * 
 	 * @param xmlString
 	 * @return
 	 */
 	public static JSONObject xmlStringToBean(String xmlString) {
-		// ÉùÃ÷·µ»Ø½á¹û
+		// å£°æ˜è¿”å›ç»“æœ
 		JSONObject _result  = null;
 		try {
 			
@@ -73,7 +73,7 @@ public class ObjectTransUtil {
 	}
 	
 	/*
-	 * µİ¹éµ÷ÓÃ´¦ÀíxmlÖĞ½ÚµãÔªËØ
+	 * é€’å½’è°ƒç”¨å¤„ç†xmlä¸­èŠ‚ç‚¹å…ƒç´ 
 	 */
 	private static JSON parseElement(Element ele){
 		JSONObject jsonObject = new JSONObject();

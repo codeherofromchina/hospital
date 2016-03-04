@@ -5,14 +5,14 @@ import com.hospital.pojo.Patient;
 import com.hospital.pojo.request.GetPatInfoRequest;
 
 /**
- * 病人服务接口规范
+ * 鐥呬汉鏈嶅姟鎺ュ彛瑙勮寖
  * @author lenovo
  *
  */
 public interface PatientService {
 	
 	/**
-	 * 通过请求信息获取病人信息
+	 * 閫氳繃璇锋眰淇℃伅鑾峰彇鐥呬汉淇℃伅
 	 * 
 	 * @return
 	 * @throws TradeErrorException

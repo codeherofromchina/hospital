@@ -4,69 +4,69 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * ÅÅ°àĞÅÏ¢¼òµ¥¶ÔÏó
+ * æ’ç­ä¿¡æ¯ç®€å•å¯¹è±¡
  * 
  * @author wxd
  *
  */
 public class Schedule {
-	// ÃÅÕïÅÅ°àÏî¼ÇÂ¼±êÊ¶
+	// é—¨è¯Šæ’ç­é¡¹è®°å½•æ ‡è¯†
 	private String scheduleItemCode;
-	// ÃÅÕïÅÅ°àÈÕÆÚ (YYYY-MM-DD)
+	// é—¨è¯Šæ’ç­æ—¥æœŸ (YYYY-MM-DD)
 	private String serviceDate;
-	// ĞÇÆÚÊı(1-7)
+	// æ˜ŸæœŸæ•°(1-7)
 	private String weekDay;
-	// ÅÅ°àÊ±¶Î´úÂë
+	// æ’ç­æ—¶æ®µä»£ç 
 	private String sessionCode;
-	// ÅÅ°àÊ±¶ÎÃû³Æ
+	// æ’ç­æ—¶æ®µåç§°
 	private String sessionName;
-	// ¿ªÊ¼Ê±¼ä (HH:MM)
+	// å¼€å§‹æ—¶é—´ (HH:MM)
 	private String startTime;
-	// ½áÊøÊ±¼ä (HH:MM)
+	// ç»“æŸæ—¶é—´ (HH:MM)
 	private String endTime;
-	// ¿ÆÊÒ´úÂë
+	// ç§‘å®¤ä»£ç 
 	private String departmentCode;
-	// ¿ÆÊÒÃû³Æ
+	// ç§‘å®¤åç§°
 	private String departmentName;
-	// ÕïÊÒ´úÂë
+	// è¯Šå®¤ä»£ç 
 	private String clinicRoomCode;
-	// ÕïÊÒÃû³Æ
+	// è¯Šå®¤åç§°
 	private String clinicRoomName;
-	// Ò½Éú´úÂë
+	// åŒ»ç”Ÿä»£ç 
 	private String doctorCode;
-	// Ò½ÉúÃû³Æ
+	// åŒ»ç”Ÿåç§°
 	private String doctorName;
-	// Ò½ÉúÖ°³Æ´úÂë
+	// åŒ»ç”ŸèŒç§°ä»£ç 
 	private String doctorTitleCode;
-	// Ò½ÉúÖ°³Æ
+	// åŒ»ç”ŸèŒç§°
 	private String doctorTitle;
-	// Ò½Éú×¨³¤
+	// åŒ»ç”Ÿä¸“é•¿
 	private String doctorSpec;
-	// ³öÕï¼¶±ğ´úÂë
+	// å‡ºè¯Šçº§åˆ«ä»£ç 
 	private String doctorSessTypeCode;
-	// ³öÕï¼¶±ğ
+	// å‡ºè¯Šçº§åˆ«
 	private String doctorSessType;
-	// ×¨Òµ´úÂë
+	// ä¸“ä¸šä»£ç 
 	private String serviceCode;
-	// ×¨ÒµÃû³Æ
+	// ä¸“ä¸šåç§°
 	private String serviceName;
-	// Ô¤Ô¼¹ÒºÅ×Ü·ÑÓÃ
+	// é¢„çº¦æŒ‚å·æ€»è´¹ç”¨
 	private String fee;
-	// ¹ÒºÅ·Ñ
+	// æŒ‚å·è´¹
 	private String regFee;
-	// Õï²é·Ñ
+	// è¯ŠæŸ¥è´¹
 	private String checkupFee;
-	// ·şÎñ·Ñ
+	// æœåŠ¡è´¹
 	private String serviceFee;
-	// ÆäËü·Ñ
+	// å…¶å®ƒè´¹
 	private String otherFee;
-	// Ê£ÓàºÅÊıÁ¿
+	// å‰©ä½™å·æ•°é‡
 	private String availableNum;
-	// ¾ÍÕïµØÖ·
+	// å°±è¯Šåœ°å€
 	private String admitAddress;
-	// ºòÕïÊ±¼ä·¶Î§
+	// å€™è¯Šæ—¶é—´èŒƒå›´
 	private String admitTimeRange;
-	// ±¸×¢
+	// å¤‡æ³¨
 	private String note;
 	public String getScheduleItemCode() {
 		return scheduleItemCode;

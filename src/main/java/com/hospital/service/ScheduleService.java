@@ -9,7 +9,7 @@ import com.hospital.pojo.request.QueryAdmScheduleRequest;
 public interface ScheduleService {
 
 	/**
-	 * ²éÔƒÅÅ°àĞÅÏ¢Ó›ä›
+	 * æŸ¥è©¢æ’ç­ä¿¡æ¯è¨˜éŒ„
 	 * 
 	 * @param request
 	 * @return

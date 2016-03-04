@@ -21,8 +21,8 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 /**
- * ·şÎñ²ã°ïÖúÀà£¬½«·şÎñÀàÖĞ½Ó¿Úµ÷ÓÃ·µ»ØµÄ×Ö·û´®×ª»»ÎªÏìÓ¦µÄ¶ÔÏó
- * TODO ´Ë·½·¨ĞèÒªĞŞ¸Ä£¬µ±Êı×éÎªÒ»¸öÊ±ºòĞèÒªµ÷Õû
+ * æœåŠ¡å±‚å¸®åŠ©ç±»ï¼Œå°†æœåŠ¡ç±»ä¸­æ¥å£è°ƒç”¨è¿”å›çš„å­—ç¬¦ä¸²è½¬æ¢ä¸ºå“åº”çš„å¯¹è±¡
+ * TODO æ­¤æ–¹æ³•éœ€è¦ä¿®æ”¹ï¼Œå½“æ•°ç»„ä¸ºä¸€ä¸ªæ—¶å€™éœ€è¦è°ƒæ•´
  * @author wxd
  *
  */
@@ -30,7 +30,7 @@ public class ServiceHelper {
 	private static Logger logger = Logger.getLogger(ServiceHelper.class);
 
 	/**
-	 * ½«²¡ÈËĞÅÏ¢xml×Ö·û´®×ª»»Îª²¡ÈËÊµÌå¶ÔÏó
+	 * å°†ç—…äººä¿¡æ¯xmlå­—ç¬¦ä¸²è½¬æ¢ä¸ºç—…äººå®ä½“å¯¹è±¡
 	 * 
 	 * @param patInfoXml
 	 * @return
@@ -48,7 +48,7 @@ public class ServiceHelper {
 
 		return patient;
 
-		// ²âÊÔĞÅÏ¢
+		// æµ‹è¯•ä¿¡æ¯
 		/*
 		 * String xmlStr = "<Response><ResultCode>0</ResultCode>" +
 		 * "<ResultContent>2</ResultContent><PatientID>3</PatientID>" +
@@ -64,7 +64,7 @@ public class ServiceHelper {
 	
 
 	/**
-	 * ½«¸ø¶¨×Ö·û´®×ª»»Îª¿ÆÊÒĞÅÏ¢ÁĞ±í
+	 * å°†ç»™å®šå­—ç¬¦ä¸²è½¬æ¢ä¸ºç§‘å®¤ä¿¡æ¯åˆ—è¡¨
 	 * 
 	 * @param departmentsXml
 	 * @return
@@ -108,7 +108,7 @@ public class ServiceHelper {
 
 		return _result;
 
-		// ²âÊÔ´úÂë
+		// æµ‹è¯•ä»£ç 
 		/*
 		 * String departmentsXml = "<Response>" + "<ResultCode>0</ResultCode>" +
 		 * "<ResultContent></ResultContent>" + "<RecordCount>2</RecordCount>" +
@@ -127,7 +127,7 @@ public class ServiceHelper {
 
 	
 	/**
-	 * ½«xml×Ö·û´®×ª»»ÎªÒ½ÉúÊµÌåÁĞ±í
+	 * å°†xmlå­—ç¬¦ä¸²è½¬æ¢ä¸ºåŒ»ç”Ÿå®ä½“åˆ—è¡¨
 	 * 
 	 * @param doctorsXml
 	 * @return
@@ -164,7 +164,7 @@ public class ServiceHelper {
 
 		return _result;
 		
-		// œyÔ‡´ú´a
+		// æ¸¬è©¦ä»£ç¢¼
 		/*String xmlStr = "<Response>"
 				+ "<ResultCode>0</ResultCode>"
 				+ "<ResultContent></ResultContent>"
@@ -189,7 +189,7 @@ public class ServiceHelper {
 	
 	
 	/**
-	 * ½«xml×Ö·û´®×ª»»ÎªÒ½ÉúÊµÌåÁĞ±í
+	 * å°†xmlå­—ç¬¦ä¸²è½¬æ¢ä¸ºåŒ»ç”Ÿå®ä½“åˆ—è¡¨
 	 * 
 	 * @param doctorsXml
 	 * @return
@@ -216,7 +216,7 @@ public class ServiceHelper {
 		
 		return _result;
 		
-		// ²âÊÔ´úÂë
+		// æµ‹è¯•ä»£ç 
 		/*String xmlStr = "<Response>"
 				+ "<ResultCode>0</ResultCode>"
 				+ "<ResultContent></ResultContent>"
@@ -227,7 +227,7 @@ public class ServiceHelper {
 				+ "<ServiceDate>222</ServiceDate>"
 				+ "<WeekDay>333</WeekDay>"
 				+ "<SessionCode>S</SessionCode>"
-				+ "<SessionName>ÉÏÎç</SessionName>"
+				+ "<SessionName>ä¸Šåˆ</SessionName>"
 				+ "<StartTime>444</StartTime>"
 				+ "<EndTime>555</EndTime>"
 				+ "<DepartmentCode>666</DepartmentCode>"
@@ -258,7 +258,7 @@ public class ServiceHelper {
 				+ "<ServiceDate>222</ServiceDate>"
 				+ "<WeekDay>333</WeekDay>"
 				+ "<SessionCode>S</SessionCode>"
-				+ "<SessionName>ÉÏÎç</SessionName>"
+				+ "<SessionName>ä¸Šåˆ</SessionName>"
 				+ "<StartTime>444</StartTime>"
 				+ "<EndTime>555</EndTime>"
 				+ "<DepartmentCode>666</DepartmentCode>"
@@ -294,7 +294,7 @@ public class ServiceHelper {
 	}
 	
 	/**
-	 * ½«xmlĞÅÏ¢×ª»»Îª¶©µ¥ÊµÌåÁĞ±íĞÅÏ¢
+	 * å°†xmlä¿¡æ¯è½¬æ¢ä¸ºè®¢å•å®ä½“åˆ—è¡¨ä¿¡æ¯
 	 * @param orderListXml
 	 * @return
 	 */
@@ -328,7 +328,7 @@ public class ServiceHelper {
 
 		return _result;
 		
-		// ²âÊÔ´úÂë
+		// æµ‹è¯•ä»£ç 
 		/*String xmlStr = "<Response>"
 				+ "<ResultCode>0</ResultCode>"
 				+ "<ResultContent></ResultContent>"
@@ -392,7 +392,7 @@ public class ServiceHelper {
 	
 	
 	/**
-	 * ½«xmlĞÅÏ¢×ª»»Îª¶©µ¥ÊµÌåĞÅÏ¢
+	 * å°†xmlä¿¡æ¯è½¬æ¢ä¸ºè®¢å•å®ä½“ä¿¡æ¯
 	 * @param orderListXml
 	 * @return
 	 */
@@ -404,7 +404,7 @@ public class ServiceHelper {
 		reflectSetStringValue(_result, orderJsonObject, Order.class);
 		return _result;
 		
-		// ²âÊÔ´úÂë
+		// æµ‹è¯•ä»£ç 
 		/*String orderXml = "<Response>"
 				+ "<ResultCode>0</ResultCode>"
 				+ "<ResultContent></ResultContent>"
@@ -421,11 +421,11 @@ public class ServiceHelper {
 	
 
 	/*
-	 * ÅĞ¶Ï´Ë´ÎÇëÇóÊÇ·ñ²úÉúÕıÈ·µÄ½á¹û
+	 * åˆ¤æ–­æ­¤æ¬¡è¯·æ±‚æ˜¯å¦äº§ç”Ÿæ­£ç¡®çš„ç»“æœ
 	 */
 	private static void isTradeSuccess(Map<String, Object> tradeMap) throws TradeErrorException {
 		if (tradeMap == null) {
-			throw new TradeErrorException("ĞèÒªÕıÈ·¸ñÊ½µÄxmlÄÚÈİ");
+			throw new TradeErrorException("éœ€è¦æ­£ç¡®æ ¼å¼çš„xmlå†…å®¹");
 		}
 		if (!ResultCode.getResultCode(String.valueOf(tradeMap.get("ResultCode"))).getResult()) {
 			throw new TradeErrorException(String.valueOf(tradeMap.get("ResultContent")));
@@ -434,10 +434,10 @@ public class ServiceHelper {
 	
 	
 	/*
-	 * ÀûÓÃ·´ÉäÉèÖÃ¶ÔÏóµÄsetÖµ
-	 * @param obj	ÒªÉèÖµµÄ¶ÔÏó
-	 * @param jsonObject  json¶ÔÏó
-	 * @param clazz	ÉèÖµµÄ¶ÔÏóÀàĞÍ
+	 * åˆ©ç”¨åå°„è®¾ç½®å¯¹è±¡çš„setå€¼
+	 * @param obj	è¦è®¾å€¼çš„å¯¹è±¡
+	 * @param jsonObject  jsonå¯¹è±¡
+	 * @param clazz	è®¾å€¼çš„å¯¹è±¡ç±»å‹
 	 */
 	public static void reflectSetStringValue(Object obj,JSONObject jsonObject,Class clazz){
 		Set keySet = jsonObject.keySet();

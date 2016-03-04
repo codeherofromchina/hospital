@@ -1,13 +1,13 @@
 package com.hospital.pojo.enum_;
 
 /**
- * ¿Í»§¶ËÀàÐÍ Ã¶¾Ù
+ * å®¢æˆ·ç«¯ç±»åž‹ æžšä¸¾
  * 
  * @author wxd
  *
  */
 public enum ClientType {
-	ATM("ATM", "×ÔÖúÖÕ¶Ë"), YD("YD", "12508"), LT("LT", "114");
+	ATM("ATM", "è‡ªåŠ©ç»ˆç«¯"), YD("YD", "12508"), LT("LT", "114");
 	private String code;
 	private String info;
 
@@ -26,6 +26,6 @@ public enum ClientType {
 
 	@Override
 	public String toString() {
-		return "[" + code + "£¬" + info + "]";
+		return "[" + code + "ï¼Œ" + info + "]";
 	}
 }

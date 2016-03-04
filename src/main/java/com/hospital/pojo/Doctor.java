@@ -4,21 +4,21 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * Ò½Éú¼òµ¥¶ÔÏó
+ * åŒ»ç”Ÿç®€å•å¯¹è±¡
  * 
  * @author wxd
  *
  */
 public class Doctor {
-	// Ò½Éú´úÂë
+	// åŒ»ç”Ÿä»£ç 
 	private String doctorCode;
-	// Ò½ÉúÃû³Æ
+	// åŒ»ç”Ÿåç§°
 	private String doctorName;
-	// Ò½ÉúÖ°³Æ´úÂë
+	// åŒ»ç”ŸèŒç§°ä»£ç 
 	private String doctorTitleCode;
-	// Ò½ÉúÖ°³Æ
+	// åŒ»ç”ŸèŒç§°
 	private String doctorTitle;
-	// Ò½Éú×¨³¤
+	// åŒ»ç”Ÿä¸“é•¿
 	private String doctorSpec;
 
 	public String getDoctorCode() {

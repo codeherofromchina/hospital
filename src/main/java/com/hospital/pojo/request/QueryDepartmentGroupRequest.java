@@ -4,7 +4,7 @@ import com.hospital.pojo.enum_.TradeCode;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
- * ²éÑ¯Ò»¼¶¿ÆÊÒÁĞ±íÇëÇóÊı¾İ¶ÔÏó
+ * æŸ¥è¯¢ä¸€çº§ç§‘å®¤åˆ—è¡¨è¯·æ±‚æ•°æ®å¯¹è±¡
  * 
  * @author wxd
  *
@@ -12,7 +12,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("Request")
 public class QueryDepartmentGroupRequest extends ParentRequest {
 	public QueryDepartmentGroupRequest() {
-		// ³õÊ¼»¯µÄÍ¬Ê±ÉèÖÃ½»Ò×´úÂëÎª²éÑ¯Ò»¼¶¿ÆÊÒÁĞ±í±àÂë
+		// åˆå§‹åŒ–çš„åŒæ—¶è®¾ç½®äº¤æ˜“ä»£ç ä¸ºæŸ¥è¯¢ä¸€çº§ç§‘å®¤åˆ—è¡¨ç¼–ç 
 		this.tradeCode = TradeCode.QUWEYDEPARTMENTGROUP.getCode();
 	}
 }

@@ -4,35 +4,35 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * ²¡ÈËº††Î¶ÔÏó
+ * ç—…äººç°¡å–®å¯¹è±¡
  * 
  * @author wxd
  *
  */
 public class Patient {
-	// ²¡ÈËID
+	// ç—…äººID
 	private String patientID;
-	// ²¡ÈËĞÕÃû
+	// ç—…äººå§“å
 	private String patientName;
-	// ĞÔ±ğ´úÂë
+	// æ€§åˆ«ä»£ç 
 	private String sexCode;
-	// ĞÔ±ğ
+	// æ€§åˆ«
 	private String sex;
-	// ³öÉúÈÕÆÚ
+	// å‡ºç”Ÿæ—¥æœŸ
 	private String DOB;
-	// ²¡°¸ºÅ
+	// ç—…æ¡ˆå·
 	private String documentID;
-	// ¼ÒÍ¥×¡Ö·
+	// å®¶åº­ä½å€
 	private String address;
-	// Ö¤¼şÀàĞÍ£¨´úÂë£©
+	// è¯ä»¶ç±»å‹ï¼ˆä»£ç ï¼‰
 	private String IDTypeCode;
-	// Ö¤¼şÀàĞÍ£¨ÃèÊö£©
+	// è¯ä»¶ç±»å‹ï¼ˆæè¿°ï¼‰
 	private String IDTypeDesc;
-	// Ö¤¼şºÅ
+	// è¯ä»¶å·
 	private String IDNo;
-	// Ò½±£±êÖ¾£¨0£º·ÇÒ½±££¬1£ºÒ½±££©
+	// åŒ»ä¿æ ‡å¿—ï¼ˆ0ï¼šéåŒ»ä¿ï¼Œ1ï¼šåŒ»ä¿ï¼‰
 	private String YBFlag;
-	// ²¡ÈËÀàĞÍÃèÊö
+	// ç—…äººç±»å‹æè¿°
 	private String patType;
 
 	public String getPatientID() {

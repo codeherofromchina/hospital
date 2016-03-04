@@ -1,7 +1,7 @@
 package com.hospital.exception;
 
 /**
- * ½»Ò×Ê§°ÜÒì³£Àà
+ * äº¤æ˜“å¤±è´¥å¼‚å¸¸ç±»
  * @author wxd
  *
  */

@@ -1,7 +1,7 @@
 package com.hospital.pojo.enum_;
 
 /**
- * 返回是否操作成功标识枚举
+ * 杩斿洖鏄惁鎿嶄綔鎴愬姛鏍囪瘑鏋氫妇
  * 
  * @author wxd
  *

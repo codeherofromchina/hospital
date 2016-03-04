@@ -4,16 +4,16 @@ import com.hospital.pojo.enum_.TradeCode;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
- * È¡ÏûÔ¤Ô¼ÇëÇóĞÅÏ¢
+ * å–æ¶ˆé¢„çº¦è¯·æ±‚ä¿¡æ¯
  * @author wxd
  *
  */
 @XStreamAlias("Request")
 public class CancelOrderRequest extends ParentRequest {
-	//½»Ò×Á÷Ë®ºÅ
+	//äº¤æ˜“æµæ°´å·
 	@XStreamAlias("TransactionId")
 	private String transactionId;
-	// Ô¤Ô¼µ¥ºÅ
+	// é¢„çº¦å•å·
 	@XStreamAlias("OrderCode")
 	private String orderCode;
 	

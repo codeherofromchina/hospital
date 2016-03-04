@@ -1,51 +1,32 @@
 package com.hospital.action;
 
-import java.util.List;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
-import javax.print.Doc;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.hospital.action.base.BaseActionSupport;
-import com.hospital.pojo.Dept;
-import com.hospital.pojo.Doctor;
-import com.hospital.pojo.HaoYuan;
-import com.hospital.pojo.Hospital;
-import com.hospital.service.DeptService;
 import com.hospital.service.DoctorService;
-import com.hospital.service.HaoYuanService;
 
-public class DoctorAction extends BaseActionSupport {
+@Controller
+@RequestMapping("/search/doctor")
+public class DoctorAction {
+	@Resource(name = "defaultDoctorServiceImpl")
+	private DoctorService doctorService;
 
-	private DoctorService docService;
-	private HaoYuanService haoYuanService;
-	public HaoYuanService getHaoYuanService() {
-		return haoYuanService;
-	}
-	public void setHaoYuanService(HaoYuanService haoYuanService) {
-		this.haoYuanService = haoYuanService;
-	}
-	public DoctorService getDoctorService() {
-		return docService;
+
+	/**
+	 * 获取科室医生列表和必要model信息并返回到医生列表页面
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/department_doctors")
+	public ModelAndView getDepartment(HttpServletRequest request) {
+
+		ModelAndView mv = new ModelAndView_velocity(request, "doctors");
+
+		return mv;
 	}
 
-	public void setDoctorService(DoctorService doctorService) {
-		this.docService = doctorService;
-	}
-	
-	public String docAction() {
-		String id = request.getParameter("deptId");
-		try{
-			Integer docId = Integer.parseInt(id);
-			List<Doctor> allDoc = docService.getDocByDeptId(docId);
-			for(Doctor d:allDoc){
-				List<HaoYuan> haoYuan = haoYuanService.getHaoYuan(d.getId());
-				d.setHaoYuan(haoYuan);
-			}
-			
-			request.setAttribute("doc", allDoc);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return "doc";
-	}
-	
 }

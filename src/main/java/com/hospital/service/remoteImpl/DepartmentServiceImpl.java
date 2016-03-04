@@ -26,11 +26,11 @@ public class DepartmentServiceImpl implements DepartmentService {
 	private RegistrationServiceSoap registrationService;
 	
 	/**
-	 * »ñÈ¡Ò»¼¶¿ÆÊÒĞÅÏ¢ÁĞ±í
+	 * è·å–ä¸€çº§ç§‘å®¤ä¿¡æ¯åˆ—è¡¨
 	 */
 	public List<Department> queryDepartmentGroup(
 			QueryDepartmentGroupRequest request) throws TradeErrorException {
-		// ½«¶ÔÏó×ª»»Îª½Ó¿ÚĞèÒªµÄxml×Ö·û´®¸ñÊ½²¢ÇëÇóÊı¾İ
+		// å°†å¯¹è±¡è½¬æ¢ä¸ºæ¥å£éœ€è¦çš„xmlå­—ç¬¦ä¸²æ ¼å¼å¹¶è¯·æ±‚æ•°æ®
 		String requestXML = ObjectTransUtil.beanToXMLString(request);
 		String departmentsXml = registrationService.opRegistration(requestXML);
 
@@ -38,11 +38,11 @@ public class DepartmentServiceImpl implements DepartmentService {
 	}
 
 	/**
-	 * »ñÈ¡¶ş¼¶¿ÆÊÒĞÅÏ¢ÁĞ±í
+	 * è·å–äºŒçº§ç§‘å®¤ä¿¡æ¯åˆ—è¡¨
 	 */
 	public List<Department> queryDepartment(QueryDepartmentRequest request)
 			throws TradeErrorException {
-		// ½«¶ÔÏó×ª»»Îª½Ó¿ÚĞèÒªµÄxml×Ö·û´®¸ñÊ½²¢ÇëÇóÊı¾İ
+		// å°†å¯¹è±¡è½¬æ¢ä¸ºæ¥å£éœ€è¦çš„xmlå­—ç¬¦ä¸²æ ¼å¼å¹¶è¯·æ±‚æ•°æ®
 		String requestXML = ObjectTransUtil.beanToXMLString(request);
 		String departmentsXml = registrationService.opRegistration(requestXML);
 

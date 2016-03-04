@@ -4,22 +4,22 @@ import com.hospital.pojo.enum_.TradeCode;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
- * ²éÑ¯¶ş¼¶¿ÆÊÒÇëÇóĞÅÏ¢
+ * æŸ¥è¯¢äºŒçº§ç§‘å®¤è¯·æ±‚ä¿¡æ¯
  * 
  * @author wxd
  *
  */
 @XStreamAlias("Request")
 public class QueryDepartmentRequest extends ParentRequest {
-	// ºÅ±ğ
+	// å·åˆ«
 	@XStreamAlias("SessType")
 	private String sessType;
-	// Ò»¼¶¿ÆÊÒ´úÂë
+	// ä¸€çº§ç§‘å®¤ä»£ç 
 	@XStreamAlias("DepartmentCode")
 	private String departmentCode;
 
 	public QueryDepartmentRequest() {
-		// ³õÊ¼»¯µÄÍ¬Ê±ÉèÖÃ½»Ò×´úÂëÎªÍ¨¹ı¿¨ºÅ»ñÈ¡»¼Õß¼²²¡ĞÅÏ¢±àÂë
+		// åˆå§‹åŒ–çš„åŒæ—¶è®¾ç½®äº¤æ˜“ä»£ç ä¸ºé€šè¿‡å¡å·è·å–æ‚£è€…ç–¾ç—…ä¿¡æ¯ç¼–ç 
 		this.tradeCode = TradeCode.QUERYDEPARTMENT.getCode();
 	}
 

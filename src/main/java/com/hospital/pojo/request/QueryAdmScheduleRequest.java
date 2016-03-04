@@ -4,33 +4,33 @@ import com.hospital.pojo.enum_.TradeCode;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
- * ²éÑ¯ÅÅ°à¼ÇÂ¼ ÇëÇóĞÅÏ¢
+ * æŸ¥è¯¢æ’ç­è®°å½• è¯·æ±‚ä¿¡æ¯
  * 
  * @author wxd
  *
  */
 @XStreamAlias("Request")
 public class QueryAdmScheduleRequest extends ParentRequest {
-	// ¿ªÊ¼ÈÕÆÚ (YYYY-MM-DD)
+	// å¼€å§‹æ—¥æœŸ (YYYY-MM-DD)
 	@XStreamAlias("StartDate")
 	private String startDate;
-	// ½áÊøÈÕÆÚ (YYYY-MM-DD)
+	// ç»“æŸæ—¥æœŸ (YYYY-MM-DD)
 	@XStreamAlias("EndDate")
 	private String endDate;
 
-	// ¿ÆÊÒ´úÂë
+	// ç§‘å®¤ä»£ç 
 	@XStreamAlias("DepartmentCode")
 	private String departmentCode;
-	// ×¨Òµ´úÂë
+	// ä¸“ä¸šä»£ç 
 	@XStreamAlias("ServiceCode")
 	private String serviceCode;
-	// Ò½Éú´úÂë
+	// åŒ»ç”Ÿä»£ç 
 	@XStreamAlias("DoctorCode")
 	private String doctorCode;
-	// ³öÕïÊ±¶Î´úÂë S£ºÉÏÎç X£ºÏÂÎç Y£ºÒ¹Íí
+	// å‡ºè¯Šæ—¶æ®µä»£ç  Sï¼šä¸Šåˆ Xï¼šä¸‹åˆ Yï¼šå¤œæ™š
 	@XStreamAlias("RBASSessionCode")
 	private String rbasSessionCode;
-	// ²éÑ¯ÅÅ°àµÄ±ê¼Ç N:Õı³£µÄÅÅ°à S:Í£ÕïµÄÅÅ°à
+	// æŸ¥è¯¢æ’ç­çš„æ ‡è®° N:æ­£å¸¸çš„æ’ç­ S:åœè¯Šçš„æ’ç­
 	@XStreamAlias("StopScheduleFlag")
 	private String stopScheduleFlag;
 	@XStreamAlias("PatientID")
@@ -39,7 +39,7 @@ public class QueryAdmScheduleRequest extends ParentRequest {
 	private String essType;
 
 	public QueryAdmScheduleRequest() {
-		// ³õÊ¼»¯µÄÍ¬Ê±ÉèÖÃ½»Ò×´úÂëÎª²éÑ¯ÅÅ°à¼ÇÂ¼±àÂë
+		// åˆå§‹åŒ–çš„åŒæ—¶è®¾ç½®äº¤æ˜“ä»£ç ä¸ºæŸ¥è¯¢æ’ç­è®°å½•ç¼–ç 
 		this.tradeCode = TradeCode.QUERYADMSCHEDULE.getCode();
 	}
 

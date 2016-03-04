@@ -4,7 +4,7 @@ import com.hospital.pojo.enum_.TradeCode;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
- * ²¡ÈËÈ¡ºÅÈ·ÈÏ ½Ó¿ÚÇëÇóĞÅÏ¢
+ * ç—…äººå–å·ç¡®è®¤ æ¥å£è¯·æ±‚ä¿¡æ¯
  * 
  * @author wxd
  *
@@ -12,34 +12,34 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("Request")
 public class OPAppArriveRequest {
 
-	// ½»Ò×´úÂë
+	// äº¤æ˜“ä»£ç 
 	@XStreamAlias("TradeCode")
 	public String tradeCode;
-	// Ò½ÔºÎ¨Ò»±àºÅ
+	// åŒ»é™¢å”¯ä¸€ç¼–å·
 	@XStreamAlias("HospitalId")
 	public String hospitalId;
-	// Ô¤Ô¼Ê±µÄ½»Ò×Á÷Ë®ºÅ
+	// é¢„çº¦æ—¶çš„äº¤æ˜“æµæ°´å·
 	@XStreamAlias("TransactionId")
 	public String transactionId;
-	// Ô¤Ô¼µ¥ºÅ
+	// é¢„çº¦å•å·
 	@XStreamAlias("OrderCode")
 	public String orderCode;
-	// ²Ù×÷Ô±¹¤ºÅ
+	// æ“ä½œå‘˜å·¥å·
 	@XStreamAlias("ExtUserID")
 	public String extUserID;
-	// È¡ºÅÈÕÆÚ(YYYY-MM-DD)
+	// å–å·æ—¥æœŸ(YYYY-MM-DD)
 	@XStreamAlias("PayDate")
 	public String payDate;
-	// È¡ºÅÊ±¼ä(HH:MM)
+	// å–å·æ—¶é—´(HH:MM)
 	@XStreamAlias("PayTime")
 	public String payTime;
-	// Ö§¸¶·½Ê½´úÂë
+	// æ”¯ä»˜æ–¹å¼ä»£ç 
 	@XStreamAlias("PayModeCode")
 	public String payModeCode;
-	// Ö§¸¶½»Ò×ĞÅÏ¢´®£¨Ó¦¸Ã°üÀ¨ÒøĞĞ´úÂë¡¢Ö§¸¶¿¨ºÅ¡¢ÒøĞĞ½»Ò×ÈÕÆÚ¡¢ÒøĞĞ½»Ò×Á÷Ë®ºÅ£©
+	// æ”¯ä»˜äº¤æ˜“ä¿¡æ¯ä¸²ï¼ˆåº”è¯¥åŒ…æ‹¬é“¶è¡Œä»£ç ã€æ”¯ä»˜å¡å·ã€é“¶è¡Œäº¤æ˜“æ—¥æœŸã€é“¶è¡Œäº¤æ˜“æµæ°´å·ï¼‰
 	@XStreamAlias("PayTradeStr")
 	public String payTradeStr;
-	// Ò½±£¹ÒºÅÏà¹ØĞÅÏ¢
+	// åŒ»ä¿æŒ‚å·ç›¸å…³ä¿¡æ¯
 	@XStreamAlias("PayInsuFeeStr")
 	public String payInsuFeeStr;
 

@@ -2,7 +2,7 @@ package com.hospital.tools;
 
 public class StringUtil {
 	/**
-	 * 将给定的字符串第一个字母设置为大写
+	 * 灏嗙粰瀹氱殑瀛楃涓茬涓�涓瓧姣嶈缃负澶у啓
 	 * 
 	 * @param str
 	 * @return
@@ -15,7 +15,7 @@ public class StringUtil {
 	}
 
 	/**
-	 * 将给定的字符串第一个字母设置为小写
+	 * 灏嗙粰瀹氱殑瀛楃涓茬涓�涓瓧姣嶈缃负灏忓啓
 	 * 
 	 * @param str
 	 * @return
