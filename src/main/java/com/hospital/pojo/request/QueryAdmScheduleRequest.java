@@ -32,7 +32,7 @@ public class QueryAdmScheduleRequest extends ParentRequest {
 	private String rbasSessionCode;
 	// 查询排班的标记 N:正常的排班 S:停诊的排班
 	@XStreamAlias("StopScheduleFlag")
-	private String stopScheduleFlag;
+	private String stopScheduleFlag = "N";
 	@XStreamAlias("PatientID")
 	private String patientID;
 	@XStreamAlias("EssType")

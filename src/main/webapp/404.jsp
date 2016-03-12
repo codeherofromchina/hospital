@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <base href="<%=basePath%>">  
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>###医院挂号系统</title>
+<title>XXXX医院挂号系统</title>
 <script type="text/javascript" src="js/jquery-1.7.2.js" ></script>
 <script type="text/javascript">
 // 3秒后跳转到首页

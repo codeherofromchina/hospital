@@ -1,5 +1,6 @@
 package com.hospital.service.remoteImpl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,6 +13,7 @@ import com.hospital.pojo.Schedule;
 import com.hospital.pojo.request.QueryAdmScheduleRequest;
 import com.hospital.pojo.stub.RegistrationServiceSoap;
 import com.hospital.service.ScheduleService;
+import com.hospital.tools.DateUtil;
 import com.hospital.tools.ObjectTransUtil;
 import com.hospital.tools.ServiceHelper;
 
@@ -38,5 +40,27 @@ public class ScheduleServiceImpl implements ScheduleService {
 		}
 		return ServiceHelper.parseXmlToSchedules(schedules);
 	}
+	
+	
+	/**
+	 * 查询科室的某天的某个时间段排班
+	 * @param departmentCode  科室代码
+	 * @param timeSlot   S：上午 X：下午  Y：夜晚
+	 * @param startDate  要查询的开始日期
+	 * @param endDate  要查询的结束日期
+	 * @return
+	 * @throws TradeErrorException
+	 */
+	public List<Schedule> queryScheduleByDay(String departmentCode,String timeSlot,Date startDate,Date endDate) throws TradeErrorException{
+		QueryAdmScheduleRequest request = new QueryAdmScheduleRequest();
+		
+		request.setDepartmentCode(departmentCode);
+		request.setRbasSessionCode(timeSlot);
+		request.setStartDate(DateUtil.formatToShortString(startDate));
+		request.setEndDate(DateUtil.formatToShortString(endDate));
+		
+		return queryAdmSchedule(request);
+	}
+
 
 }

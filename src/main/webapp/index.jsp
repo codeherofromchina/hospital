@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <base href="<%=basePath%>">  
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>###医院挂号系统</title>
+<title>XXXX医院挂号系统</title>
 </head>
 <body>
 <jsp:forward page="index.htm"></jsp:forward>
