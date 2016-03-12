@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.hospital.exception.TradeErrorException;
 import com.hospital.pojo.Doctor;
-import com.hospital.pojo.request.QueryDoctorRequest;
 
 /**
  * 医生接口操作规范
@@ -14,11 +13,17 @@ import com.hospital.pojo.request.QueryDoctorRequest;
 public interface DoctorService {
 	
 	/**
-	 * 获取医生列表信息
+	 * 获取相关科室医生列表信息
 	 * @param request
 	 * @return
 	 */
-	public List<Doctor> queryDoctor(QueryDoctorRequest request) throws TradeErrorException;
+	public List<Doctor> queryDoctor(String departmentCode) throws TradeErrorException;
+
+	/**
+	 * 获取医院中的所有医生列表
+	 * @return
+	 */
+	public List<Doctor> queryAllDoctor() throws TradeErrorException;
 	
 	
 }

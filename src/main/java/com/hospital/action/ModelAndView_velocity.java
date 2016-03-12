@@ -9,6 +9,8 @@ import com.hospital.tools.CommUtil;
 import com.hospital.tools.HttpInclude;
 
 /**
+ * 
+ * TODO
  * velocity 视图的模型页面简化类
  * @author lenovo
  *

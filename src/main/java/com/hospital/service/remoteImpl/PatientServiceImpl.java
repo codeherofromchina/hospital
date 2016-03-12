@@ -2,6 +2,7 @@ package com.hospital.service.remoteImpl;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.hospital.exception.TradeErrorException;
@@ -16,9 +17,9 @@ import com.hospital.tools.ServiceHelper;
  * @author wxd
  *
  */
-@Service
+@Service("defaultPatientService")
 public class PatientServiceImpl implements PatientService{
-	
+	private final Logger logger = Logger.getLogger(getClass());
 	/**
 	 * 此类是webService操作类
 	 */
@@ -30,7 +31,9 @@ public class PatientServiceImpl implements PatientService{
 		String requestXML = ObjectTransUtil.beanToXMLString(request);
 		
 		String patInfoXml = registrationService.opRegistration(requestXML);
-		
+		if(logger.isInfoEnabled()){
+			logger.info("request msg is ["+requestXML+"] and response msg is ["+patInfoXml+"]");
+		}
 		return ServiceHelper.parseXmlToPatient(patInfoXml);
 	}
 	

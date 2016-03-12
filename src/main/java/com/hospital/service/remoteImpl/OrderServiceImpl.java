@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.hospital.exception.TradeErrorException;
@@ -20,9 +21,9 @@ import com.hospital.tools.ServiceHelper;
  * @author wxd
  *
  */
-@Service
+@Service("defaultOrderService")
 public class OrderServiceImpl implements OrderService{
-	
+	private final Logger logger = Logger.getLogger(getClass());
 	@Resource(name = "registrationServiceSoap")
 	private RegistrationServiceSoap registrationService;
 	
@@ -32,7 +33,9 @@ public class OrderServiceImpl implements OrderService{
 	public List<Order> queryOrder(QueryOrderRequest request) throws TradeErrorException {
 		String requestXML = ObjectTransUtil.beanToXMLString(request);
 		String orderListXml = registrationService.opRegistration(requestXML);
-
+		if(logger.isInfoEnabled()){
+			logger.info("request msg is ["+requestXML+"] and response msg is ["+orderListXml+"]");
+		}
 		return ServiceHelper.parseXmlToOrders(orderListXml);
 	}
 
@@ -42,7 +45,9 @@ public class OrderServiceImpl implements OrderService{
 	public Order opAppArrive(OPAppArriveRequest request) throws TradeErrorException {
 		String requestXML = ObjectTransUtil.beanToXMLString(request);
 		String orderXml = registrationService.opRegistration(requestXML);
-
+		if(logger.isInfoEnabled()){
+			logger.info("request msg is ["+requestXML+"] and response msg is ["+orderXml+"]");
+		}
 		return ServiceHelper.parseXmlToOrder(orderXml);
 	}
 

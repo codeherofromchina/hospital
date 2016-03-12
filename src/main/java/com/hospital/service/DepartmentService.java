@@ -21,8 +21,7 @@ public interface DepartmentService {
 	 * @param request
 	 * @return
 	 */
-	public List<Department> queryDepartmentGroup(
-			QueryDepartmentGroupRequest request) throws TradeErrorException;
+	public List<Department> queryDepartmentGroup() throws TradeErrorException;
 
 	/**
 	 * 查询二级科室信息列表

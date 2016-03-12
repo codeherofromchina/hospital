@@ -1,5 +1,6 @@
 package com.hospital.pojo.request;
 
+import com.hospital.pojo.enum_.ClientType;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -13,9 +14,12 @@ public abstract class ParentRequest {
 	@XStreamAlias("TradeCode")
 	protected String tradeCode;
 
+	/**
+	 * 默认设置为自助终端(ATM)
+	 */
 	// 预约机构
 	@XStreamAlias("ExtOrgCode")
-	protected String extOrgCode = "";
+	protected String extOrgCode = ClientType.ATM.getCode();
 	// 客户端类型
 	@XStreamAlias("ClientType")
 	protected String clientType = "";

@@ -21,6 +21,12 @@ public class QueryDoctorRequest extends ParentRequest {
 		this.tradeCode = TradeCode.QUERYDOCTOR.getCode();
 	}
 
+	
+	public QueryDoctorRequest(String deparmentCode) {
+		this();
+		this.departmentCode = deparmentCode;
+	}
+	
 	public String getDepartmentCode() {
 		return departmentCode;
 	}

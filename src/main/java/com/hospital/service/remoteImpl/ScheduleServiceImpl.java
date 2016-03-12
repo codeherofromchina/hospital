@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.hospital.exception.TradeErrorException;
@@ -15,24 +16,26 @@ import com.hospital.tools.ObjectTransUtil;
 import com.hospital.tools.ServiceHelper;
 
 /**
- * ÅÅ°àĞÅÏ¢½Ó¿Ú²éÑ¯·şÎñÊµÏÖÀà
+ * æ’ç­ä¿¡æ¯æ¥å£æŸ¥è¯¢æœåŠ¡å®ç°ç±»
  * 
  * @author wxd
  *
  */
-@Service
+@Service("defaultScheduleService")
 public class ScheduleServiceImpl implements ScheduleService {
-
+	private final Logger logger = Logger.getLogger(getClass());
 	@Resource(name = "registrationServiceSoap")
 	private RegistrationServiceSoap registrationService;
 
 	/**
-	 * ²éÑ¯ÅÅ°à¼ÇÂ¼ÁĞ±í
+	 * æŸ¥è¯¢æ’ç­è®°å½•åˆ—è¡¨
 	 */
 	public List<Schedule> queryAdmSchedule(QueryAdmScheduleRequest request) throws TradeErrorException {
 		String requestXML = ObjectTransUtil.beanToXMLString(request);
 		String schedules = registrationService.opRegistration(requestXML);
-
+		if(logger.isInfoEnabled()){
+			logger.info("request msg is ["+requestXML+"] and response msg is ["+schedules+"]");
+		}
 		return ServiceHelper.parseXmlToSchedules(schedules);
 	}
 
