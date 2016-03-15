@@ -19,4 +19,17 @@ public interface ScheduleService {
 	 * @throws TradeErrorException
 	 */
 	public List<Schedule> queryScheduleByDay(String departmentCode,String timeSlot,Date startDate,Date endDate) throws TradeErrorException;
+	
+	
+	/**
+	 * 查询科室中医师某天的某个时间段排班
+	 * @param departmentCode
+	 * @param doctorCode
+	 * @param timeSlot
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 * @throws TradeErrorException
+	 */
+	public List<Schedule> queryScheduleByDay(String departmentCode,String doctorCode,String timeSlot,Date startDate,Date endDate) throws TradeErrorException;
 }

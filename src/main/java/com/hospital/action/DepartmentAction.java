@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hospital.exception.TradeErrorException;
 import com.hospital.pojo.Department;
@@ -53,4 +54,25 @@ public class DepartmentAction {
 		
 		return _result;
 	}
+	
+	/**
+	 * 查看所有科室列表
+	 * 用于显示所有科室信息列表页面
+	 * @return
+	 */
+	@RequestMapping("findAllDepartment")
+	public ModelAndView findAllDepartment(){
+		ModelAndView mv = new ModelAndView("allDepartment");
+		try {
+			List<Department> allDepartmentGroups = departmentService.queryDepartmentGroup();
+			mv.addObject("list", allDepartmentGroups);
+		} catch (TradeErrorException e) {
+			logger.error("查询所有科室组出错["+e.getMessage()+"]");
+			mv.addObject("errMsg", e.getMessage());
+		}
+		
+		return mv;
+	}
+	
+	
 }
