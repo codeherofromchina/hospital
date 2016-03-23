@@ -8,6 +8,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.xml.XMLSerializer;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -60,11 +61,12 @@ public class ObjectTransUtil {
 		// 声明返回结果
 		JSONObject _result  = null;
 		try {
+			if(StringUtils.isNotEmpty(xmlString)){
+				Document document = DocumentHelper.parseText(xmlString);
+				Element root = document.getRootElement();
+				_result = (JSONObject)parseElement(root);
 			
-			Document document = DocumentHelper.parseText(xmlString);
-			Element root = document.getRootElement();
-			_result = (JSONObject)parseElement(root);
-			
+			}
 			
 		} catch (DocumentException e) {
 			e.printStackTrace();

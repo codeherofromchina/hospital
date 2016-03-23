@@ -61,8 +61,8 @@ public class DepartmentAction {
 	 * @return
 	 */
 	@RequestMapping("findAllDepartment")
-	public ModelAndView findAllDepartment(){
-		ModelAndView mv = new ModelAndView("allDepartment");
+	public ModelAndView findAllDepartment(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView_velocity(request,"allDepartment");
 		try {
 			List<Department> allDepartmentGroups = departmentService.queryDepartmentGroup();
 			mv.addObject("list", allDepartmentGroups);

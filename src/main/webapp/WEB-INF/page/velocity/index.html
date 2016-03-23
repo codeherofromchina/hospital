@@ -1,11 +1,221 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <title>XXXX医院挂号系统</title>
+<link type="text/css" rel="stylesheet" href="${webPath}/css/main.css"/>
+<script type="text/javascript" src="${webPath}/js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="${webPath}/js/common.js"></script>
 </head>
 <body>
-index page！！！
-TODO 这里需要修改跳转到相应地方2
+<div id="dbnav">
+	<!-- 
+	<div class="dbnav_context">
+		<p class="dbnav_context_left"><img src="http://img.bjguahao.gov.cn/ws/1.0/hs/images/dbnav.png"><span>010-114/116114电话预约</span></p>
+		<div class="top_help">
+			<a href="javascript:void(0);">患者信息查询</a>
+			<a href="javascript:void(0);">帮助中心</a>
+		</div>
+	</div>
+	<div id="top">
+		<div class="top_left">
+			<a href="$!{webPath}/index.htm"><img src="http://img.bjguahao.gov.cn/ws/1.0/hs/images/logo.jpg">
+				<h2 class="top_h2">北京市预约挂号统一平台</h2>
+			</a>
+		</div>
+		<div class="top_search">
+			<div class="option" id="wn_h_div">
+				<span id="wn_h">科室</span>
+			</div>
+			<div class="sbox">
+				<input class="ac_input" autocomplete="off" onblur="javascript:if(this.value=='')this.value='请输入搜索内容';" onfocus="javascript:if(this.value=='请输入搜索内容')this.value='';" value="请输入搜索内容" maxlength="30" name="words" id="words" type="text">
+			</div>
+			<div class="sbtn">
+				<input value="" style="letter-spacing: -1px;" type="submit">
+			</div>
+			<div id="sbArea_h" style="display:none;">
+				<a target="_self" href="#">
+					<div class="dselObj" id="wv_h_1">
+						科室
+					</div>
+				</a>
+				<a target="_self" href="#">
+					<div class="dselObj" id="wv_h_2">
+						医生
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div id="index_nav_border">
+		<div id="index_nav">
+			<ul class="index_nav_ul">
+				<li class="index_nav_lic">全部科室</li>
+				<li><a href="#">科室排班</a></li>
+				<li><a href="#">科室医生</a></li>
+			</ul>
+			<div class="index_nav_right">
+				<a target="_blank" href="#">预约记录通道</a>
+			</div>
+		</div>
+	</div>
+	 -->
+	$!httpInclude.include("$!{webPath}/top.htm");
+	
+	
+	<div id="index_top_c">
+		<div id="index_top_left">
+			<div id="index_top_guid">
+				<ul class="index_top_nav">
+					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
+					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
+					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
+					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
+					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
+					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
+					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
+					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
+					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
+					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
+				</ul>
+				<p class="index_top_nav_p">
+					<span class="i_t_s13" style="display:inline-block; padding-left:6px;"><a href="${webPath}/search/department/findAllDepartment.htm" class="index_top_a_none">其他科室</a></span>
+				</p>
+			</div>
+			<div id="index_top_showvalue" style="display: none;">
+	<div class="index_top_con_zwc">
+		<div class="index_top_con_w">
+			<p class="index_top_hdvalue_p">
+				<span>骨外科</span>
+			</p>
+			<ul class="index_top_hdvalue_ul">
+				<li><a href="dpt/hps/1,0,0,0,90.htm">骨科</a><i></i></li>
+				<li><a href="dpt/hps/1,0,0,0,91.htm">脊柱外科</a><i></i></li>
+				<li><a href="dpt/hps/1,0,0,0,92.htm">手外科</a><i></i></li>
+				<li><a href="dpt/hps/1,0,0,0,93.htm">创伤骨科</a><i></i></li>
+				<li><a href="dpt/hps/1,0,0,0,94.htm">骨关节科</a><i></i></li>
+				<li><a href="dpt/hps/1,0,0,0,95.htm">矫形骨科</a><i></i></li>
+				<li><a href="dpt/hps/1,0,0,0,96.htm">骨质疏松科</a><i></i></li>
+				<li><a href="dpt/hps/1,0,0,0,203.htm">骨伤专科</a><i></i></li>
+			</ul>
+		</div>
+		<div class="index_top_con_w">
+			<p class="index_top_hdvalue_p">
+				<span>骨外科常见疾病</span>
+			</p>
+			<ul class="index_top_hdvalue_ul">
+				<li><a class="index_top_hd_color" href="/#">骨折</a><i></i></li>
+				<li><a href="/dis/hps/1,0,0,0,200000545.htm">腰椎间盘突出</a><i></i></li>
+				<li><a href="/dis/hps/1,0,0,0,200000546.htm">颈椎病</a><i></i></li>
+				<li><a href="/dis/hps/1,0,0,0,200000548.htm">膝关节损伤</a><i></i></li>
+				<li><a href="/dis/hps/1,0,0,0,200000549.htm">腰椎管狭窄</a><i></i></li>
+				<li><a href="/dis/hps/1,0,0,0,200000550.htm">股骨头坏死</a><i></i></li>
+				<li><a href="/dis/hps/1,0,0,0,200000551.htm">骨质增生</a><i></i></li>
+				<li><a href="/dis/hps/1,0,0,0,200000552.htm">脊柱骨折</a><i></i></li>
+				<li><a href="/dis/hps/1,0,0,0,200000553.htm">骨肿瘤</a><i></i></li>
+				<li><a href="/dis/hps/1,0,0,0,200000554.htm">腰痛</a><i></i></li>
+				<li><a class="index_top_hd_color" href="#">关节炎</a><i></i></li>
+				<li><a href="/dis/hps/1,0,0,0,200000556.htm">手外伤</a><i></i></li>
+				<li><a href="/dis/hps/1,0,0,0,200000557.htm">脊柱结核</a><i></i></li>
+				<li><a href="/dis/hps/1,0,0,0,200000559.htm">骨髓炎</a><i></i></li>
+				<li><a href="/dis/hps/1,0,0,0,200000562.htm">关节损伤</a><i></i></li>
+				<li><a href="/dis/hps/1,0,0,0,200000563.htm">骨不连</a><i></i></li>
+			</ul>
+		</div>
+	</div>
+</div>
+		</div>
+		<div id="index_jdt">
+			<div class="index_jdt_box">
+				<div id="picBox" class="picBox">
+					<ul class="cf" style="width: 1632px; left: -544px;">
+						<li class="on"><a href="http://www.bjguahao.gov.cn/" target="_blank"><img src="http://img.bjguahao.gov.cn/user/2016/02/57928394360522292053.jpg"></a></li>
+						<li><a href="http://www.114menhu.com/Unicom114/qrcode/mc114down.htm" target="_blank"><img src="http://img.bjguahao.gov.cn/user/2015/11/2419794089540409.jpg"></a></li>
+						<li><a href="http://www.bjguahao.gov.cn/" target="_blank"><img src="http://img.bjguahao.gov.cn/user/2016/02/391865867336706239.jpg"></a></li>
+					</ul>
+					<span id="prev" class="btn prev" style="display: none;"></span><span id="next" class="btn next" style="display: none;"></span>
+				</div>
+				<div id="listBox" class="listBox">
+					<ul class="cf">
+						<li class=""></li>
+						<li class="on"></li>
+						<li class=""></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="ksbz">
+			<div class="ksyuyue">
+				<h2><span>快速预约</span></h2>
+				<p>
+					<span class="ksbz_h_a">科室名称：</span>
+					<input type="text" class="ksyuyue_p_select" />
+				</p>
+				<p>
+					<span class="ksbz_h_a">医师名称：</span>
+					 <input type="text" class="ksyuyue_p_select" />
+				</p>
+				<a class="ksbz_kscx" href="#">快速查询</a>
+			</div>
+			<div class="ksyuyue ksbz_help">
+				<h2><span>患者信息快速查询</span></h2>
+				<p>
+					<span class="ksbz_h_a">就诊卡号：</span>
+					<input type="text" class="ksyuyue_p_select" />
+				</p>
+				<a class="ksbz_kscx" href="#">快速查询</a>
+			</div>
+		</div>
+	</div>
+	$!httpInclude.include("$!{webPath}/bottom.htm");
+	<!-- 
+	<div class="footer-box clear path">
+		<div class="footer-img-box">
+			<div class="footer-img-left">
+				<img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/logo.png">
+				<ul>
+					<li><span class="phone">4000-191-191</span></li>
+					<li><span class="mail">邮箱：baiduyisheng@baidu.com</span></li>
+					<li><a href="#" target="_blank">联系客服</a></li>
+				</ul>
+			</div>
+			<ul class="footer-img-right">
+				<li class="image-hospital">
+				<p>
+					签约医院：
+				</p>
+				<ul>
+					<li><img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/china-japan-hospital.png"></li>
+					<li><img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/huashan-hospital.png"></li>
+					<li><img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/china-301-hosptical.png"></li>
+					<li><img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/qingdao-hospital.png"></li>
+				</ul>
+				</li>
+				<li class="image-mec">
+				<p>
+					合作伙伴：
+				</p>
+				<ul>
+					<li><img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/zhonghua-partners.png"></li>
+					<li><img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/shenzhen-partners.png"></li>
+				</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="footer-container-box">
+			<div class="footer-container">
+				<div style="overflow:hidden">
+					<dd class="footer-container-left">©2016 Baidu <a href="#" target="_blank">使用百度前必读</a> 京ICP证030173号</dd>
+					<dd class="footer-container-right">
+					<a href="#" target="_blank"><span>帮助 |</span></a>
+					<a href="#" target="_blank"><span> 用户协议 |</span></a>
+					<a href="#" target="_blank"><span> 意见反馈<span></span></span></a>
+					</dd>
+				</div>
+			</div>
+		</div>
+	</div>
+	 -->
+</div>
 </body>
 </html>

@@ -2,8 +2,10 @@ package com.hospital.action;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -94,7 +96,7 @@ public class ScheduleAction {
 	
 	
 	/**
-	 * 查询科室
+	 * 查询科室中某时间段医生排班列表
 	 * @param request
 	 * @param departmentCode
 	 * @param timeSlot

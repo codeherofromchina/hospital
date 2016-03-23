@@ -14,7 +14,7 @@ import com.hospital.pojo.Department;
 import com.hospital.service.DepartmentService;
 /**
  * 网站首页面action
- * @author lenovo
+ * @author wxd
  *
  */
 @Controller
@@ -39,6 +39,28 @@ public class IndexAction {
 			e.printStackTrace();
 		}
 		
+		return mv;
+	}
+	
+	/**
+	 * 网站统一顶部
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/top")
+	public ModelAndView topPage(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView_velocity(request, "top");
+		return mv;
+	}
+	
+	/**
+	 * 网站统一底部
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/bottom")
+	public ModelAndView bottomPage(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView_velocity(request, "bottom");
 		return mv;
 	}
 }
