@@ -8,6 +8,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,27 +34,27 @@ public class DepartmentAction {
 	private DepartmentService departmentService;
 	
 	/**
-	 * 异步获取所有一级科室信息
+	 * 异步获取所有科室信息
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping("/asyncAllGroups")
+	@RequestMapping("/asyncAllDepartments")
 	@ResponseBody
-	public Map<String, Object> asyncAllDepartmentGroups(HttpServletRequest request,HttpServletResponse response){
+	public String asyncAllDepartmentGroups(HttpServletRequest request,HttpServletResponse response){
 		Map<String, Object> _result = new HashMap<String, Object>();
 		_result.put("success", true);
 		
 		try {
-			List<Department> allDepartmentGroups = departmentService.queryDepartmentGroup();
-			_result.put("result", allDepartmentGroups);
+			List<Department> AllDepartments = departmentService.queryAllDepartments();
+			_result.put("result", AllDepartments);
 		} catch (TradeErrorException e) {
 			logger.error("获取所有科室组出错["+e.getMessage()+"]");
 			_result.put("success", false);
 			_result.put("msg", e.getMessage());
 		}
 		
-		return _result;
+		return JSONObject.fromObject(_result).toString();
 	}
 	
 	/**
@@ -64,8 +66,8 @@ public class DepartmentAction {
 	public ModelAndView findAllDepartment(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView_velocity(request,"allDepartment");
 		try {
-			List<Department> allDepartmentGroups = departmentService.queryDepartmentGroup();
-			mv.addObject("list", allDepartmentGroups);
+			List<Department> allDepartments = departmentService.queryAllDepartments();
+			mv.addObject("allDepartments", allDepartments);
 		} catch (TradeErrorException e) {
 			logger.error("查询所有科室组出错["+e.getMessage()+"]");
 			mv.addObject("errMsg", e.getMessage());

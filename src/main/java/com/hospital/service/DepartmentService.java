@@ -16,19 +16,17 @@ import com.hospital.pojo.request.QueryDepartmentRequest;
 public interface DepartmentService {
 
 	/**
-	 * 查询一级科室信息列表
+	 * 查询所有科室信息列表
 	 * 
 	 * @param request
 	 * @return
 	 */
-	public List<Department> queryDepartmentGroup() throws TradeErrorException;
+	public List<Department> queryAllDepartments() throws TradeErrorException;
 
 	/**
-	 * 查询二级科室信息列表
-	 * 
-	 * @param request
+	 * 通过科室编号获取科室信息
+	 * @param deptCode
 	 * @return
 	 */
-	public List<Department> queryDepartment(QueryDepartmentRequest request)
-			throws TradeErrorException;
+	public Department queryByDeptCode(String deptCode) throws TradeErrorException;
 }

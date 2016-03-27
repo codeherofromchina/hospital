@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "RegistrationService", targetNamespace = "http://tempuri.org", wsdlLocation = "http://172.18.10.96:57772/csp/dhc-ens/ATRegistration.BS.AutoReg.cls?wsdl")
+@WebServiceClient(name = "RegistrationService", targetNamespace = "http://tempuri.org", wsdlLocation = "http://183.196.0.25:5772/csp/dhc-ens/ATRegistration.BS.AutoReg.cls?wsdl")
 public class RegistrationService
     extends Service
 {
@@ -30,7 +30,7 @@ public class RegistrationService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://172.18.10.96:57772/csp/dhc-ens/ATRegistration.BS.AutoReg.cls?wsdl");
+            url = new URL("http://183.196.0.25:5772/csp/dhc-ens/ATRegistration.BS.AutoReg.cls?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

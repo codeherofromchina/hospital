@@ -10,6 +10,8 @@ import java.util.Set;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import net.sf.json.JSONObject;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -41,14 +43,19 @@ public class ScheduleAction {
 	 * @return
 	 */
 	@RequestMapping("/department")
-	public ModelAndView getScheduleList(){
-		ModelAndView mv = new ModelAndView_velocity("schedules_department");
+	public ModelAndView getScheduleList(HttpServletRequest request,String deptCode){
+		ModelAndView mv = new ModelAndView_velocity(request,"schedules_dept");
 		
 		try {
-			List<Department> queryDepartmentGroup = departmentService.queryDepartmentGroup();
-			mv.addObject("departmentGroup", queryDepartmentGroup);
+			List<Department> allDepts = departmentService.queryAllDepartments();
+			mv.addObject("allDepts", allDepts);
 		} catch (TradeErrorException e) {
 			logger.error("查询所有科室错误[errmsg:"+e.getMessage()+"]");
+		}
+		
+		// 设置传入的科室编号
+		if(StringUtils.isNotEmpty(deptCode)){
+			mv.addObject("deptCode", deptCode);
 		}
 		
 		return mv;
@@ -57,19 +64,20 @@ public class ScheduleAction {
 	
 	/**
 	 * 获取某科室排班列表信息
+	 * 
 	 * @param request
-	 * @param departmentCode
-	 * @param timeSlot
-	 * @param date
+	 * @param departmentCode	科室编号
+	 * @param timeSlot 具体时间段，例如上午（S）、下午(X)、晚上(Y)
+	 * @param date  固定某天的排班信息 格式 （yyyy-MM-dd）
 	 * @return
 	 */
-	@RequestMapping("asyncScheduleDoctors")
+	@RequestMapping("asyncScheduleDayDepartment")
 	@ResponseBody
-	public Map<String, Object> asyncScheduleDoctors(HttpServletRequest request,String departmentCode,String timeSlot,String date) {
+	public String asyncScheduleDayDepartment(HttpServletRequest request,String departmentCode,String timeSlot,String date) {
 		Map<String, Object> _result = new HashMap<String, Object>();
 		_result.put("success", true);
 		// 检查参数完整性
-		if(StringUtils.isEmpty(departmentCode) || StringUtils.isNotEmpty(timeSlot) || StringUtils.isNotEmpty(date)){
+		if(StringUtils.isEmpty(departmentCode) || StringUtils.isEmpty(timeSlot) || StringUtils.isEmpty(date)){
 			_result.put("success", false);
 			_result.put("msg", "参数不完整");
 		}else{
@@ -91,21 +99,21 @@ public class ScheduleAction {
 			}
 		}
 		
-		return _result;
+		return JSONObject.fromObject(_result).toString();
 	}
 	
 	
 	/**
 	 * 查询科室中某时间段医生排班列表
-	 * @param request
+	 * @param request	
 	 * @param departmentCode
-	 * @param timeSlot
+	 * @param timeSlot	
 	 * @param date
 	 * @return
 	 */
-	@RequestMapping("asyncScheduleDoctors")
+	@RequestMapping("asyncScheduleSevenDaysDapartment")
 	@ResponseBody
-	public Map<String, Object> asyncScheduleDepartmnetCode(HttpServletRequest request,String departmentCode,String date){
+	public Map<String, Object> asyncScheduleSevenDaysDapartment(HttpServletRequest request,String departmentCode,String date){
 		Map<String, Object> _result = new HashMap<String, Object>();
 		_result.put("success", true);
 		

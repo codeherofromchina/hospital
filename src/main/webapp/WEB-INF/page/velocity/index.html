@@ -9,7 +9,6 @@
 </head>
 <body>
 <div id="dbnav">
-	<!-- 
 	<div class="dbnav_context">
 		<p class="dbnav_context_left"><img src="http://img.bjguahao.gov.cn/ws/1.0/hs/images/dbnav.png"><span>010-114/116114电话预约</span></p>
 		<div class="top_help">
@@ -51,7 +50,7 @@
 		<div id="index_nav">
 			<ul class="index_nav_ul">
 				<li class="index_nav_lic">全部科室</li>
-				<li><a href="#">科室排班</a></li>
+				<li><a href="${webPath}/search/schedule/department.htm">科室排班</a></li>
 				<li><a href="#">科室医生</a></li>
 			</ul>
 			<div class="index_nav_right">
@@ -59,71 +58,25 @@
 			</div>
 		</div>
 	</div>
-	 -->
-	$!httpInclude.include("$!{webPath}/top.htm");
 	
 	
 	<div id="index_top_c">
 		<div id="index_top_left">
 			<div id="index_top_guid">
 				<ul class="index_top_nav">
-					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
-					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
-					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
-					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
-					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
-					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
-					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
-					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
-					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
-					<li class="li-inner"><span><b>肿瘤科</b><a href="#">癌痛</a></span></li>
+					#set($vCount = 0)
+					#foreach($dept in $allDepartment)
+						<li class="li-inner"><a href="javascript:void(0);"><span><b>$!{dept.departmentName}</b></span></a></li>
+						#set($vCount = $vCount+1)
+						#if($vCount == 10)
+							#break
+						#end
+					#end
 				</ul>
 				<p class="index_top_nav_p">
 					<span class="i_t_s13" style="display:inline-block; padding-left:6px;"><a href="${webPath}/search/department/findAllDepartment.htm" class="index_top_a_none">其他科室</a></span>
 				</p>
 			</div>
-			<div id="index_top_showvalue" style="display: none;">
-	<div class="index_top_con_zwc">
-		<div class="index_top_con_w">
-			<p class="index_top_hdvalue_p">
-				<span>骨外科</span>
-			</p>
-			<ul class="index_top_hdvalue_ul">
-				<li><a href="dpt/hps/1,0,0,0,90.htm">骨科</a><i></i></li>
-				<li><a href="dpt/hps/1,0,0,0,91.htm">脊柱外科</a><i></i></li>
-				<li><a href="dpt/hps/1,0,0,0,92.htm">手外科</a><i></i></li>
-				<li><a href="dpt/hps/1,0,0,0,93.htm">创伤骨科</a><i></i></li>
-				<li><a href="dpt/hps/1,0,0,0,94.htm">骨关节科</a><i></i></li>
-				<li><a href="dpt/hps/1,0,0,0,95.htm">矫形骨科</a><i></i></li>
-				<li><a href="dpt/hps/1,0,0,0,96.htm">骨质疏松科</a><i></i></li>
-				<li><a href="dpt/hps/1,0,0,0,203.htm">骨伤专科</a><i></i></li>
-			</ul>
-		</div>
-		<div class="index_top_con_w">
-			<p class="index_top_hdvalue_p">
-				<span>骨外科常见疾病</span>
-			</p>
-			<ul class="index_top_hdvalue_ul">
-				<li><a class="index_top_hd_color" href="/#">骨折</a><i></i></li>
-				<li><a href="/dis/hps/1,0,0,0,200000545.htm">腰椎间盘突出</a><i></i></li>
-				<li><a href="/dis/hps/1,0,0,0,200000546.htm">颈椎病</a><i></i></li>
-				<li><a href="/dis/hps/1,0,0,0,200000548.htm">膝关节损伤</a><i></i></li>
-				<li><a href="/dis/hps/1,0,0,0,200000549.htm">腰椎管狭窄</a><i></i></li>
-				<li><a href="/dis/hps/1,0,0,0,200000550.htm">股骨头坏死</a><i></i></li>
-				<li><a href="/dis/hps/1,0,0,0,200000551.htm">骨质增生</a><i></i></li>
-				<li><a href="/dis/hps/1,0,0,0,200000552.htm">脊柱骨折</a><i></i></li>
-				<li><a href="/dis/hps/1,0,0,0,200000553.htm">骨肿瘤</a><i></i></li>
-				<li><a href="/dis/hps/1,0,0,0,200000554.htm">腰痛</a><i></i></li>
-				<li><a class="index_top_hd_color" href="#">关节炎</a><i></i></li>
-				<li><a href="/dis/hps/1,0,0,0,200000556.htm">手外伤</a><i></i></li>
-				<li><a href="/dis/hps/1,0,0,0,200000557.htm">脊柱结核</a><i></i></li>
-				<li><a href="/dis/hps/1,0,0,0,200000559.htm">骨髓炎</a><i></i></li>
-				<li><a href="/dis/hps/1,0,0,0,200000562.htm">关节损伤</a><i></i></li>
-				<li><a href="/dis/hps/1,0,0,0,200000563.htm">骨不连</a><i></i></li>
-			</ul>
-		</div>
-	</div>
-</div>
 		</div>
 		<div id="index_jdt">
 			<div class="index_jdt_box">
@@ -135,13 +88,15 @@
 					</ul>
 					<span id="prev" class="btn prev" style="display: none;"></span><span id="next" class="btn next" style="display: none;"></span>
 				</div>
-				<div id="listBox" class="listBox">
-					<ul class="cf">
-						<li class=""></li>
-						<li class="on"></li>
-						<li class=""></li>
-					</ul>
-				</div>
+				<!-- 
+					<div id="listBox" class="listBox">
+						<ul class="cf">
+							<li class=""></li>
+							<li class="on"></li>
+							<li class=""></li>
+						</ul>
+					</div>
+				 -->
 			</div>
 		</div>
 		<div id="ksbz">
@@ -167,8 +122,6 @@
 			</div>
 		</div>
 	</div>
-	$!httpInclude.include("$!{webPath}/bottom.htm");
-	<!-- 
 	<div class="footer-box clear path">
 		<div class="footer-img-box">
 			<div class="footer-img-left">
@@ -215,7 +168,6 @@
 			</div>
 		</div>
 	</div>
-	 -->
 </div>
 </body>
 </html>

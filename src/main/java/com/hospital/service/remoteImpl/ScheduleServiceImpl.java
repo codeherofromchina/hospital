@@ -44,6 +44,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	}
 
 	/**
+	 * TODO  没有通过通过
 	 * 查询科室的某天的某个时间段排班
 	 * 
 	 * @param departmentCode

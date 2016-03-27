@@ -9,11 +9,15 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @author wxd
  *
  */
-public class Doctor {
+public class Doctor implements Comparable<Doctor>{
 	// 医生代码
 	private String doctorCode;
 	// 医生名称
 	private String doctorName;
+	// 所在科室代码
+	private String departmentCode;
+	// 所在科室名称
+	private String departmentName;
 	// 医生职称代码
 	private String doctorTitleCode;
 	// 医生职称
@@ -60,10 +64,33 @@ public class Doctor {
 	public void setDoctorSpec(String doctorSpec) {
 		this.doctorSpec = doctorSpec;
 	}
+	public String getDepartmentCode() {
+		return departmentCode;
+	}
+
+	public void setDepartmentCode(String departmentCode) {
+		this.departmentCode = departmentCode;
+	}
+
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
 
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+	}
+
+	@Override
+	public int compareTo(Doctor o) {
+		if(o==null){
+			return -1;
+		}
+		return this.getDoctorCode().compareTo(o.getDoctorCode());
 	}
 
 }

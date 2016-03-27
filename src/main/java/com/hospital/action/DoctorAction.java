@@ -10,6 +10,8 @@ import javax.annotation.Resource;
 import javax.naming.spi.DirStateFactory.Result;
 import javax.servlet.http.HttpServletRequest;
 
+import net.sf.json.JSONObject;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -39,12 +41,13 @@ public class DoctorAction {
 	/**
 	 * 异步获取科室中医生列表
 	 * @param request
-	 * @param departmentCode
+	 * @param departmentCode 科室代码
 	 * @return
+	 * {"result": [{"doctorCode": "106", "doctorName": "高记华-GJH", "doctorSpec": "", "doctorTitle": "", "doctorTitleCode": ""}],"success": true}
 	 */
 	@RequestMapping("asyncDepartmentDoctors")
 	@ResponseBody
-	public Map<String, Object> asyncDepartmentDoctors(HttpServletRequest request,String departmentCode){
+	public String asyncDepartmentDoctors(HttpServletRequest request,String departmentCode){
 		Map<String, Object> _result = new HashMap<String, Object>();
 		if(StringUtils.isEmpty(departmentCode)){
 			_result.put("success", false);
@@ -61,7 +64,7 @@ public class DoctorAction {
 			}
 		}
 		
-		return _result;
+		return JSONObject.fromObject(_result).toString();
 	}
 	
 	
@@ -74,7 +77,7 @@ public class DoctorAction {
 	 */
 	@RequestMapping("asyncAllDoctors")
 	@ResponseBody
-	public Map<String, Object> asyncAllDoctors(HttpServletRequest request){
+	public String asyncAllDoctors(HttpServletRequest request){
 		Map<String, Object> _result = new HashMap<String, Object>();
 		_result.put("success", true);
 		try {
@@ -85,7 +88,7 @@ public class DoctorAction {
 			_result.put("success", false);
 			_result.put("msg", e.getMessage());
 		}
-		return _result;
+		return JSONObject.fromObject(_result).toString();
 	}
 	
 	/**

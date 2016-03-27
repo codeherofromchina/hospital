@@ -32,9 +32,9 @@ public class IndexAction {
 		ModelAndView mv = new ModelAndView_velocity(request, "index");
 		
 		try {
-			// 获取所有一级科室并存储到model中供页面使用
-			List<Department> departmentGroups = departmentService.queryDepartmentGroup();
-			mv.addObject("departmentGroups", departmentGroups);
+			// 获取所有科室并存储到model中供页面使用
+			List<Department> allDepartment = departmentService.queryAllDepartments();
+			mv.addObject("allDepartment", allDepartment);
 		} catch (TradeErrorException e) {
 			e.printStackTrace();
 		}
@@ -42,25 +42,4 @@ public class IndexAction {
 		return mv;
 	}
 	
-	/**
-	 * 网站统一顶部
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping("/top")
-	public ModelAndView topPage(HttpServletRequest request){
-		ModelAndView mv = new ModelAndView_velocity(request, "top");
-		return mv;
-	}
-	
-	/**
-	 * 网站统一底部
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping("/bottom")
-	public ModelAndView bottomPage(HttpServletRequest request){
-		ModelAndView mv = new ModelAndView_velocity(request, "bottom");
-		return mv;
-	}
 }
