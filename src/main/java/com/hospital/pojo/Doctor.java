@@ -24,6 +24,10 @@ public class Doctor implements Comparable<Doctor>{
 	private String doctorTitle;
 	// 医生专长
 	private String doctorSpec;
+	// 出诊级别
+	private String doctorSessType;
+	// 专业名称
+	private String serivceName;
 
 	public String getDoctorCode() {
 		return doctorCode;
@@ -83,6 +87,23 @@ public class Doctor implements Comparable<Doctor>{
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+	}
+	
+
+	public String getDoctorSessType() {
+		return doctorSessType;
+	}
+
+	public void setDoctorSessType(String doctorSessType) {
+		this.doctorSessType = doctorSessType;
+	}
+
+	public String getSerivceName() {
+		return serivceName;
+	}
+
+	public void setSerivceName(String serivceName) {
+		this.serivceName = serivceName;
 	}
 
 	@Override

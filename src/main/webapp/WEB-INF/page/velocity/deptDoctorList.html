@@ -1,0 +1,216 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>XXXX医院挂号系统</title>
+<link type="text/css" rel="stylesheet" href="${webPath}/css/main.css"/>
+<script type="text/javascript" src="${webPath}/js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="${webPath}/js/common.js"></script>
+<script type="text/javascript" src="${webPath}/js/jquery.twbsPagination.js"></script>
+<script type="text/javascript">
+$(function(){
+	#if($!{deptCode})
+		// 查询当前科室的医生列表
+		queryDoctors('$!{deptCode}',1);
+	#else
+		// 查询所有科室的医生列表
+		queryDoctors('',1);
+	#end
+	
+	$("a[id^='deptList_A_']").click(function(){
+		var code = $(this).attr("code");
+		$("#currentDeptCode").val(code);
+		queryDoctors(code,1);
+	})
+	
+})
+
+// 查询医生列表
+function queryDoctors(deptCode,pageNo){
+	$.post("$!{webPath}/search/doctor/asyncDoctorDetailByDepartmentCode.htm",{deptCode:deptCode,pageNo:pageNo},function(data){
+		if(data.success){
+			$("#doc_total").html(data.totalLimit);
+			// 设置页码信息
+			setPage(data.totalPage,data.pageNum);
+			
+			var listEle = "";
+			$.each(data.doctors, function(index, obj) {
+				listEle += "<li class='doctor-info-single'>";
+				listEle += "<div class='doctor-card clearfix'>";
+				listEle += "<div class='info-pic'><img src='http://hiphotos.baidu.com/dpp/pic/item/9f2f070828381f309e3425d5af014c086e06f099.jpg'></div>";
+				listEle += "<div class='infos'><div class='info-title' style='margin-top:-10px;'>";
+				listEle += "<div>"+obj.doctorName+"</div>";
+				listEle += "<span class='doctor-medtitle'>"+obj.doctorTitle+"</span>";
+				listEle += "<p class='info-hospittal'>";
+				listEle += "<span><a href='javascript:void(0);'>"+obj.departmentName+"</a></span>";
+				listEle += "<span><a href='javascript:void(0);'>"+obj.serivceName+"</a></span>";
+				listEle += "<span><a href='javascript:void(0);'>"+obj.doctorSessType+"</a></span>";
+				listEle += "</p>";
+						
+				listEle += "<table cellspacing='0' cellpadding='0'><tr class='doctor-good'>";
+				listEle += "<td class='first-td' valign='top'>擅长诊治:</td>";
+				listEle += "<td class='last-td' valign='top'>"+obj.doctorSpec+"</td>";
+				listEle += "</tr></table>";
+				listEle += "</div></div>";
+				
+				listEle += "<div class='appointment-time'><ul>";
+				listEle += "<li><span class='appointment-day'>周四</span><span>03/24</span><span>上午</span><a href='#' target='_blank' class='more-time-chose'><span class='appointment-click'>立即预约</span></a></li>";
+				listEle += "<li><span class='appointment-day'>周二</span><span>03/29</span><span>下午</span><a href='#' target='_blank' class='more-time-chose'><span class='appointment-click'>立即预约</span></a></li>";
+				listEle += "<li><a href='#' class='more-time-chose' target='_blank'><span style='margin:0 1px;'>更多时段&nbsp;&gt;</span></a></li>";
+				listEle += "</ul></div>";
+				
+				listEle += "</div>";
+				listEle += "</li>";
+			});
+			
+			$("#doctor-info-list").html(listEle);
+		}
+	},"json");
+	
+}
+
+// 设置分页信息
+function setPage(totalPages,startPage){
+	$("#visible-pages-doctors-p").html('<ul id="visible-pages-doctors" style="margin:0;"></ul>');
+	var pageClickNum = 0;
+	$("#visible-pages-doctors").twbsPagination({
+        totalPages: totalPages,
+        startPage : startPage,
+        visiblePages: 5,
+        href: 'javascript:void(0)' ,
+        onPageClick : function (event, page) {
+        	if(pageClickNum > 0){
+        		var deptCode = $("#currentDeptCode").val();
+        		queryDoctors(deptCode,page)
+        	}
+        	pageClickNum++;
+        }
+    });
+}
+
+</script>
+</head>
+<body>
+<div id="dbnav">
+	<div class="dbnav_context">
+		<p class="dbnav_context_left"><img src="http://img.bjguahao.gov.cn/ws/1.0/hs/images/dbnav.png"><span>010-114/116114电话预约</span></p>
+		<div class="top_help">
+			<a href="#" target="_blank">患者信息查询</a>
+			<a href="#" target="_blank">帮助中心</a>
+		</div>
+	</div>
+</div>
+<div id="top">
+	<div class="top_left">
+		<a href="$!{webPath}/index.htm"><img src="http://img.bjguahao.gov.cn/ws/1.0/hs/images/logo.jpg">
+			<h2 class="top_h2">北京市预约挂号统一平台</h2>
+		</a>
+	</div>
+	<div class="top_search">
+		<div class="option" id="wn_h_div">
+			<span id="wn_h">科室</span>
+		</div>
+		<div class="sbox">
+			<input class="ac_input" autocomplete="off" onblur="javascript:if(this.value=='')this.value='请输入搜索内容';" onfocus="javascript:if(this.value=='请输入搜索内容')this.value='';" value="请输入搜索内容" maxlength="30" name="words" id="words" type="text">
+		</div>
+		<div class="sbtn">
+			<input value="" style="letter-spacing: -1px;" type="submit">
+		</div>
+		<div id="sbArea_h" style="display:none;">
+			<a target="_self" href="#">
+				<div class="dselObj" id="wv_h_1">
+					科室
+				</div>
+			</a>
+			<a target="_self" href="#">
+				<div class="dselObj" id="wv_h_2">
+					医生
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div id="index_nav_border">
+	<div id="index_nav">
+		<ul class="index_nav_ul">
+			<li class="index_nav_lic">全部科室</li>
+			<li><a href="${webPath}/search/schedule/department.htm">科室排班</a></li>
+			<li><a href="$!{webPath}/search/doctor/deptDoctorList.htm">科室医生</a></li>
+		</ul>
+		<div class="index_nav_right">
+			<a target="_blank" href="#">预约记录通道</a>
+		</div>
+	</div>
+</div>
+<div id="yiyuanxz_dh">
+	<div class="yiyuanxz_dh1">
+		<dl class="yiyuanxz_dh1_dl">
+			<dt><span>科室选择</span><a id="deptList_A_aaa_dfdf" href="javascript:void(0);" code="" class="yiyuanxz_dt_all">全部</a></dt>
+			<dd>
+				#foreach($dept in $allDepts)
+					<li><a href="javascript:void(0);" id="deptList_A_$!{dept.departmentCode}" code="$!{dept.departmentCode}">$!{dept.departmentName}</a></li>
+				#end
+			</dd>
+		</dl>
+	</div>
+</div>
+<!-- 隐藏域，当前科室 -->
+<input type="hidden" id="currentDeptCode" value="$!{deptCode}" />
+
+<div class="doctor-info-box">
+	<h4>符合条件的 <label class="curdotor"><em id="doc_total">0</em></label> 名优质医生</h4>
+	<ul id="doctor-info-list" class="doctor-info-list" style="display:block"></ul>
+	<div class="pagination-x pull-right">
+		<span class="pagers" id="visible-pages-doctors-p"></span>
+	</div>
+</div>
+
+
+<div class="footer-box clear path">
+		<div class="footer-img-box">
+			<div class="footer-img-left">
+				<img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/logo.png">
+				<ul>
+					<li><span class="phone">4000-191-191</span></li>
+					<li><span class="mail">邮箱：baiduyisheng@baidu.com</span></li>
+					<li><a href="#" target="_blank">联系客服</a></li>
+				</ul>
+			</div>
+			<ul class="footer-img-right">
+				<li class="image-hospital">
+				<p>
+					签约医院：
+				</p>
+				<ul>
+					<li><img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/china-japan-hospital.png"></li>
+					<li><img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/huashan-hospital.png"></li>
+					<li><img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/china-301-hosptical.png"></li>
+					<li><img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/qingdao-hospital.png"></li>
+				</ul>
+				</li>
+				<li class="image-mec">
+				<p>
+					合作伙伴：
+				</p>
+				<ul>
+					<li><img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/zhonghua-partners.png"></li>
+					<li><img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/shenzhen-partners.png"></li>
+				</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="footer-container-box">
+			<div class="footer-container">
+				<div style="overflow:hidden">
+					<dd class="footer-container-left">©2016 Baidu <a href="#" target="_blank">使用百度前必读</a> 京ICP证030173号</dd>
+					<dd class="footer-container-right">
+					<a href="#" target="_blank"><span>帮助 |</span></a>
+					<a href="#" target="_blank"><span> 用户协议 |</span></a>
+					<a href="#" target="_blank"><span> 意见反馈<span></span></span></a>
+					</dd>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

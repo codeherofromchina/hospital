@@ -2,10 +2,8 @@ package com.hospital.action;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +24,7 @@ import com.hospital.service.DepartmentService;
 import com.hospital.service.ScheduleService;
 import com.hospital.tools.DateUtil;
 /**
- * @author lenovo
+ * @author wxd
  *
  */
 @Controller

@@ -40,6 +40,20 @@ public class DoctorServiceImpl implements DoctorService {
 	 * @throws TradeErrorException 
 	 */
 	public List<Doctor> queryDoctor(String deparmentCode) throws TradeErrorException {
+		
+		// 先从缓存中查询，如果查询失败，再调用远程查询
+		List<Doctor> data = DataCacheUtil.getData(DataCacheUtil.CacheKey.ALL_DOCTORS_KEY,List.class);
+		if(data!=null){
+			List<Doctor> result = new ArrayList<Doctor>();
+			for(Doctor doctor:data){
+				if(deparmentCode.equals(doctor.getDepartmentCode())){
+					result.add(doctor);
+				}
+			}
+			return result;
+		}
+		
+		
 		QueryDoctorRequest request = new QueryDoctorRequest(deparmentCode);
 		
 		return queryDoctor(request);

@@ -16,42 +16,43 @@
 			<a href="javascript:void(0);">帮助中心</a>
 		</div>
 	</div>
-	<div id="top">
-		<div class="top_left">
-			<a href="$!{webPath}/index.htm"><img src="http://img.bjguahao.gov.cn/ws/1.0/hs/images/logo.jpg">
-				<h2 class="top_h2">北京市预约挂号统一平台</h2>
+</div>
+<div id="top">
+	<div class="top_left">
+		<a href="$!{webPath}/index.htm"><img src="http://img.bjguahao.gov.cn/ws/1.0/hs/images/logo.jpg">
+			<h2 class="top_h2">北京市预约挂号统一平台</h2>
+		</a>
+	</div>
+	<div class="top_search">
+		<div class="option" id="wn_h_div">
+			<span id="wn_h">科室</span>
+		</div>
+		<div class="sbox">
+			<input class="ac_input" autocomplete="off" onblur="javascript:if(this.value=='')this.value='请输入搜索内容';" onfocus="javascript:if(this.value=='请输入搜索内容')this.value='';" value="请输入搜索内容" maxlength="30" name="words" id="words" type="text">
+		</div>
+		<div class="sbtn">
+			<input value="" style="letter-spacing: -1px;" type="submit">
+		</div>
+		<div id="sbArea_h" style="display:none;">
+			<a target="_self" href="#">
+				<div class="dselObj" id="wv_h_1">
+					科室
+				</div>
+			</a>
+			<a target="_self" href="#">
+				<div class="dselObj" id="wv_h_2">
+					医生
+				</div>
 			</a>
 		</div>
-		<div class="top_search">
-			<div class="option" id="wn_h_div">
-				<span id="wn_h">科室</span>
-			</div>
-			<div class="sbox">
-				<input class="ac_input" autocomplete="off" onblur="javascript:if(this.value=='')this.value='请输入搜索内容';" onfocus="javascript:if(this.value=='请输入搜索内容')this.value='';" value="请输入搜索内容" maxlength="30" name="words" id="words" type="text">
-			</div>
-			<div class="sbtn">
-				<input value="" style="letter-spacing: -1px;" type="submit">
-			</div>
-			<div id="sbArea_h" style="display:none;">
-				<a target="_self" href="#">
-					<div class="dselObj" id="wv_h_1">
-						科室
-					</div>
-				</a>
-				<a target="_self" href="#">
-					<div class="dselObj" id="wv_h_2">
-						医生
-					</div>
-				</a>
-			</div>
-		</div>
 	</div>
+</div>
 	<div id="index_nav_border">
 		<div id="index_nav">
 			<ul class="index_nav_ul">
 				<li class="index_nav_lic">全部科室</li>
 				<li><a href="${webPath}/search/schedule/department.htm">科室排班</a></li>
-				<li><a href="#">科室医生</a></li>
+				<li><a href="$!{webPath}/search/doctor/deptDoctorList.htm">科室医生</a></li>
 			</ul>
 			<div class="index_nav_right">
 				<a target="_blank" href="#">预约记录通道</a>
@@ -66,7 +67,7 @@
 				<ul class="index_top_nav">
 					#set($vCount = 0)
 					#foreach($dept in $allDepartment)
-						<li class="li-inner"><a href="javascript:void(0);"><span><b>$!{dept.departmentName}</b></span></a></li>
+						<li class="li-inner"><a href="$!{webPath}/search/schedule/department.htm?deptCode=$!{dept.departmentCode}"><span><b>$!{dept.departmentName}</b></span></a></li>
 						#set($vCount = $vCount+1)
 						#if($vCount == 10)
 							#break
@@ -168,6 +169,5 @@
 			</div>
 		</div>
 	</div>
-</div>
 </body>
 </html>

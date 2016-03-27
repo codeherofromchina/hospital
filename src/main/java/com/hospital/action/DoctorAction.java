@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.naming.spi.DirStateFactory.Result;
 import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONObject;
@@ -17,16 +16,19 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hospital.exception.TradeErrorException;
+import com.hospital.pojo.Department;
 import com.hospital.pojo.Doctor;
 import com.hospital.pojo.Schedule;
+import com.hospital.service.DepartmentService;
 import com.hospital.service.DoctorService;
 import com.hospital.service.ScheduleService;
 import com.hospital.tools.DateUtil;
 /**
  * 
- * @author lenovo
+ * @author wxd
  *
  */
 @Controller
@@ -37,6 +39,8 @@ public class DoctorAction {
 	private DoctorService doctorService;
 	@Resource(name="defaultScheduleService")
 	private ScheduleService scheduleService;
+	@Resource(name = "defaultDepartmentServiceImpl")
+	private DepartmentService departmentService;
 
 	/**
 	 * 异步获取科室中医生列表
@@ -91,28 +95,56 @@ public class DoctorAction {
 		return JSONObject.fromObject(_result).toString();
 	}
 	
+	
 	/**
+	 * 跳转到科室医师列表页面
+	 * @param request
+	 * @param deptCode
+	 * @return
+	 */
+	@RequestMapping("deptDoctorList")
+	public ModelAndView deptDoctorList(HttpServletRequest request,String deptCode){
+		ModelAndView mv = new ModelAndView_velocity(request, "deptDoctorList");
+		
+		// 获取所有科室
+		try {
+			List<Department> allDepartments = departmentService.queryAllDepartments();
+			mv.addObject("allDepts", allDepartments);
+		} catch (TradeErrorException e) {
+			logger.error("获取所有科室组出错["+e.getMessage()+"]");
+		}
+		
+		if(StringUtils.isNotEmpty(deptCode)){
+			mv.addObject("deptCode", deptCode);
+		}
+
+		return mv;
+	}
+	
+	
+	/**
+	 * 未测试  TODO
 	 * 用于科室医生页面使用
-	 * @param departmentCode  科室编号  如果为空，则查询所有科室
+	 * @param deptCode  科室编号  如果为空，则查询所有科室
 	 * @param pageNo   当前页码  默认1页 ，设置默认每页10个医生，不可编辑
 	 * @return
 	 */
 	@RequestMapping("asyncDoctorDetailByDepartmentCode")
 	@ResponseBody
-	public Map<String, Object> asyncDoctorDetailByDepartmentCode(String departmentCode,String pageNo){
+	public String asyncDoctorDetailByDepartmentCode(String deptCode,String pageNo){
 		Map<String, Object> _result = new HashMap<String,Object>();
 		_result.put("success", true);
 		List<Doctor> doctors = null;
 		try {
 			// 查询全部科室
-			if(StringUtils.isEmpty(departmentCode)){
-				doctors = doctorService.queryDoctor(departmentCode);
+			if(StringUtils.isEmpty(deptCode)){
+				doctors = doctorService.queryAllDoctor();
 			}else{
 				// 查询指定科室
-				doctors = doctorService.queryDoctor(departmentCode);
+				doctors = doctorService.queryDoctor(deptCode);
 			}
 		} catch (TradeErrorException e) {
-			logger.error("查询全部医生错误[departmentCode:"+departmentCode+",errMsg:"+e.getMessage()+"]");
+			logger.error("查询全部医生错误[departmentCode:"+deptCode+",errMsg:"+e.getMessage()+"]");
 			_result.put("success", false);
 			_result.put("msg", e.getMessage());
 		}
@@ -123,6 +155,8 @@ public class DoctorAction {
 				_result.put("success", false);
 				_result.put("msg", "没有任何医生信息！");
 			} else {
+				
+				// 获取当前页码和总记录条数
 				int pageNum = 1;
 				totalPage = doctors.size()/10 + (doctors.size()%10 >0?1:0);
 				if (StringUtils.isNotEmpty(pageNo)) {
@@ -139,32 +173,34 @@ public class DoctorAction {
 					}
 				}
 				
-				_result.put("totalPage", totalPage);
-				_result.put("pageNum", pageNum);
+				_result.put("totalPage", totalPage);// 总页码
+				int size = doctors.size();
+				_result.put("totalLimit", size); // 总记录条数
+				_result.put("pageNum", pageNum); // 当前页码
 				int fromIndex = (pageNum - 1) * 10;
 				int toIndex = fromIndex + 10;
 
-				List<Doctor> subList = doctors.subList(fromIndex, toIndex);
+				List<Doctor> subList = doctors.subList(fromIndex, toIndex>size?size:toIndex);
 
 				
 				Date startDate = new Date();
 				Date endDate = DateUtil.plusSomeDay(startDate, 2);
 				
-				for(Doctor doctor:subList){
+				/*for(Doctor doctor:subList){
 					try {
 						Map<String,List<Schedule>> _tmp = new HashMap<String, List<Schedule>>();
 						
-						List<Schedule> queryScheduleByDay = scheduleService.queryScheduleByDay(departmentCode, doctor.getDoctorCode(), "S", startDate, endDate);
+						List<Schedule> queryScheduleByDay = scheduleService.queryScheduleByDay(deptCode, doctor.getDoctorCode(), "S", startDate, endDate);
 						
 						if(queryScheduleByDay!=null && queryScheduleByDay.size() > 0){
 							_tmp.put("S", queryScheduleByDay);
 						}
 						
-						List<Schedule> queryScheduleByDay2 = scheduleService.queryScheduleByDay(departmentCode, doctor.getDoctorCode(), "X", startDate, endDate);
+						List<Schedule> queryScheduleByDay2 = scheduleService.queryScheduleByDay(deptCode, doctor.getDoctorCode(), "X", startDate, endDate);
 						if(queryScheduleByDay2!=null && queryScheduleByDay2.size() > 0){
 							_tmp.put("X", queryScheduleByDay2);
 						}
-						List<Schedule> queryScheduleByDay3 = scheduleService.queryScheduleByDay(departmentCode, doctor.getDoctorCode(), "Y", startDate, endDate);
+						List<Schedule> queryScheduleByDay3 = scheduleService.queryScheduleByDay(deptCode, doctor.getDoctorCode(), "Y", startDate, endDate);
 						if(queryScheduleByDay3!=null && queryScheduleByDay3.size() > 0){
 							_tmp.put("Y", queryScheduleByDay3);
 						}
@@ -190,14 +226,14 @@ public class DoctorAction {
 					} catch (TradeErrorException e) {
 						logger.error("查询医生排班信息错误["+e.getMessage()+"]");
 					}
-				}
+				}*/
 				
 				
 				_result.put("doctors", subList);
 			}
 		}
 		
-		return _result;
+		return JSONObject.fromObject(_result).toString();
 	}
 
 }

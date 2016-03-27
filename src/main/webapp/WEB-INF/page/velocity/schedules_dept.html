@@ -28,14 +28,15 @@ $(function(){
 	// 点击科室，获取当前点击科室的所有排班信息
 	$("a[id^='deptName_A']").click(function(){
 		$("a[id^='deptName_A']").removeClass("active");
-		var code = $(this).attr(code);
+		var code = $(this).attr("code");
 		getSchedule(code);
 	})
 })
 
+// 异步获取科室排班信息
 function getSchedule(deptCode){
 	$("#deptName_A_"+deptCode).addClass("active");
-	alert(deptCode);
+	// 这里获取科室排班信息
 }
 </script>
 </head>
@@ -48,6 +49,7 @@ function getSchedule(deptCode){
 			<a href="javascript:void(0);">帮助中心</a>
 		</div>
 	</div>
+</div>
 	<div id="top">
 		<div class="top_left">
 			<a href="$!{webPath}/index.htm"><img src="http://img.bjguahao.gov.cn/ws/1.0/hs/images/logo.jpg">
@@ -83,7 +85,7 @@ function getSchedule(deptCode){
 			<ul class="index_nav_ul">
 				<li class="index_nav_lic">全部科室</li>
 				<li><a href="${webPath}/search/schedule/department.htm">科室排班</a></li>
-				<li><a href="#">科室医生</a></li>
+				<li><a href="$!{webPath}/search/doctor/deptDoctorList.htm">科室医生</a></li>
 			</ul>
 			<div class="index_nav_right">
 				<a target="_blank" href="#">预约记录通道</a>
@@ -287,6 +289,6 @@ function getSchedule(deptCode){
 			</div>
 		</div>
 	</div>
-</div>
+
 </body>
 </html>
