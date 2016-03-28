@@ -159,31 +159,4 @@ public class ScheduleAction {
 		return JSONObject.fromObject(_result).toString();
 	}
 	
-	/*
-	 * TODO  
-	 * 获取排班日期某天的剩余数量
-	 */
-	private Map<String, Object> handlerSchedule(List<Schedule> schedules){
-		Map<String, Object> _result = new HashMap<String, Object>();
-		
-		for(Schedule schedule:schedules){
-			String serviceDate = schedule.getServiceDate();
-			int availableNum = 0;
-			try{
-				availableNum = Integer.parseInt(schedule.getAvailableNum());
-			}catch(NumberFormatException ex){
-				logger.error("获取排班信息后剩余号数量转数字错误["+ex.getMessage()+"]");
-			}
-			
-			if(_result.containsKey(serviceDate)){
-				Integer num = (Integer)_result.get(serviceDate);
-				_result.put(serviceDate, availableNum +num);
-			}else{
-				_result.put(serviceDate, availableNum);
-			}
-		}
-		
-		return _result;
-	}
-	
 }

@@ -37,6 +37,9 @@ $(function(){
 function getSchedule(deptCode){
 	$("#deptName_A_"+deptCode).addClass("active");
 	var deptName = $("#deptName_A_"+deptCode).html();
+	// 先隐藏医生显示部分
+	$("#ksorder_djgh_doctor").hide();
+	
 	// 这里获取科室排班信息
 	var now = getDateFormat(new Date());
 	$.post("$!{webPath}/search/schedule/asyncScheduleNDaysDapartment.htm",{departmentCode:deptCode,sDate:now,n:7},function(data){
@@ -67,21 +70,21 @@ function getSchedule(deptCode){
 					})
 				}
 				
-				head += "<th scope='col'>星期X<p>"+key+"</p></th>";
+				head += "<th scope='col'>"+getWeek(comDate)+"<p>"+key+"</p></th>";
 				if(sw > 0){
-					t1 += "<td class='ksorder_kyy ksorder_bgcol'>预约<br>剩余:"+sw+"</td>";
+					t1 += "<td class='ksorder_kyy ksorder_bgcol' onclick='getDoctorList(this,\""+deptCode+"\",\"上午\",\""+key+"\")'>预约<br>剩余:"+sw+"</td>";
 				}else{
-					t1 += "<td>&nbsp;</td>";
+					t1 += "<td>&nbsp;无</td>";
 				}
 				if(xw > 0){
-					t2 += "<td class='ksorder_kyy ksorder_bgcol'>预约<br>剩余:"+xw+"</td>";
+					t2 += "<td class='ksorder_kyy ksorder_bgcol' onclick='getDoctorList(this,\""+deptCode+"\",\"下午\",\""+key+"\")'>预约<br>剩余:"+xw+"</td>";
 				}else{
-					t2 += "<td>&nbsp;</td>";
+					t2 += "<td>&nbsp;无</td>";
 				}
 				if(ws > 0){
-					t3 += "<td class='ksorder_kyy ksorder_bgcol'>预约<br>剩余:"+ws+"</td>";
+					t3 += "<td class='ksorder_kyy ksorder_bgcol' onclick='getDoctorList(this,\""+deptCode+"\",\"晚上\",\""+key+"\")'>预约<br>剩余:"+ws+"</td>";
 				}else{
-					t3 += "<td>&nbsp;</td>";
+					t3 += "<td>&nbsp;无</td>";
 				}
 			}
 			
@@ -110,11 +113,12 @@ function getSchedule(deptCode){
 }
 
 
+
 function getAvailableNum(availabelNumStr){
-	var num = parseInt(availabelNumStr);
+	var num = Number(availabelNumStr);
 	if(isNaN(num)){
 		var result = 0;
-		$.each(num.split(","),function(index,obj){
+		$.each(availabelNumStr.split(","),function(index,obj){
 			var numArr = obj.split(";");
 			if(numArr.length > 1){
 				var n = parseInt(numArr[1]);
@@ -129,6 +133,53 @@ function getAvailableNum(availabelNumStr){
 	}
 }
 
+// 获取点击事件中的医生列表并排班到页面中，同时控制点击td中的样式改变
+function getDoctorList(tdObj,deptCode,timeSole,dateStr){
+	$(".ksorder_kyy").addClass("ksorder_bgcol");
+	$(tdObj).removeClass("ksorder_bgcol");
+	$.post("$!{webPath}/search/schedule/asyncScheduleNDaysDapartment.htm",{departmentCode:deptCode,sDate:dateStr},function(data){
+		if(data.success){
+			var result = data.result;
+			var doctorHtml = "";
+			
+			$.each(result[dateStr],function(index,obj){
+				if(obj["sessionName"] == timeSole){
+					var aNum = Number(obj["availableNum"]);
+					var ableNumFlag = true;
+					if(isNaN(aNum)){
+						ableNumFlag = false;
+					}
+					
+					doctorHtml += "<div class='ksorder_djgh_dr1 ksorder_djgh_dr1_bg'>";
+					doctorHtml += "<dl class='ksorder_dr1_dl'>";
+					doctorHtml += "<dt><img src='http://img.bjguahao.gov.cn/naja/doctor/doctor.jpg'></dt>";
+					doctorHtml += "<dd>"+obj["doctorName"]+"</dd>";
+					doctorHtml += "<dd>"+obj["departmentName"]+"</dd>";
+					doctorHtml += "<dd><h4>"+obj["doctorTitle"]+"</h4></dd>";
+					if(!ableNumFlag){
+						doctorHtml += "<p>剩余号："+obj["availableNum"]+"</p>";
+					}
+					doctorHtml += "</dl>";
+					doctorHtml += "<p class='ksorder_dr1_p'>";
+					doctorHtml += "<span class='ksorder_dr1spa'>挂号费：<b>&yen;"+obj["regFee"]+"</b></span>";
+					doctorHtml += "<span class='ksorder_dr1spa'>诊查费：<b>&yen;"+obj["checkupFee"]+"</b></span>";
+					doctorHtml += "<span class='ksorder_dr1spa'>服务费：<b>&yen;"+obj["serviceFee"]+"</b></span>";
+					doctorHtml += "<span class='ksorder_dr1spa'>其他费用：<b>&yen;"+obj["otherFee"]+"</b></span>";
+					if(ableNumFlag){
+						doctorHtml += "<span class='ksorder_dr1spa2'>剩余号：<b>"+aNum+"</b></span>";
+					}
+					doctorHtml += "</p>";
+					doctorHtml += "<p class='ksorder_dr1_p2'><a href='#' class='ksorder_dr1_syhy'>预约挂号</a></p>";
+					doctorHtml += "</div>";
+				}
+			});
+			
+			
+			$("#ksorder_djgh_doctor").html(doctorHtml);
+			$("#ksorder_djgh_doctor").show();
+		}
+	},"json");
+}
 </script>
 </head>
 <body>
@@ -314,6 +365,7 @@ function getAvailableNum(availabelNumStr){
 	    </div>
 	    <!-- 医生列表信息 -->
 	    <div id="ksorder_djgh_doctor" style="display:none;">
+	    	<!-- 
 			<div class="ksorder_djgh_dr1 ksorder_djgh_dr1_bg">
 				<dl class="ksorder_dr1_dl">
 					<dt><img id="doctorPortrait" src="http://img.bjguahao.gov.cn/naja/doctor/doctor.jpg" onerror="this.src=&quot;http://img.bjguahao.gov.cn/naja/doctor/doctor.jpg;&quot;"></dt>
@@ -331,6 +383,7 @@ function getAvailableNum(availabelNumStr){
 					<a href="/order/confirm/7-200000049-200000179-33324824.htm" class="ksorder_dr1_syhy">预约挂号</a>
 				</p>
 			</div>
+			 -->
 		</div>
 	</div>	
 	
