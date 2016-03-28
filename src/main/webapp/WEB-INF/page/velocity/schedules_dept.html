@@ -36,8 +36,99 @@ $(function(){
 // 异步获取科室排班信息
 function getSchedule(deptCode){
 	$("#deptName_A_"+deptCode).addClass("active");
+	var deptName = $("#deptName_A_"+deptCode).html();
 	// 这里获取科室排班信息
+	var now = getDateFormat(new Date());
+	$.post("$!{webPath}/search/schedule/asyncScheduleNDaysDapartment.htm",{departmentCode:deptCode,sDate:now,n:7},function(data){
+		if(data.success){
+			var result = data.result;
+			
+			var str = "<div class='ksorder_cen_l_l'><a href='javascript:void(0);' class='ksorder_btn_left'></a><ul><li>上午</li><li>下午</li><li>晚上</li></ul></div>";
+			str += "<div class='ksorder_cen_l_table'><div class='ksorder_cen_l_t_c' style='width: 659px;'><table border='0' cellpadding='0' cellspacing='0'>"
+			var head = "<tr>"; // table标题
+			var t1 = "<tr>";// 上午内容
+			var t2 = "<tr>"; // 下午内容
+			var t3 = "<tr>"; // 晚上内容
+			for(var i =0;i<7;++i){
+				var comDate = addDate(now,i);
+				var key = getDateFormat(comDate);
+				var sw = 0;
+				var xw = 0;
+				var ws = 0;
+				if(result[key]){
+					$.each(result[key],function(index,obj){
+						if(obj["sessionName"]=="上午"){
+							sw += getAvailableNum(obj["availableNum"]);
+						}else if(obj["sessionName"]=="下午"){
+							xw += getAvailableNum(obj["availableNum"]);
+						}else{
+							ws += getAvailableNum(obj["availableNum"]);
+						}			
+					})
+				}
+				
+				head += "<th scope='col'>星期X<p>"+key+"</p></th>";
+				if(sw > 0){
+					t1 += "<td class='ksorder_kyy ksorder_bgcol'>预约<br>剩余:"+sw+"</td>";
+				}else{
+					t1 += "<td>&nbsp;</td>";
+				}
+				if(xw > 0){
+					t2 += "<td class='ksorder_kyy ksorder_bgcol'>预约<br>剩余:"+xw+"</td>";
+				}else{
+					t2 += "<td>&nbsp;</td>";
+				}
+				if(ws > 0){
+					t3 += "<td class='ksorder_kyy ksorder_bgcol'>预约<br>剩余:"+ws+"</td>";
+				}else{
+					t3 += "<td>&nbsp;</td>";
+				}
+			}
+			
+			head += "<tr>"; 
+			t1 += "<tr>";
+			t2 += "<tr>"; 
+			t3 += "<tr>"; 
+			
+			str += head;
+			str += t1;
+			str += t2;
+			str += t3;
+			
+			str += "</table></div></div>";
+			str += "<div class='ksorder_cen_l_r'><a href='#' class='ksorder_btn_right'></a></div>";
+			$("#ksorder_cen_l").html(str);
+		}
+	},"json");
+	
+	// 显示科室排班内容
+	$("#ksorder_time_title_nothing").hide();
+	$("#ksorder_time_title_have").show();
+	$("#sechedu_table_title_info").html("科室排班表("+deptName+")");
+	$("#ksorder_time_center_table").show();
+	
 }
+
+
+function getAvailableNum(availabelNumStr){
+	var num = parseInt(availabelNumStr);
+	if(isNaN(num)){
+		var result = 0;
+		$.each(num.split(","),function(index,obj){
+			var numArr = obj.split(";");
+			if(numArr.length > 1){
+				var n = parseInt(numArr[1]);
+				if(!isNaN(n)){
+					result += n;
+				}
+			}
+		})
+		return result;
+	}else{
+		return num;
+	}
+}
+
 </script>
 </head>
 <body>
@@ -111,17 +202,18 @@ function getSchedule(deptCode){
 	
 	
 	<div id="ksorder_time">
-		<div class="ksorder_time_title" style="display:none;">
+		<div class="ksorder_time_title" id="ksorder_time_title_nothing" style="display:block;">
 	    	<p class="ksorder_t_p"><font color="red">请选择科室以查看科室排班信息</font></p>
 	    </div>
-		<div class="ksorder_time_title" style="display:block;">
-	    	<p class="ksorder_t_p">科室排班表</p>
+		<div class="ksorder_time_title" id="ksorder_time_title_have" style="display:none;">
+	    	<p class="ksorder_t_p" id="sechedu_table_title_info">科室排班表</p>
 	    </div>
-	    <div class="ksorder_time_center" style="display:block;">
-	    	<div class="ksorder_cen_l">
+	    <div class="ksorder_time_center" id="ksorder_time_center_table" style="display:none;">
+	    	<div class="ksorder_cen_l" id="ksorder_cen_l">
+	    		<!-- 
 	    		<div class="ksorder_cen_l_l">
-	            	<a href="#" class="ksorder_btn_left"></a>
-	            		<ul>
+	            	<a href="javascript:void(0);" class="ksorder_btn_left"></a>
+	            	<ul>
 	                    <li>上午</li>
 	                    <li>下午</li>
 	                    <li>晚上</li>
@@ -202,6 +294,7 @@ function getSchedule(deptCode){
 	            <div class="ksorder_cen_l_r">
 	            	<a href="#" class="ksorder_btn_right"></a>
 	            </div>
+	             -->
 	    	</div>
 	    	<div class="ksorder_cen_r">
 	            <div class="ksorder_cen_r_top">
@@ -220,7 +313,7 @@ function getSchedule(deptCode){
 	        </div>
 	    </div>
 	    <!-- 医生列表信息 -->
-	    <div id="ksorder_djgh_doctor" style="display:block;">
+	    <div id="ksorder_djgh_doctor" style="display:none;">
 			<div class="ksorder_djgh_dr1 ksorder_djgh_dr1_bg">
 				<dl class="ksorder_dr1_dl">
 					<dt><img id="doctorPortrait" src="http://img.bjguahao.gov.cn/naja/doctor/doctor.jpg" onerror="this.src=&quot;http://img.bjguahao.gov.cn/naja/doctor/doctor.jpg;&quot;"></dt>

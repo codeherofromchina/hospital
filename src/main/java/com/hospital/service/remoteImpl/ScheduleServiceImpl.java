@@ -44,42 +44,35 @@ public class ScheduleServiceImpl implements ScheduleService {
 	}
 
 	/**
-	 * TODO  没有通过通过
 	 * 查询科室的某天的某个时间段排班
 	 * 
 	 * @param departmentCode
 	 *            科室代码
-	 * @param timeSlot
-	 *            S：上午 X：下午 Y：夜晚
-	 * @param startDate
-	 *            要查询的开始日期
-	 * @param endDate
-	 *            要查询的结束日期
+	 * @param date
+	 *            要查询的日期
 	 * @return
 	 * @throws TradeErrorException
 	 */
-	public List<Schedule> queryScheduleByDay(String departmentCode,
-			String timeSlot, Date startDate, Date endDate)
+	public List<Schedule> queryScheduleByDay(String departmentCode, Date date)
 			throws TradeErrorException {
 		QueryAdmScheduleRequest request = new QueryAdmScheduleRequest();
 
 		request.setDepartmentCode(departmentCode);
-		request.setRbasSessionCode(timeSlot);
-		request.setStartDate(DateUtil.formatToShortString(startDate));
-		request.setEndDate(DateUtil.formatToShortString(endDate));
+		request.setStartDate(DateUtil.formatToShortString(date));
+		request.setEndDate(DateUtil.formatToShortString(date));
 
 		return queryAdmSchedule(request);
 	}
 
 	/**
+	 * 
+	 * TODO 需要测试
 	 * 查询科室中医师的某天的某个时间段排班
 	 * 
 	 * @param departmentCode
 	 *            科室代码
 	 * @param doctorCode
 	 *            医生代码
-	 * @param timeSlot
-	 *            S：上午 X：下午 Y：夜晚
 	 * @param startDate
 	 *            要查询的开始日期
 	 * @param endDate
@@ -88,13 +81,12 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @throws TradeErrorException
 	 */
 	public List<Schedule> queryScheduleByDay(String departmentCode,
-			String doctorCode, String timeSlot, Date startDate, Date endDate)
+			String doctorCode , Date startDate, Date endDate)
 			throws TradeErrorException {
 		QueryAdmScheduleRequest request = new QueryAdmScheduleRequest();
 
 		request.setDepartmentCode(departmentCode);
 		request.setDoctorCode(doctorCode);
-		request.setRbasSessionCode(timeSlot);
 		request.setStartDate(DateUtil.formatToShortString(startDate));
 		request.setEndDate(DateUtil.formatToShortString(endDate));
 

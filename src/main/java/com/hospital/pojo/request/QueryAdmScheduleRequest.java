@@ -1,5 +1,6 @@
 package com.hospital.pojo.request;
 
+import com.hospital.pojo.enum_.ClientType;
 import com.hospital.pojo.enum_.TradeCode;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
@@ -11,6 +12,12 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  */
 @XStreamAlias("Request")
 public class QueryAdmScheduleRequest extends ParentRequest {
+	// 预约机构
+	@XStreamAlias("ExtOrgCode")
+	protected String extOrgCode = "";
+	// 操作员代码
+	@XStreamAlias("ExtUserID")
+	protected String extUserID = "zz01";
 	// 开始日期 (YYYY-MM-DD)
 	@XStreamAlias("StartDate")
 	private String startDate;
@@ -23,18 +30,18 @@ public class QueryAdmScheduleRequest extends ParentRequest {
 	private String departmentCode;
 	// 专业代码
 	@XStreamAlias("ServiceCode")
-	private String serviceCode;
+	private String serviceCode = "";
 	// 医生代码
 	@XStreamAlias("DoctorCode")
-	private String doctorCode;
+	private String doctorCode = "";
 	// 出诊时段代码 S：上午 X：下午 Y：夜晚
 	@XStreamAlias("RBASSessionCode")
-	private String rbasSessionCode;
+	private String rbasSessionCode = "";
 	// 查询排班的标记 N:正常的排班 S:停诊的排班
 	@XStreamAlias("StopScheduleFlag")
-	private String stopScheduleFlag = "N";
+	private String stopScheduleFlag = "";
 	@XStreamAlias("PatientID")
-	private String patientID;
+	private String patientID = "";
 	@XStreamAlias("EssType")
 	private String essType;
 

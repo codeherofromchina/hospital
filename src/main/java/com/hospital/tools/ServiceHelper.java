@@ -201,10 +201,18 @@ public class ServiceHelper {
 		List<Schedule> _result = new ArrayList<Schedule>();
 		int RecordCount = schedulesJsonObject.getInt("RecordCount");
 		if (RecordCount > 0) {
-			JSONArray schedules = schedulesJsonObject.getJSONArray("Schedules");
+			JSONObject schedules = schedulesJsonObject.getJSONObject("Schedules");
+			JSONArray scheduleArr = null;
+			if(RecordCount == 1){
+				scheduleArr = new JSONArray();
+				scheduleArr.add(schedules.getJSONObject("Schedule"));
+			}else{
+				scheduleArr = schedules.getJSONArray("Schedule");
+			}
+			
 			Class<Schedule> sClass =  Schedule.class;
-			for (int i = 0; i < schedules.size(); ++i) {
-				JSONObject jsonObject = schedules.getJSONObject(i);
+			for (int i = 0; i < scheduleArr.size(); ++i) {
+				JSONObject jsonObject = scheduleArr.getJSONObject(i);
 				
 				Schedule schedule = new Schedule();
 				
@@ -220,7 +228,7 @@ public class ServiceHelper {
 		/*String xmlStr = "<Response>"
 				+ "<ResultCode>0</ResultCode>"
 				+ "<ResultContent></ResultContent>"
-				+ "<RecordCount>1</RecordCount>"
+				+ "<RecordCount>2</RecordCount>"
 				+ "<Schedules>"
 				+ "<Schedule>"
 				+ "<ScheduleItemCode>111</ScheduleItemCode>"
@@ -292,6 +300,8 @@ public class ServiceHelper {
 			System.out.println(dt);
 		}*/
 	}
+	
+	
 	
 	/**
 	 * 将xml信息转换为订单实体列表信息

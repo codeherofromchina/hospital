@@ -65,17 +65,16 @@ public class ScheduleAction {
 	 * 
 	 * @param request
 	 * @param departmentCode	科室编号
-	 * @param timeSlot 具体时间段，例如上午（S）、下午(X)、晚上(Y)
 	 * @param date  固定某天的排班信息 格式 （yyyy-MM-dd）
 	 * @return
 	 */
 	@RequestMapping("asyncScheduleDayDepartment")
 	@ResponseBody
-	public String asyncScheduleDayDepartment(HttpServletRequest request,String departmentCode,String timeSlot,String date) {
+	public String asyncScheduleDayDepartment(HttpServletRequest request,String departmentCode,String date) {
 		Map<String, Object> _result = new HashMap<String, Object>();
 		_result.put("success", true);
 		// 检查参数完整性
-		if(StringUtils.isEmpty(departmentCode) || StringUtils.isEmpty(timeSlot) || StringUtils.isEmpty(date)){
+		if(StringUtils.isEmpty(departmentCode) || StringUtils.isEmpty(date)){
 			_result.put("success", false);
 			_result.put("msg", "参数不完整");
 		}else{
@@ -87,7 +86,7 @@ public class ScheduleAction {
 			}else{
 				
 				try {
-					List<Schedule> schedules = scheduleService.queryScheduleByDay(departmentCode, timeSlot, dDate, dDate);
+					List<Schedule> schedules = scheduleService.queryScheduleByDay(departmentCode, dDate);
 					_result.put("result", schedules);
 				} catch (TradeErrorException e) {
 					logger.error("查询某科室内排班医生异常["+e.getMessage()+"]");
@@ -102,38 +101,50 @@ public class ScheduleAction {
 	
 	
 	/**
-	 * 查询科室中某时间段医生排班列表
+	 * 查询科室中给定时间到7天后时间段内医生排班列表
 	 * @param request	
-	 * @param departmentCode
-	 * @param timeSlot	
-	 * @param date
+	 * @param departmentCode 科室编号
+	 * @param sDate 开始日期 （包含）  -- yyyy-MM-dd
+	 * @param n  往后的几天，如果负数或其他错误格式，将会自动修改为只查当天结果，即 n=0,最多只能连续查询8天
 	 * @return
 	 */
-	@RequestMapping("asyncScheduleSevenDaysDapartment")
+	@RequestMapping("asyncScheduleNDaysDapartment")
 	@ResponseBody
-	public Map<String, Object> asyncScheduleSevenDaysDapartment(HttpServletRequest request,String departmentCode,String date){
+	public String asyncScheduleSevenDaysDapartment(HttpServletRequest request,String departmentCode,String sDate,String n){
 		Map<String, Object> _result = new HashMap<String, Object>();
 		_result.put("success", true);
 		
 		// 检查参数完整性
-		if(StringUtils.isEmpty(departmentCode) || StringUtils.isNotEmpty(date)){
+		if(StringUtils.isEmpty(departmentCode) || StringUtils.isEmpty(sDate)){
 			_result.put("success", false);
 			_result.put("msg", "参数不完整");
 		}else{
 			// 检查日期参数是否正确
-			Date dDate = DateUtil.parseShortStrToDate(date);
-			if(dDate == null){
+			int nDay = 0;
+			if(StringUtils.isNotEmpty(n)){
+				try{
+					nDay = Integer.parseInt(n);
+				}catch(NumberFormatException ex){}
+			}
+			// 最多只能连续查询8天
+			if(nDay > 8){
+				nDay = 8;
+			}
+			
+			Date sdate = DateUtil.parseShortStrToDate(sDate);
+			if(sdate == null){
 				_result.put("success", false);
 				_result.put("msg", "日期参数错误");
 			}else{
 				try {
-					// {S:{date1:n,date2:n,date3:n},X:{date1:n,date2:n,date3:n},Y:{date1:n,date2:n,date3:n}}
-					Map<String, Map<String, Object>> mapObject = new HashMap<String, Map<String, Object>>();
-					// 分别查询上午、下午、和晚上的排班并进行处理
-					String[] sArr = {"S","X","Y"};
-					for(String s:sArr){
-						List<Schedule> schedules = scheduleService.queryScheduleByDay(departmentCode, s, dDate, DateUtil.plusSomeDay(dDate, 7));
-						mapObject.put(s, handlerSchedule(schedules));
+					Map<String, List<Schedule>> mapObject = new HashMap<String, List<Schedule>>();
+					
+					for(int i=0;i<=nDay;++i){
+						Date tempDate = DateUtil.plusSomeDay(sdate, i);
+						List<Schedule> schedules = scheduleService.queryScheduleByDay(departmentCode, tempDate);
+						if(schedules!=null && schedules.size() > 0){
+							mapObject.put(DateUtil.formatToShortString(tempDate), schedules);
+						}
 					}
 					
 					_result.put("result", mapObject);
@@ -145,10 +156,11 @@ public class ScheduleAction {
 			}
 		}
 		
-		return _result;
+		return JSONObject.fromObject(_result).toString();
 	}
 	
 	/*
+	 * TODO  
 	 * 获取排班日期某天的剩余数量
 	 */
 	private Map<String, Object> handlerSchedule(List<Schedule> schedules){

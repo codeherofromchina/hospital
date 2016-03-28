@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 
 public final class DateUtil {
 	private final static Logger logger = Logger.getLogger(DateUtil.class);
-	private final static DateFormat shortDateFormat = new SimpleDateFormat("yyyy-mm-dd");
+	private final static DateFormat shortDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	
 	
 	/**
@@ -50,4 +50,5 @@ public final class DateUtil {
 		
 		return calendar.getTime();
 	}
+	
 }

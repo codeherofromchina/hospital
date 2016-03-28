@@ -22,3 +22,25 @@ $(function(){
 	
 	
 });
+
+function getDateFormat(date){
+	var years = date.getFullYear();
+	var months = date.getMonth()+1;
+	if(months < 10){
+		months = "0" + months;
+	}
+	var days = date.getDate();
+	if(days < 10){
+		days = "0" + days;
+	}
+	return years +"-" + months + "-" +days;
+}
+
+
+function addDate(dd,dadd){
+	var a = new Date(dd)
+	a = a.valueOf()
+	a = a + dadd * 24 * 60 * 60 * 1000
+	a = new Date(a)
+	return a;
+}
