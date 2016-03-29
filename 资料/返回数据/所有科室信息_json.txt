@@ -1,0 +1,400 @@
+{
+    "result": [
+        {
+            "departmentCode": "37",
+            "departmentGroup": "",
+            "departmentName": "肛肠一科门诊"
+        },
+        {
+            "departmentCode": "51",
+            "departmentGroup": "",
+            "departmentName": "骨伤一科门诊"
+        },
+        {
+            "departmentCode": "322",
+            "departmentGroup": "",
+            "departmentName": "骨伤一科门诊(院区)"
+        },
+        {
+            "departmentCode": "17",
+            "departmentGroup": "",
+            "departmentName": "呼吸一科门诊"
+        },
+        {
+            "departmentCode": "342",
+            "departmentGroup": "",
+            "departmentName": "呼吸一科门诊(省人大)"
+        },
+        {
+            "departmentCode": "283",
+            "departmentGroup": "",
+            "departmentName": "呼吸一科门诊(院区)"
+        },
+        {
+            "departmentCode": "47",
+            "departmentGroup": "",
+            "departmentName": "脾胃病一科门诊"
+        },
+        {
+            "departmentCode": "279",
+            "departmentGroup": "",
+            "departmentName": "脾胃病一科门诊(院区)"
+        },
+        {
+            "departmentCode": "341",
+            "departmentGroup": "",
+            "departmentName": "脾胃一科门诊(省人大)"
+        },
+        {
+            "departmentCode": "33",
+            "departmentGroup": "",
+            "departmentName": "肿瘤一科门诊"
+        },
+        {
+            "departmentCode": "294",
+            "departmentGroup": "",
+            "departmentName": "肿瘤一科门诊(院区)"
+        },
+        {
+            "departmentCode": "38",
+            "departmentGroup": "",
+            "departmentName": "肛肠二科门诊"
+        },
+        {
+            "departmentCode": "330",
+            "departmentGroup": "",
+            "departmentName": "肛肠二科门诊(院区)"
+        },
+        {
+            "departmentCode": "53",
+            "departmentGroup": "",
+            "departmentName": "骨伤二科门诊"
+        },
+        {
+            "departmentCode": "319",
+            "departmentGroup": "",
+            "departmentName": "骨伤二科门诊(院区)"
+        },
+        {
+            "departmentCode": "242",
+            "departmentGroup": "",
+            "departmentName": "呼吸二科门诊"
+        },
+        {
+            "departmentCode": "284",
+            "departmentGroup": "",
+            "departmentName": "呼吸二科门诊(院区)"
+        },
+        {
+            "departmentCode": "3",
+            "departmentGroup": "",
+            "departmentName": "脾胃病二科门诊"
+        },
+        {
+            "departmentCode": "280",
+            "departmentGroup": "",
+            "departmentName": "脾胃病二科门诊(院区)"
+        },
+        {
+            "departmentCode": "245",
+            "departmentGroup": "",
+            "departmentName": "肿瘤二科门诊"
+        },
+        {
+            "departmentCode": "295",
+            "departmentGroup": "",
+            "departmentName": "肿瘤二科门诊(院区)"
+        },
+        {
+            "departmentCode": "55",
+            "departmentGroup": "",
+            "departmentName": "骨伤三科门诊"
+        },
+        {
+            "departmentCode": "323",
+            "departmentGroup": "",
+            "departmentName": "骨伤三科门诊(院区)"
+        },
+        {
+            "departmentCode": "43",
+            "departmentGroup": "",
+            "departmentName": "脾胃病三科门诊"
+        },
+        {
+            "departmentCode": "281",
+            "departmentGroup": "",
+            "departmentName": "脾胃病三科门诊(院区)"
+        },
+        {
+            "departmentCode": "254",
+            "departmentGroup": "",
+            "departmentName": "骨伤四科门诊"
+        },
+        {
+            "departmentCode": "320",
+            "departmentGroup": "",
+            "departmentName": "骨伤四科门诊(院区)"
+        },
+        {
+            "departmentCode": "111",
+            "departmentGroup": "",
+            "departmentName": "病理科"
+        },
+        {
+            "departmentCode": "5",
+            "departmentGroup": "",
+            "departmentName": "耳鼻喉科门诊"
+        },
+        {
+            "departmentCode": "292",
+            "departmentGroup": "",
+            "departmentName": "耳鼻喉科门诊(院区)"
+        },
+        {
+            "departmentCode": "35",
+            "departmentGroup": "",
+            "departmentName": "儿科门诊"
+        },
+        {
+            "departmentCode": "291",
+            "departmentGroup": "",
+            "departmentName": "儿科门诊(院区)"
+        },
+        {
+            "departmentCode": "31",
+            "departmentGroup": "",
+            "departmentName": "妇科门诊"
+        },
+        {
+            "departmentCode": "290",
+            "departmentGroup": "",
+            "departmentName": "妇科门诊(院区)"
+        },
+        {
+            "departmentCode": "11",
+            "departmentGroup": "",
+            "departmentName": "风湿病科门诊"
+        },
+        {
+            "departmentCode": "147",
+            "departmentGroup": "",
+            "departmentName": "感染性疾病科"
+        },
+        {
+            "departmentCode": "146",
+            "departmentGroup": "",
+            "departmentName": "精神心理科"
+        },
+        {
+            "departmentCode": "159",
+            "departmentGroup": "",
+            "departmentName": "简易门诊"
+        },
+        {
+            "departmentCode": "49",
+            "departmentGroup": "",
+            "departmentName": "康复科门诊"
+        },
+        {
+            "departmentCode": "340",
+            "departmentGroup": "",
+            "departmentName": "康复科门诊(省人大)"
+        },
+        {
+            "departmentCode": "143",
+            "departmentGroup": "",
+            "departmentName": "口腔科"
+        },
+        {
+            "departmentCode": "338",
+            "departmentGroup": "",
+            "departmentName": "口腔科(院区)"
+        },
+        {
+            "departmentCode": "152",
+            "departmentGroup": "",
+            "departmentName": "临床功能检查科"
+        },
+        {
+            "departmentCode": "156",
+            "departmentGroup": "",
+            "departmentName": "老年病门诊"
+        },
+        {
+            "departmentCode": "15",
+            "departmentGroup": "",
+            "departmentName": "脑病科门诊"
+        },
+        {
+            "departmentCode": "345",
+            "departmentGroup": "",
+            "departmentName": "脑病科门诊(省人大)"
+        },
+        {
+            "departmentCode": "286",
+            "departmentGroup": "",
+            "departmentName": "脑病科门诊(院区)"
+        },
+        {
+            "departmentCode": "157",
+            "departmentGroup": "",
+            "departmentName": "脑病治疗中心"
+        },
+        {
+            "departmentCode": "19",
+            "departmentGroup": "",
+            "departmentName": "内分泌病科门诊"
+        },
+        {
+            "departmentCode": "344",
+            "departmentGroup": "",
+            "departmentName": "内分泌科门诊(省人大)"
+        },
+        {
+            "departmentCode": "287",
+            "departmentGroup": "",
+            "departmentName": "内分泌科门诊(院区)"
+        },
+        {
+            "departmentCode": "144",
+            "departmentGroup": "",
+            "departmentName": "男科"
+        },
+        {
+            "departmentCode": "45",
+            "departmentGroup": "",
+            "departmentName": "皮肤科门诊"
+        },
+        {
+            "departmentCode": "41",
+            "departmentGroup": "",
+            "departmentName": "肾病科门诊"
+        },
+        {
+            "departmentCode": "282",
+            "departmentGroup": "",
+            "departmentName": "肾病科门诊(院区)"
+        },
+        {
+            "departmentCode": "158",
+            "departmentGroup": "",
+            "departmentName": "失眠门诊"
+        },
+        {
+            "departmentCode": "313",
+            "departmentGroup": "",
+            "departmentName": "失眠门诊(院区)"
+        },
+        {
+            "departmentCode": "113",
+            "departmentGroup": "",
+            "departmentName": "体检中心"
+        },
+        {
+            "departmentCode": "9",
+            "departmentGroup": "",
+            "departmentName": "推拿科门诊"
+        },
+        {
+            "departmentCode": "141",
+            "departmentGroup": "",
+            "departmentName": "疼痛门诊"
+        },
+        {
+            "departmentCode": "155",
+            "departmentGroup": "",
+            "departmentName": "特需门诊"
+        },
+        {
+            "departmentCode": "27",
+            "departmentGroup": "",
+            "departmentName": "外科门诊"
+        },
+        {
+            "departmentCode": "289",
+            "departmentGroup": "",
+            "departmentName": "外科门诊(院区)"
+        },
+        {
+            "departmentCode": "81",
+            "departmentGroup": "",
+            "departmentName": "胃肠病检测室"
+        },
+        {
+            "departmentCode": "25",
+            "departmentGroup": "",
+            "departmentName": "消化介入科门诊"
+        },
+        {
+            "departmentCode": "316",
+            "departmentGroup": "",
+            "departmentName": "消化介入科门诊(院区)"
+        },
+        {
+            "departmentCode": "23",
+            "departmentGroup": "",
+            "departmentName": "心血管科门诊"
+        },
+        {
+            "departmentCode": "285",
+            "departmentGroup": "",
+            "departmentName": "心血管科门诊(院区)"
+        },
+        {
+            "departmentCode": "343",
+            "departmentGroup": "",
+            "departmentName": "心血管科门诊(省人大)"
+        },
+        {
+            "departmentCode": "21",
+            "departmentGroup": "",
+            "departmentName": "血液病科门诊"
+        },
+        {
+            "departmentCode": "288",
+            "departmentGroup": "",
+            "departmentName": "血液病科门诊(院区)"
+        },
+        {
+            "departmentCode": "13",
+            "departmentGroup": "",
+            "departmentName": "眼科门诊"
+        },
+        {
+            "departmentCode": "293",
+            "departmentGroup": "",
+            "departmentName": "眼科门诊(院区)"
+        },
+        {
+            "departmentCode": "145",
+            "departmentGroup": "",
+            "departmentName": "医疗美容科"
+        },
+        {
+            "departmentCode": "75",
+            "departmentGroup": "",
+            "departmentName": "医学影像科"
+        },
+        {
+            "departmentCode": "7",
+            "departmentGroup": "",
+            "departmentName": "针灸科门诊"
+        },
+        {
+            "departmentCode": "29",
+            "departmentGroup": "",
+            "departmentName": "治未病科门诊"
+        },
+        {
+            "departmentCode": "325",
+            "departmentGroup": "",
+            "departmentName": "治未病科(院区)"
+        },
+        {
+            "departmentCode": "1",
+            "departmentGroup": "",
+            "departmentName": "急诊科"
+        }
+    ],
+    "success": true
+}

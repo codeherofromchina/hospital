@@ -1,0 +1,83 @@
+{
+    "result": [
+        {
+            "doctorCode": "106", 
+            "doctorName": "高记华-GJH", 
+            "doctorSpec": "", 
+            "doctorTitle": "", 
+            "doctorTitleCode": ""
+        }, 
+        {
+            "doctorCode": "109", 
+            "doctorName": "李利霞-LLX", 
+            "doctorSpec": "", 
+            "doctorTitle": "", 
+            "doctorTitleCode": ""
+        }, 
+        {
+            "doctorCode": "110", 
+            "doctorName": "张磊-ZL", 
+            "doctorSpec": "", 
+            "doctorTitle": "", 
+            "doctorTitleCode": ""
+        }, 
+        {
+            "doctorCode": "111", 
+            "doctorName": "陈雪清-CXQ", 
+            "doctorSpec": "", 
+            "doctorTitle": "", 
+            "doctorTitleCode": ""
+        }, 
+        {
+            "doctorCode": "116", 
+            "doctorName": "薛伟彩-XWC", 
+            "doctorSpec": "", 
+            "doctorTitle": "", 
+            "doctorTitleCode": ""
+        }, 
+        {
+            "doctorCode": "295", 
+            "doctorName": "赵庆梅-ZQM", 
+            "doctorSpec": "", 
+            "doctorTitle": "", 
+            "doctorTitleCode": ""
+        }, 
+        {
+            "doctorCode": "562", 
+            "doctorName": "便民号-bmh", 
+            "doctorSpec": "", 
+            "doctorTitle": "", 
+            "doctorTitleCode": ""
+        }, 
+        {
+            "doctorCode": "521", 
+            "doctorName": "DOCTOR-DOCTOR", 
+            "doctorSpec": "", 
+            "doctorTitle": "", 
+            "doctorTitleCode": ""
+        }, 
+        {
+            "doctorCode": "679", 
+            "doctorName": "吴春晓-wcx", 
+            "doctorSpec": "", 
+            "doctorTitle": "", 
+            "doctorTitleCode": ""
+        }, 
+        {
+            "doctorCode": "695", 
+            "doctorName": "许建成-", 
+            "doctorSpec": "", 
+            "doctorTitle": "", 
+            "doctorTitleCode": ""
+        }, 
+        {
+            "doctorCode": "800", 
+            "doctorName": "师晨松-SCS", 
+            "doctorSpec": "", 
+            "doctorTitle": "", 
+            "doctorTitleCode": ""
+        }
+    ], 
+    "success": true
+}
+

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Response>
+  <ResultCode>0</ResultCode>
+  <ResultContent/>
+  <RecordCount>11</RecordCount>
+  <Doctors>
+    <Doctor>
+      <DoctorCode>106</DoctorCode>
+      <DoctorName>高记华-GJH</DoctorName>
+    </Doctor>
+    <Doctor>
+      <DoctorCode>109</DoctorCode>
+      <DoctorName>李利霞-LLX</DoctorName>
+    </Doctor>
+    <Doctor>
+      <DoctorCode>110</DoctorCode>
+      <DoctorName>张磊-ZL</DoctorName>
+    </Doctor>
+    <Doctor>
+      <DoctorCode>111</DoctorCode>
+      <DoctorName>陈雪清-CXQ</DoctorName>
+    </Doctor>
+    <Doctor>
+      <DoctorCode>116</DoctorCode>
+      <DoctorName>薛伟彩-XWC</DoctorName>
+    </Doctor>
+    <Doctor>
+      <DoctorCode>295</DoctorCode>
+      <DoctorName>赵庆梅-ZQM</DoctorName>
+    </Doctor>
+    <Doctor>
+      <DoctorCode>562</DoctorCode>
+      <DoctorName>便民号-bmh</DoctorName>
+    </Doctor>
+    <Doctor>
+      <DoctorCode>521</DoctorCode>
+      <DoctorName>DOCTOR-DOCTOR</DoctorName>
+    </Doctor>
+    <Doctor>
+      <DoctorCode>679</DoctorCode>
+      <DoctorName>吴春晓-wcx</DoctorName>
+    </Doctor>
+    <Doctor>
+      <DoctorCode>695</DoctorCode>
+      <DoctorName>许建成-</DoctorName>
+    </Doctor>
+    <Doctor>
+      <DoctorCode>800</DoctorCode>
+      <DoctorName>师晨松-SCS</DoctorName>
+    </Doctor>
+  </Doctors>
+</Response>

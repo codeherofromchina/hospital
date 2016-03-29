@@ -1,0 +1,21 @@
+// teamView会议软件对方号和密码
+821377137  
+7728
+
+
+外网地址：
+http://183.196.0.25:5772/csp/dhc-ens/ATRegistration.BS.AutoReg.cls
+
+
+// 生成webservice内容类
+wsimport  -keep -p com.hospital.service.sub -s d:/tmp http://www.webxml.com.cn/WebServices/RandomFontsWebService.asmx?wsdl
+
+
+// 内网wsdl地址
+http://172.18.10.96:57772/csp/dhc-ens/ATRegistration.BS.AutoReg.cls
+http://172.18.10.96:57772/csp/dhc-ens/ATRegistration.BS.AutoReg.cls?wsdl
+
+
+// 项目git仓库地址
+git@github.com:codeherofromchina/hospital.git
+
