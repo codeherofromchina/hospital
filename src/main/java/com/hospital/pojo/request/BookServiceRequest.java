@@ -11,6 +11,9 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  */
 @XStreamAlias("Request")
 public class BookServiceRequest extends ParentRequest{
+	// 操作员代码
+	@XStreamAlias("ExtUserID")
+	protected String extUserID = "zz01";
 	
 	//交易流水号
 	@XStreamAlias("TransactionId")
@@ -18,7 +21,7 @@ public class BookServiceRequest extends ParentRequest{
 	
 	// 门诊排班项代码
 	@XStreamAlias("ScheduleItemCode")
-	private String string ;
+	private String scheduleItemCode ;
 	// 锁定的队列号
 	@XStreamAlias("LockQueueNo")
 	private String lockQueueNo;
@@ -27,7 +30,7 @@ public class BookServiceRequest extends ParentRequest{
 	private String cardNo;
 	// 卡类型
 	@XStreamAlias("CardType")
-	private String cardType;
+	private String cardType = "02";
 	// 证件类型
 	@XStreamAlias("CredTypeCode")
 	private String credTypeCode;
@@ -95,6 +98,359 @@ public class BookServiceRequest extends ParentRequest{
 		tradeCode = TradeCode.BOOKSERVICE.getCode();
 	}
 	
+	
+	
+	
+	public String getExtUserID() {
+		return extUserID;
+	}
+
+
+
+
+	public void setExtUserID(String extUserID) {
+		this.extUserID = extUserID;
+	}
+
+
+
+
+	public String getTransactionId() {
+		return transactionId;
+	}
+
+
+
+
+	public void setTransactionId(String transactionId) {
+		this.transactionId = transactionId;
+	}
+
+
+
+
+	public String getScheduleItemCode() {
+		return scheduleItemCode;
+	}
+
+
+
+
+	public void setScheduleItemCode(String scheduleItemCode) {
+		this.scheduleItemCode = scheduleItemCode;
+	}
+
+
+
+
+	public String getLockQueueNo() {
+		return lockQueueNo;
+	}
+
+
+
+
+	public void setLockQueueNo(String lockQueueNo) {
+		this.lockQueueNo = lockQueueNo;
+	}
+
+
+
+
+	public String getCardNo() {
+		return cardNo;
+	}
+
+
+
+
+	public void setCardNo(String cardNo) {
+		this.cardNo = cardNo;
+	}
+
+
+
+
+	public String getCardType() {
+		return cardType;
+	}
+
+
+
+
+	public void setCardType(String cardType) {
+		this.cardType = cardType;
+	}
+
+
+
+
+	public String getCredTypeCode() {
+		return credTypeCode;
+	}
+
+
+
+
+	public void setCredTypeCode(String credTypeCode) {
+		this.credTypeCode = credTypeCode;
+	}
+
+
+
+
+	public String getiDCardNo() {
+		return iDCardNo;
+	}
+
+
+
+
+	public void setiDCardNo(String iDCardNo) {
+		this.iDCardNo = iDCardNo;
+	}
+
+
+
+
+	public String getTelePhoneNo() {
+		return telePhoneNo;
+	}
+
+
+
+
+	public void setTelePhoneNo(String telePhoneNo) {
+		this.telePhoneNo = telePhoneNo;
+	}
+
+
+
+
+	public String getMobileNo() {
+		return mobileNo;
+	}
+
+
+
+
+	public void setMobileNo(String mobileNo) {
+		this.mobileNo = mobileNo;
+	}
+
+
+
+
+	public String getPatientName() {
+		return patientName;
+	}
+
+
+
+
+	public void setPatientName(String patientName) {
+		this.patientName = patientName;
+	}
+
+
+
+
+	public String getGender() {
+		return gender;
+	}
+
+
+
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+
+
+
+	public String getAddress() {
+		return address;
+	}
+
+
+
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+
+
+
+	public String gethISApptID() {
+		return hISApptID;
+	}
+
+
+
+
+	public void sethISApptID(String hISApptID) {
+		this.hISApptID = hISApptID;
+	}
+
+
+
+
+	public String getSeqCode() {
+		return seqCode;
+	}
+
+
+
+
+	public void setSeqCode(String seqCode) {
+		this.seqCode = seqCode;
+	}
+
+
+
+
+	public String getAdmitRange() {
+		return admitRange;
+	}
+
+
+
+
+	public void setAdmitRange(String admitRange) {
+		this.admitRange = admitRange;
+	}
+
+
+
+
+	public String getPayFlag() {
+		return payFlag;
+	}
+
+
+
+
+	public void setPayFlag(String payFlag) {
+		this.payFlag = payFlag;
+	}
+
+
+
+
+	public String getPayModeCode() {
+		return payModeCode;
+	}
+
+
+
+
+	public void setPayModeCode(String payModeCode) {
+		this.payModeCode = payModeCode;
+	}
+
+
+
+
+	public String getPayBankCode() {
+		return payBankCode;
+	}
+
+
+
+
+	public void setPayBankCode(String payBankCode) {
+		this.payBankCode = payBankCode;
+	}
+
+
+
+
+	public String getPayCardNo() {
+		return payCardNo;
+	}
+
+
+
+
+	public void setPayCardNo(String payCardNo) {
+		this.payCardNo = payCardNo;
+	}
+
+
+
+
+	public String getPayFee() {
+		return payFee;
+	}
+
+
+
+
+	public void setPayFee(String payFee) {
+		this.payFee = payFee;
+	}
+
+
+
+
+	public String getPayInsuFee() {
+		return payInsuFee;
+	}
+
+
+
+
+	public void setPayInsuFee(String payInsuFee) {
+		this.payInsuFee = payInsuFee;
+	}
+
+
+
+
+	public String getPayInsuFeeStr() {
+		return payInsuFeeStr;
+	}
+
+
+
+
+	public void setPayInsuFeeStr(String payInsuFeeStr) {
+		this.payInsuFeeStr = payInsuFeeStr;
+	}
+
+
+
+
+	public String getPayTradeNo() {
+		return payTradeNo;
+	}
+
+
+
+
+	public void setPayTradeNo(String payTradeNo) {
+		this.payTradeNo = payTradeNo;
+	}
+
+
+
+
+	public String getPayTradeStr() {
+		return payTradeStr;
+	}
+
+
+
+
+	public void setPayTradeStr(String payTradeStr) {
+		this.payTradeStr = payTradeStr;
+	}
+
+
+
+
 	/**
 	 * 自身带转换为xml格式字符串方法
 	 * 此类需要使用自身方法，因为此请求中有CDATA属性数据

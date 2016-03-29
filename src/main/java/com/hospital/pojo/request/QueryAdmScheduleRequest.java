@@ -11,7 +11,20 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  *
  */
 @XStreamAlias("Request")
-public class QueryAdmScheduleRequest extends ParentRequest {
+public class QueryAdmScheduleRequest {
+
+	// 交易代码
+	@XStreamAlias("TradeCode")
+	protected String tradeCode;
+
+	// 客户端类型
+	@XStreamAlias("ClientType")
+	protected String clientType = "";
+
+	// 医院唯一编号
+	@XStreamAlias("HospitalId")
+	protected String hospitalId = "";
+
 	// 预约机构
 	@XStreamAlias("ExtOrgCode")
 	protected String extOrgCode = "";
@@ -93,7 +106,7 @@ public class QueryAdmScheduleRequest extends ParentRequest {
 	public String getRbasSessionCode() {
 		return rbasSessionCode;
 	}
-	
+
 	public void setRbasSessionCode(String rbasSessionCode) {
 		this.rbasSessionCode = rbasSessionCode;
 	}
@@ -120,6 +133,46 @@ public class QueryAdmScheduleRequest extends ParentRequest {
 
 	public void setEssType(String essType) {
 		this.essType = essType;
+	}
+
+	public String getTradeCode() {
+		return tradeCode;
+	}
+
+	public void setTradeCode(String tradeCode) {
+		this.tradeCode = tradeCode;
+	}
+
+	public String getClientType() {
+		return clientType;
+	}
+
+	public void setClientType(String clientType) {
+		this.clientType = clientType;
+	}
+
+	public String getHospitalId() {
+		return hospitalId;
+	}
+
+	public void setHospitalId(String hospitalId) {
+		this.hospitalId = hospitalId;
+	}
+
+	public String getExtOrgCode() {
+		return extOrgCode;
+	}
+
+	public void setExtOrgCode(String extOrgCode) {
+		this.extOrgCode = extOrgCode;
+	}
+
+	public String getExtUserID() {
+		return extUserID;
+	}
+
+	public void setExtUserID(String extUserID) {
+		this.extUserID = extUserID;
 	}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.hospital.exception.TradeErrorException;
 import com.hospital.pojo.Order;
+import com.hospital.pojo.request.BookServiceRequest;
 import com.hospital.pojo.request.OPAppArriveRequest;
 import com.hospital.pojo.request.QueryOrderRequest;
 import com.hospital.pojo.stub.RegistrationServiceSoap;
@@ -50,5 +51,33 @@ public class OrderServiceImpl implements OrderService{
 		}
 		return ServiceHelper.parseXmlToOrder(orderXml);
 	}
-
+	
+	/**
+	 * 根据给定信息预约挂号，并返回结果
+	 */
+	@Override
+	public Order bookService(String scheduleItemCode, String cardNo,
+			String admitRange) throws TradeErrorException {
+		BookServiceRequest request = new BookServiceRequest();
+		request.setScheduleItemCode(scheduleItemCode);
+		request.setCardNo(cardNo);
+		request.setAdmitRange(admitRange);
+		
+		return bookService(request);
+	}
+	
+	/**
+	 * 预约挂号
+	 * @param request
+	 * @return
+	 * @throws TradeErrorException
+	 */
+	private Order bookService(BookServiceRequest request) throws TradeErrorException{
+		String requestXML = BookServiceRequest.parseToXml(request);
+		String orderXml = registrationService.opRegistration(requestXML);
+		if(logger.isInfoEnabled()){
+			logger.info("request msg is ["+requestXML+"] and response msg is ["+orderXml+"]");
+		}
+		return ServiceHelper.parseXmlToOrder(orderXml);
+	}
 }

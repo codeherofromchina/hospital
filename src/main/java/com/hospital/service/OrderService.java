@@ -32,4 +32,16 @@ public interface OrderService {
 	 * @throws TradeErrorException
 	 */
 	public Order opAppArrive(OPAppArriveRequest request) throws TradeErrorException;
+	
+	
+	/**
+	 * 预约挂号
+	 * @param scheduleItemCode	门诊排班项记录标识
+	 * @param cardNo	病人就诊卡卡号
+	 * @param admitRange	就诊时间段
+	 * @return
+	 * @throws TradeErrorException
+	 */
+	public Order bookService(String scheduleItemCode,String cardNo,String admitRange) throws TradeErrorException;
+	
 }

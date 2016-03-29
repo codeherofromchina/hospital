@@ -64,7 +64,7 @@
 			<p class="ksgh_c_right_p"><a name="ks1"></a><span>所有科室</span></p>
 			<div class="ksgh_c_inner">
 				#foreach($dept in $allDepartments)
-					<a href="javascript:void(0);">$!{dept.departmentName}</a>
+					<a href="${webPath}/search/schedule/department.htm?deptCode=${dept.departmentCode}">$!{dept.departmentName}</a>
 				#end
 			</div>				
 			<p class="ksgh_c_right_p"><a name="ks30"></a><span></span></p>

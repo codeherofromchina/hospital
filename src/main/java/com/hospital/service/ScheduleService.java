@@ -20,7 +20,7 @@ public interface ScheduleService {
 	
 	
 	/**
-	 * 查询科室中医师某天的某个时间段排班
+	 * 查询科室中医师某个时间段排班
 	 * @param departmentCode
 	 * @param doctorCode
 	 * @param timeSlot
@@ -30,4 +30,7 @@ public interface ScheduleService {
 	 * @throws TradeErrorException
 	 */
 	public List<Schedule> queryScheduleByDay(String departmentCode,String doctorCode,Date startDate,Date endDate) throws TradeErrorException;
+	
+	
+	
 }
