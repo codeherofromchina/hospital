@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hospital.exception.TradeErrorException;
+import com.hospital.pojo.Order;
 import com.hospital.pojo.Schedule;
 import com.hospital.service.OrderService;
 import com.hospital.service.ScheduleService;
@@ -105,10 +107,62 @@ public class OrderAction {
 	@RequestMapping("/bookService")
 	public ModelAndView bookService(HttpServletRequest request,String scheduleItemCode,String cardNo,String admitRange){
 		ModelAndView mv = new ModelAndView_velocity(request, "bookOrderResult");
-	
+		
+		if(logger.isInfoEnabled()){
+			logger.info("有卡预约挂号[scheduleItemCode:"+scheduleItemCode+",cardNo:"+cardNo+",admitRange:"+admitRange+"]");
+		}
+		
+		try {
+			Order order = orderService.bookService(scheduleItemCode, cardNo, admitRange);
+			mv.addObject("order", order);
+		} catch (TradeErrorException e) {
+			mv.addObject("errMsg", e.getErrorContent());
+			logger.error("预约挂号异常错误[scheduleItemCode:"+scheduleItemCode+",cardNo:"+cardNo+",admitRange:"+admitRange+",errMsg:"+e.getErrorContent()+"]");
+		}
+		
 		return mv;
 	}
 	
+	
+	/**
+	 * 无卡预约挂号
+	 * @param request
+	 * @param scheduleItemCode
+	 * @param admitRange
+	 * @param iDCardNo
+	 * @param patientName
+	 * @param mobileNo
+	 * @param gender
+	 * @return
+	 */
+	@RequestMapping("/bookServiceNoCard")
+	public ModelAndView bookServiceNoCard(HttpServletRequest request,
+			String scheduleItemCode, String admitRange, String iDCardNo,
+			String patientName, String mobileNo, String gender) {
+		ModelAndView mv = new ModelAndView_velocity(request, "bookOrderResult");
+		
+		if(logger.isInfoEnabled()){
+			logger.info("无卡预约挂号[scheduleItemCode:"+scheduleItemCode+",iDCardNo:"+iDCardNo+",admitRange:"+admitRange+",patientName:"+patientName+",mobileNo:"+mobileNo+",gender:"+gender+"]");
+		}
+		
+		try {
+			if (StringUtils.isNotEmpty(scheduleItemCode)
+					&& StringUtils.isNotEmpty(iDCardNo)
+					&& StringUtils.isNotEmpty(patientName)
+					&& StringUtils.isNotEmpty(mobileNo)
+					&& StringUtils.isNotEmpty(gender)) {
+				Order order = orderService.bookService(scheduleItemCode, admitRange,iDCardNo,patientName,mobileNo,gender);
+				mv.addObject("order", order);
+			}else{
+				mv.addObject("errMsg", "参数信息错误！");
+			}
+		} catch (TradeErrorException e) {
+			mv.addObject("errMsg", e.getErrorContent());
+			logger.error("预约挂号异常错误[scheduleItemCode:"+scheduleItemCode+",iDCardNo:"+iDCardNo+",admitRange:"+admitRange+",patientName:"+patientName+",mobileNo:"+mobileNo+",gender:"+gender+",errMsg:"+e.getErrorContent()+"]");
+		}
+		
+		return mv;
+	}
 	
 	
 	/**

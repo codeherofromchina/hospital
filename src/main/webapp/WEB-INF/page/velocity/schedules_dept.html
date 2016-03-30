@@ -142,6 +142,16 @@ function getDoctorList(tdObj,deptCode,timeSole,dateStr){
 			var result = data.result;
 			var doctorHtml = "";
 			
+			// 获取上午下午晚上标识码
+			var ts ;
+			if(timeSole=="上午"){
+				ts = "S";
+			}else if(timeSole=="下午"){
+				ts = "X";
+			}else{
+				ts = "Y";
+			}
+			
 			$.each(result[dateStr],function(index,obj){
 				if(obj["sessionName"] == timeSole){
 					var aNum = Number(obj["availableNum"]);
@@ -169,7 +179,7 @@ function getDoctorList(tdObj,deptCode,timeSole,dateStr){
 						doctorHtml += "<span class='ksorder_dr1spa2'>剩余号：<b>"+aNum+"</b></span>";
 					}
 					doctorHtml += "</p>";
-					doctorHtml += "<p class='ksorder_dr1_p2'><a href='$!{webPath}/search/order/bookOrder.htm?deptCode=23&docCode=44&date=2016-04-02&timeSole=S' class='ksorder_dr1_syhy'>预约挂号</a></p>";
+					doctorHtml += "<p class='ksorder_dr1_p2'><a href='$!{webPath}/search/order/bookOrder.htm?deptCode="+obj["departmentCode"]+"&docCode="+obj["doctorCode"]+"&date="+obj["serviceDate"]+"&timeSole="+ts+"' class='ksorder_dr1_syhy'>预约挂号</a></p>";
 					doctorHtml += "</div>";
 				}
 			});

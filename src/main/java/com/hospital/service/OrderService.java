@@ -35,7 +35,7 @@ public interface OrderService {
 	
 	
 	/**
-	 * 预约挂号
+	 * 有卡预约挂号
 	 * @param scheduleItemCode	门诊排班项记录标识
 	 * @param cardNo	病人就诊卡卡号
 	 * @param admitRange	就诊时间段
@@ -43,5 +43,18 @@ public interface OrderService {
 	 * @throws TradeErrorException
 	 */
 	public Order bookService(String scheduleItemCode,String cardNo,String admitRange) throws TradeErrorException;
+	
+	/**
+	 * 无卡预约挂号
+	 * @param scheduleItemCode
+	 * @param admitRange
+	 * @param iDCardNo	身份证号
+	 * @param patientName	病人名称
+	 * @param mobileNo	电话号码
+	 * @param gender	性别  1：男  2：女
+	 * @return
+	 * @throws TradeErrorException
+	 */
+	public Order bookService(String scheduleItemCode,String admitRange,String iDCardNo,String patientName,String mobileNo,String gender) throws TradeErrorException;
 	
 }

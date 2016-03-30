@@ -1,5 +1,6 @@
 package com.hospital.pojo.request;
 
+import com.hospital.pojo.enum_.ClientType;
 import com.hospital.pojo.enum_.TradeCode;
 import com.hospital.tools.ObjectTransUtil;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -10,21 +11,39 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  *
  */
 @XStreamAlias("Request")
-public class BookServiceRequest extends ParentRequest{
+public class BookServiceRequest {
+	
+	// 交易代码
+	@XStreamAlias("TradeCode")
+	protected String tradeCode;
+
+	/**
+	 * 默认设置为自助终端(ATM)
+	 */
+	// 预约机构
+	@XStreamAlias("ExtOrgCode")
+	protected String extOrgCode = ClientType.ATM.getCode();
+	// 客户端类型
+	@XStreamAlias("ClientType")
+	protected String clientType = "ATM";
+
+	// 医院唯一编号
+	@XStreamAlias("HospitalId")
+	protected String hospitalId = "";
 	// 操作员代码
 	@XStreamAlias("ExtUserID")
 	protected String extUserID = "zz01";
 	
 	//交易流水号
 	@XStreamAlias("TransactionId")
-	private String transactionId;
+	private String transactionId = "";
 	
 	// 门诊排班项代码
 	@XStreamAlias("ScheduleItemCode")
 	private String scheduleItemCode ;
 	// 锁定的队列号
 	@XStreamAlias("LockQueueNo")
-	private String lockQueueNo;
+	private String lockQueueNo = "";
 	// 卡号
 	@XStreamAlias("CardNo")
 	private String cardNo;
@@ -33,59 +52,59 @@ public class BookServiceRequest extends ParentRequest{
 	private String cardType = "02";
 	// 证件类型
 	@XStreamAlias("CredTypeCode")
-	private String credTypeCode;
+	private String credTypeCode = "";
 	// 证件号
 	@XStreamAlias("IDCardNo")
-	private String iDCardNo;
+	private String iDCardNo="";
 	// 联系电话
 	@XStreamAlias("TelePhoneNo")
-	private String telePhoneNo;
+	private String telePhoneNo="";
 	// 手机
 	@XStreamAlias("MobileNo")
-	private String mobileNo;
+	private String mobileNo = "";
 	// 姓名
 	@XStreamAlias("PatientName")
-	private String patientName;
+	private String patientName ="";
 	// 性别代码
 	@XStreamAlias("Gender")
-	private String gender;
+	private String gender = "";
 	// 住址
 	@XStreamAlias("Address")
-	private String address;
+	private String address = "";
 	// HIS系统的预约ID
 	@XStreamAlias("HISApptID")
-	private String hISApptID;
+	private String hISApptID = "";
 	// 挂号序号
 	@XStreamAlias("SeqCode")
-	private String seqCode;
+	private String seqCode = "";
 	// 就诊时间段
 	@XStreamAlias("AdmitRange")
-	private String admitRange;
+	private String admitRange="";
 	// 支付标记 （Y：已支付）
 	@XStreamAlias("PayFlag")
-	private String payFlag;
+	private String payFlag="";
 	// 支付方式代码
 	@XStreamAlias("PayModeCode")
-	private String payModeCode;
+	private String payModeCode="";
 	// 银行代码
 	@XStreamAlias("PayBankCode")
-	private String payBankCode;
+	private String payBankCode="";
 	// 银行代码
 	@XStreamAlias("PayCardNo")
-	private String payCardNo;
+	private String payCardNo="";
 	// 个人支付费用
 	@XStreamAlias("PayFee")
-	private String payFee;
+	private String payFee="";
 	// 医保支付费用
 	@XStreamAlias("PayInsuFee")
-	private String payInsuFee;
+	private String payInsuFee="";
 	// 医保分解返回串
 	@XStreamAlias("PayInsuFeeStr")
-	private String payInsuFeeStr;
+	private String payInsuFeeStr = "";
 	
 	// 支付交易号
 	@XStreamAlias("PayTradeNo")
-	private String payTradeNo;
+	private String payTradeNo="";
 	
 	/**
 	 * 支付交易信息串（应该包括银行代码、支付卡号、银行交易日期、银行交易流水号）
@@ -449,6 +468,15 @@ public class BookServiceRequest extends ParentRequest{
 	}
 
 
+	public static void main(String[] args) {
+		
+		BookServiceRequest request = new BookServiceRequest();
+		request.setScheduleItemCode("setScheduleItemCode");
+		request.setCardNo("setCardNo");
+		request.setAdmitRange("setAdmitRange");
+		
+		System.out.println(BookServiceRequest.parseToXml(request));
+	}
 
 
 	/**

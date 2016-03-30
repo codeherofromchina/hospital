@@ -663,7 +663,8 @@ _background: url(../images/ksgh_jt_1.png) 171px center no-repeat;}
 .container .doctor-info .infos .info-hospittal{overflow:hidden;margin-bottom:9px;height:14px;max-width:370px;color:#333;text-overflow:ellipsis;white-space:nowrap;line-height:14px;}
 .container .doctor-info .infos .info-hospittal span{display:inline-block;overflow:hidden;margin-right:10px;max-width:272px;vertical-align:top;text-overflow:ellipsis;white-space:nowrap;}
 .container .doctor-info .infos .info-pos{overflow:hidden;width:370px;height:32px;color:#333;text-overflow:ellipsis;line-height:16px;}
-.container .doctor-info .infos .info-pos span{margin-right:10px;color:#898989;}
+.container .doctor-info .infos .info-pos span{color:#898989;}
+.container .doctor-info .infos .info-pos font{margin-right: 10px;}
 .container .doctor-info .time-and-pay{position:absolute;top:76px;left:550px;line-height:25px;}
 .container .doctor-info .time-and-pay .info-time,.container .doctor-info .time-and-pay .pay-info{color:#333;font-size:14px;}
 .container .doctor-info .time-and-pay .info-time span,.container .doctor-info .time-and-pay .pay-info span{color:#898989;font-size:14px;}

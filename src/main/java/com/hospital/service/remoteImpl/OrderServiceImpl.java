@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
@@ -53,6 +54,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 	
 	/**
+	 * 有卡预约实现
 	 * 根据给定信息预约挂号，并返回结果
 	 */
 	@Override
@@ -61,10 +63,35 @@ public class OrderServiceImpl implements OrderService{
 		BookServiceRequest request = new BookServiceRequest();
 		request.setScheduleItemCode(scheduleItemCode);
 		request.setCardNo(cardNo);
-		request.setAdmitRange(admitRange);
+		if(StringUtils.isNotEmpty(admitRange)){
+			request.setAdmitRange(admitRange);
+		}
 		
 		return bookService(request);
 	}
+	
+	/**
+	 * 无卡预约实现
+	 * 根据给定信息预约挂号，并返回结果
+	 */
+	@Override
+	public Order bookService(String scheduleItemCode, String admitRange,
+			String iDCardNo, String patientName, String mobileNo, String gender)
+			throws TradeErrorException {
+		BookServiceRequest request = new BookServiceRequest();
+		request.setScheduleItemCode(scheduleItemCode);
+		if(StringUtils.isNotEmpty(admitRange)){
+			request.setAdmitRange(admitRange);
+		}
+		request.setiDCardNo(iDCardNo);
+		request.setPatientName(patientName);
+		request.setMobileNo(mobileNo);
+		request.setGender(gender);
+		request.setCardType("");
+		
+		return bookService(request);
+	}
+	
 	
 	/**
 	 * 预约挂号
