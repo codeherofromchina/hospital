@@ -2,6 +2,7 @@ package com.hospital.action;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +28,7 @@ import com.hospital.service.DepartmentService;
 import com.hospital.service.DoctorService;
 import com.hospital.service.ScheduleService;
 import com.hospital.tools.DateUtil;
+import com.hospital.tools.WebUtil;
 /**
  * 
  * @author wxd
@@ -97,6 +99,42 @@ public class DoctorAction {
 	}
 	
 	
+	
+	/**
+	 * 异步获取在给定科室名称（标准科室名称中包含给定字符即可）中的医生
+	 * @param request
+	 * @param departmentCode
+	 * @return
+	 */
+	@RequestMapping("asyncDoctorsByDeparmentName")
+	@ResponseBody
+	public String asyncDoctorsByDeparmentName(HttpServletRequest request,String deptName){
+		Map<String, Object> _result = new HashMap<String, Object>();
+		_result.put("success", true);
+		try {
+			List<Doctor> doctors = doctorService.queryAllDoctor();
+			
+			if(StringUtils.isNotEmpty(deptName)){
+				List<Doctor> resultDoctors = new ArrayList<Doctor>();
+				for(Doctor d:doctors){
+					if(d.getDepartmentName().contains(deptName)){
+						resultDoctors.add(d);
+					}
+				}
+				
+				_result.put("result", resultDoctors);
+			}else{
+				_result.put("result", doctors);
+			}
+		} catch (TradeErrorException e) {
+			logger.error("获取所有医生列表出错[errmsg:"+e.getMessage()+"]");
+			_result.put("success", false);
+			_result.put("msg", e.getMessage());
+		}
+		return JSONObject.fromObject(_result).toString();
+	}
+	
+	
 	/**
 	 * 跳转到科室医师列表页面
 	 * @param request
@@ -104,7 +142,7 @@ public class DoctorAction {
 	 * @return
 	 */
 	@RequestMapping("deptDoctorList")
-	public ModelAndView deptDoctorList(HttpServletRequest request,String deptCode){
+	public ModelAndView deptDoctorList(HttpServletRequest request,String deptCode,String doctorName){
 		ModelAndView mv = new ModelAndView_velocity(request, "deptDoctorList");
 		
 		// 获取所有科室
@@ -115,9 +153,8 @@ public class DoctorAction {
 			logger.error("获取所有科室组出错["+e.getMessage()+"]");
 		}
 		
-		if(StringUtils.isNotEmpty(deptCode)){
-			mv.addObject("deptCode", deptCode);
-		}
+		WebUtil.writeBackParams(request);
+		
 
 		return mv;
 	}
@@ -131,7 +168,7 @@ public class DoctorAction {
 	 */
 	@RequestMapping("asyncDoctorDetailByDepartmentCode")
 	@ResponseBody
-	public String asyncDoctorDetailByDepartmentCode(String deptCode,String pageNo){
+	public String asyncDoctorDetailByDepartmentCode(String deptCode,String doctorName,String pageNo){
 		Map<String, Object> _result = new HashMap<String,Object>();
 		_result.put("success", true);
 		List<Doctor> doctors = null;
@@ -143,6 +180,18 @@ public class DoctorAction {
 				// 查询指定科室
 				doctors = doctorService.queryDoctor(deptCode);
 			}
+			
+			// 如果医生姓名存在，则过滤医生姓名
+			if(StringUtils.isNotEmpty(doctorName) &&doctors!=null && doctors.size() > 0){
+				List<Doctor> dest = new ArrayList<Doctor>();
+				for(Doctor d:doctors){
+					if(d.getDoctorName().contains(doctorName)){
+						dest.add(d);
+					}
+				}
+				doctors = dest;
+			}
+			
 		} catch (TradeErrorException e) {
 			logger.error("查询全部医生错误[departmentCode:"+deptCode+",errMsg:"+e.getMessage()+"]");
 			_result.put("success", false);
@@ -194,9 +243,9 @@ public class DoctorAction {
 					
 					List<Schedule> doctorSchedules = new ArrayList<Schedule>();
 					try {
-						// 最多获取四天外的排班信息,由于一次只能查询到一天的排班信息，所有分多次查询
+						// 最多获取2天外的排班信息,由于一次只能查询到一天的排班信息，所有分多次查询
 						boolean setDoctorInfoFlag = true;
-						for(int i=0;i<5;++i){
+						for(int i=0;i<3;++i){
 							Date searchDate = DateUtil.plusSomeDay(today, i);
 							List<Schedule> searchSchedules = scheduleService.queryScheduleByDay(doctor.getDepartmentCode(), doctor.getDoctorCode(), searchDate);
 							// 如果排班信息存在,则放入到医生排班键中

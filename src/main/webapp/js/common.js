@@ -1,4 +1,6 @@
 $(function(){
+	autoComplete(1,"words"); // 科室医生表单栏自动提示
+	
 	$(document).click(function(){ 
 		if(!$("#sbArea_h").is(":hidden")){
 			$("#sbArea_h").hide();
@@ -14,12 +16,55 @@ $(function(){
 	// 选中科室或者医生
 	$("div[id^='wv_h_']").click(function(){
 		var name = $(this).html();
-		$("#wn_h").html(name);
+		var oldName = $("#wn_h").html();
+		if(name!=oldName){
+			if(name=="医生"){
+				autoComplete(2,"words");
+			}else if(name="科室"){
+				autoComplete(1,"words");
+			}
+			$("#wn_h").html(name);
+		}
 		$("#sbArea_h").hide();
 	});
 	
 	
-	
+	// 头部搜索框事件
+	$("#top_search_btn").click(function(){
+		var wordsValue = $("#words").val();
+		var wnhValue = $("#wn_h").html();
+		if(wordsValue=="" || wordsValue=="请输入搜索内容"){
+			var msg ;
+			if(wnhValue=="科室"){
+				msg = "请输入科室名称或者从提示中选取科室名称。";
+			}else if(wnhValue == "医生"){
+				msg = "请输入医生姓名或者从提示中选取医生姓名。";
+			}else{
+				msg = "请输入内容或者从提示中选取内容。";
+			}
+			
+			alertMsg(msg);
+			return;
+		}
+		
+		// 如果选择的是科室
+		if(wnhValue=="科室"){
+			$.post("search/department/asyncQueryDepartmentByName.htm",{deptName:wordsValue},function(data){
+				if(data.success){
+					  window.location.href="search/schedule/department.htm?deptCode="+data.result.departmentCode; 
+				}else{
+					alertMsg(data.msg);
+				}
+			},"json");
+		}else if(wnhValue == "医生"){
+			// 如果选择的是医生
+			window.location.href="search/doctor/deptDoctorList.htm?doctorName="+wordsValue; 
+		}else{
+			// 如果其他
+			alertMsg("页面错误，请尝试刷新后重新操作");
+		}
+		
+	})
 	
 });
 // 格式化日期格式为yyyy-MM-dd
@@ -139,3 +184,103 @@ function getAvailableNum(availabelNumStr){
 		return num;
 	}
 }
+
+
+//自动提示 ,flagNum分别科室为1(全部科室信息)、2（全部医生信息）、3（科室医生信息）,id为要自动提示的控件
+function autoComplete(flagNum,id,deptVal){
+	if(flagNum==1){
+		$.post("search/department/asyncAllDepartments.htm",function(data){
+			if(data.success){
+				var arr = new Array();
+				
+				$.each(data.result,function(index,obj){
+					arr.push(obj.departmentName);
+				})
+				
+				completeArr(arr.unique4(),id);
+			}
+		},"json");
+	}else if(flagNum==2){
+		$.post("search/doctor/asyncAllDoctors.htm",function(data){
+			if(data.success){
+				var arr = new Array();
+				
+				$.each(data.result,function(index,obj){
+					arr.push(obj.doctorName);
+				})
+				
+				completeArr(arr.unique4(),id);
+			}
+		},"json");
+	}else if(flagNum==3){
+		$.post("search/doctor/asyncDoctorsByDeparmentName.htm",{deptName:deptVal},function(data){
+			if(data.success){
+				var arr = new Array();
+				
+				$.each(data.result,function(index,obj){
+					arr.push(obj.doctorName);
+				})
+				
+				completeArr(arr.unique4(),id);
+			}
+		},"json");
+	}
+}
+
+// 自动补充表单提示 arr 要提示的数据   id：要控制的表单ID
+function completeArr(arr,id){
+	try{
+		$("#"+id).autocomplete( "destroy" );
+	}catch(e){
+		console.log(e.message);
+	}
+	$("#"+id).autocomplete({
+		source: arr,
+		minLength: 0
+	});
+	$("#"+id).focus(function(){
+		$("#"+id).autocomplete( "search", $("#"+id).val());
+	})
+}
+
+
+// 数组去重
+Array.prototype.unique4 = function()
+{
+	this.sort(function(a,b){
+        return  b - a ;
+	});
+	var re=[this[0]];
+	for(var i = 1; i < this.length; i++)
+	{
+		if( this[i] !== re[re.length-1])
+		{
+			re.push(this[i]);
+		}
+	}
+	return re;
+}
+
+// 弹出警告信息
+function alertMsg(msg){
+	// 更换提示信息并显示警告信息
+	$("#top_alert_div_msg").html(msg);
+	$("#top_alert_div").slideDown();
+	
+	try{
+		// 清除定时器，预防上次操作还没有过3秒后又操作引起bug
+		clearTimeout(commonJsTimeOutVari);
+	}catch(ex){
+		console.log(ex.message);
+	}
+	
+	// 定时3秒后隐藏警告信息
+	commonJsTimeOutVari = setTimeout(function(){
+		$("#top_alert_div").slideUp();
+	},5000);
+}
+
+var commonJsTimeOutVari;
+
+
+
