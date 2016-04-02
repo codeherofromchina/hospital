@@ -16,11 +16,49 @@
 	</context:component-scan>
 	<!--开启AOP自动代理 -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
-	
+
 	<!-- webService 服务工厂类 -->
-	 <bean id="registrationServiceFactory" class="com.hospital.pojo.stub.RegistrationService"></bean>  
+	<bean id="registrationServiceFactory" class="com.hospital.pojo.stub.RegistrationService"></bean>
 	<!--<bean id="registrationServiceFactory" class="com.hospital.tools.TestRegistrationService"></bean> -->
-	<bean id="registrationServiceSoap" factory-bean="registrationServiceFactory" factory-method="getRegistrationServiceSoap"></bean>
+	<bean id="registrationServiceSoap" factory-bean="registrationServiceFactory"
+		factory-method="getRegistrationServiceSoap"></bean>
+
+
+
+	<!-- quartz 定时任务配置 -->
+	<bean id="jobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="refreshDataCacheJob" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>execute</value>
+		</property>
+		<property name="concurrent" value="false"/>
+	</bean>
+
+	<!-- 定义触发时间 -->
+	<bean id="scheduledTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="jobDetail" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression">
+			<value>0 0 */2 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 -->
+	<bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="scheduledTrigger" />
+			</list>
+		</property>
+	</bean>
+
 </beans>
 
 

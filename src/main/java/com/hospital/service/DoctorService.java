@@ -26,4 +26,13 @@ public interface DoctorService {
 	public List<Doctor> queryAllDoctor() throws TradeErrorException;
 	
 	
+	/**
+	 * 通过医生编码获取唯一医生信息
+	 * @param departmentCode	科室编码
+	 * @param doctorCode	医生编码
+	 * @return
+	 */
+	public Doctor queryDoctorByCode(String departmentCode,String doctorCode) throws TradeErrorException ;
+	
+	
 }

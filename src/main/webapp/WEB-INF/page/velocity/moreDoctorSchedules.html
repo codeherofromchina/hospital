@@ -1,0 +1,255 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>XXXX医院挂号系统</title>
+<link type="text/css" rel="stylesheet" href="${webPath}/css/main.css"/>
+<script type="text/javascript" src="${webPath}/js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="${webPath}/js/common.js"></script>
+<script type="text/javascript">
+var data = $!{scheduleData};
+
+$(function(){
+	// 组织医生排班信息表格
+	typeSettingSchedule(data);
+	
+	
+	
+	
+	
+	
+})
+
+function typeSettingSchedule(scheduleData){
+	var table = "";
+	var now = getDateFormat(new Date());
+	table += "<table border='0' cellpadding='0' cellspacing='0'>"
+	var head = "<tr>"; // table标题
+	var t1 = "<tr>";// 上午内容
+	var t2 = "<tr>"; // 下午内容
+	var t3 = "<tr>"; // 晚上内容
+	for(var i =0;i<7;++i){
+		var comDate = addDate(now,i);
+		var key = getDateFormat(comDate);
+		var sw = 0;
+		var xw = 0;
+		var ws = 0;
+		if(scheduleData[key]){
+			$.each(scheduleData[key],function(index,obj){
+				if(obj["sessionName"]=="上午"){
+					sw += getAvailableNum(obj["availableNum"]);
+				}else if(obj["sessionName"]=="下午"){
+					xw += getAvailableNum(obj["availableNum"]);
+				}else{
+					ws += getAvailableNum(obj["availableNum"]);
+				}
+			})
+		}
+		
+		head += "<th scope='col'>"+getWeek(comDate)+"<p>"+key+"</p></th>";
+		if(sw > 0){
+			t1 += "<td class='ksorder_kyy ksorder_bgcol' onclick='orderHospital(\"$!{department.departmentCode}\",\"$!{doctor.doctorCode}\",\""+key+"\",\"S\")'>预约<br>剩余:有</td>";
+		}else{
+			t1 += "<td>&nbsp;无</td>";
+		}
+		if(xw > 0){
+			t2 += "<td class='ksorder_kyy ksorder_bgcol' onclick='orderHospital(\"$!{department.departmentCode}\",\"$!{doctor.doctorCode}\",\""+key+"\",\"X\")'>预约<br>剩余:有</td>";
+		}else{
+			t2 += "<td>&nbsp;无</td>";
+		}
+		if(ws > 0){
+			t3 += "<td class='ksorder_kyy ksorder_bgcol' onclick='orderHospital(\"$!{department.departmentCode}\",\"$!{doctor.doctorCode}\",\""+key+"\",\"Y\")'>预约<br>剩余:有</td>";
+		}else{
+			t3 += "<td>&nbsp;无</td>";
+		}
+	}
+	
+	head += "<tr>"; 
+	t1 += "<tr>";
+	t2 += "<tr>"; 
+	t3 += "<tr>"; 
+	
+	table += head;
+	table += t1;
+	table += t2;
+	table += t3;
+	
+	table += "</table>";
+	
+	$("#tableContainer").html(table);
+}
+
+// 预约
+function orderHospital(deptCode,doctorCode,date,timeSole){
+	window.location.href="http://localhost:8080/hospital/search/order/bookOrder.htm?deptCode="+deptCode+"&docCode="+doctorCode+"&date="+date+"&timeSole=" + timeSole; 
+}
+</script>
+</head>
+<body>
+<div id="dbnav">
+	<div class="dbnav_context">
+		<p class="dbnav_context_left"><img src="http://img.bjguahao.gov.cn/ws/1.0/hs/images/dbnav.png"><span>010-114/116114电话预约</span></p>
+		<div class="top_help">
+			<a href="#" target="_blank">患者信息查询</a>
+			<a href="#" target="_blank">帮助中心</a>
+		</div>
+	</div>
+</div>
+<div id="top">
+	<div class="top_left">
+		<a href="$!{webPath}/index.htm"><img src="http://img.bjguahao.gov.cn/ws/1.0/hs/images/logo.jpg">
+			<h2 class="top_h2">北京市预约挂号统一平台</h2>
+		</a>
+	</div>
+	<div class="top_search">
+		<div class="option" id="wn_h_div">
+			<span id="wn_h">科室</span>
+		</div>
+		<div class="sbox">
+			<input class="ac_input" autocomplete="off" onblur="javascript:if(this.value=='')this.value='请输入搜索内容';" onfocus="javascript:if(this.value=='请输入搜索内容')this.value='';" value="请输入搜索内容" maxlength="30" name="words" id="words" type="text">
+		</div>
+		<div class="sbtn">
+			<input value="" style="letter-spacing: -1px;" type="submit">
+		</div>
+		<div id="sbArea_h" style="display:none;">
+			<a target="_self" href="#">
+				<div class="dselObj" id="wv_h_1">
+					科室
+				</div>
+			</a>
+			<a target="_self" href="#">
+				<div class="dselObj" id="wv_h_2">
+					医生
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div id="index_nav_border">
+	<div id="index_nav">
+		<ul class="index_nav_ul">
+			<li class="index_nav_lic">全部科室</li>
+			<li><a href="${webPath}/search/schedule/department.htm">科室排班</a></li>
+			<li><a href="$!{webPath}/search/doctor/deptDoctorList.htm">科室医生</a></li>
+		</ul>
+		<div class="index_nav_right">
+			<a target="_blank" href="#">预约记录通道</a>
+		</div>
+	</div>
+</div>
+
+<!-- 这里是医生内容区 -->
+<div class="wrap">
+	<div class="container">
+		<div class="doctor-info">
+			<div class="info-pic">
+				<img src="http://hiphotos.baidu.com/dpp/pic/item/f703738da97739121256d072ff198618367ae2b5.jpg">
+			</div>
+			<div class="infos">
+				<div class="info-title">
+					<div>
+						$!{doctor.doctorName}
+					</div>
+					<div class="info-doc">
+						<span class="doctor-medtitle">$!{doctor.doctorTitle}</span> &nbsp;&nbsp;&nbsp;&nbsp;<i></i><span>$!{doctor.doctorSessType}</span>
+					</div>
+				</div>
+				<p class="info-hospittal">
+					<span>XXX医院</span>$!{department.departmentName}
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 这里是排班内容区 -->
+<div id="ksorder_time">
+	<div class="ksorder_time_title">
+    	<p class="ksorder_t_p">医生排班表</p>
+    </div>
+    <div class="ksorder_time_center">
+    	<div class="ksorder_cen_l">
+    		<div class="ksorder_cen_l_l">
+            	<a href="javascript:void(0);" class="ksorder_btn_left"></a>
+            		<ul>
+                    <li>上午</li>
+                    <li>下午</li>
+                    <li>晚上</li>
+                </ul>
+            </div>
+            <div class="ksorder_cen_l_table">
+            	<div class="ksorder_cen_l_t_c" id="tableContainer" style="width: 659px;">
+            		<!-- 这里通过js放置医生排班信息 -->
+                </div>
+            </div>
+            <div class="ksorder_cen_l_r">
+            	<a href="javascript:void(0);" class="ksorder_btn_right"></a>
+            </div>
+    	</div>
+    	<div class="ksorder_cen_r">
+            <div class="ksorder_cen_r_top">
+                <h4>预约规则</h4>
+                <ul>
+                    <li><span>更新时间：</span>每日0:00更新</li>
+                    <li><span>预约周期：</span>91天</li>
+                    <li><span>停挂时间：</span> 下午15:00停止次日预约挂号 （周五15:00后停挂至下周一）</li>
+                    <li><span>退号时间：</span> 就诊前一工作日15:00前取消</li>
+                </ul>
+	            <dl>
+	            	<dt>特殊规则</dt>
+	                <dd>无</dd>
+	            </dl>
+            </div>
+        </div>
+    </div>
+</div>	
+
+
+<div class="footer-box clear path">
+		<div class="footer-img-box">
+			<div class="footer-img-left">
+				<img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/logo.png">
+				<ul>
+					<li><span class="phone">4000-191-191</span></li>
+					<li><span class="mail">邮箱：baiduyisheng@baidu.com</span></li>
+					<li><a href="#" target="_blank">联系客服</a></li>
+				</ul>
+			</div>
+			<ul class="footer-img-right">
+				<li class="image-hospital">
+				<p>
+					签约医院：
+				</p>
+				<ul>
+					<li><img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/china-japan-hospital.png"></li>
+					<li><img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/huashan-hospital.png"></li>
+					<li><img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/china-301-hosptical.png"></li>
+					<li><img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/qingdao-hospital.png"></li>
+				</ul>
+				</li>
+				<li class="image-mec">
+				<p>
+					合作伙伴：
+				</p>
+				<ul>
+					<li><img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/zhonghua-partners.png"></li>
+					<li><img src="http://dpp.bdimg.com/static/pc/201603071446/asset/common/img/detail/shenzhen-partners.png"></li>
+				</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="footer-container-box">
+			<div class="footer-container">
+				<div style="overflow:hidden">
+					<dd class="footer-container-left">©2016 Baidu <a href="#" target="_blank">使用百度前必读</a> 京ICP证030173号</dd>
+					<dd class="footer-container-right">
+					<a href="#" target="_blank"><span>帮助 |</span></a>
+					<a href="#" target="_blank"><span> 用户协议 |</span></a>
+					<a href="#" target="_blank"><span> 意见反馈<span></span></span></a>
+					</dd>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

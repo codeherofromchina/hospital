@@ -21,15 +21,13 @@ public interface ScheduleService {
 	
 	/**
 	 * 查询科室中医师某个时间段排班
-	 * @param departmentCode
-	 * @param doctorCode
-	 * @param timeSlot
-	 * @param startDate
-	 * @param endDate
+	 * @param departmentCode 科室编号
+	 * @param doctorCode  医生编号
+	 * @param date  要查询的日期
 	 * @return
 	 * @throws TradeErrorException
 	 */
-	public List<Schedule> queryScheduleByDay(String departmentCode,String doctorCode,Date startDate,Date endDate) throws TradeErrorException;
+	public List<Schedule> queryScheduleByDay(String departmentCode,String doctorCode,Date date) throws TradeErrorException;
 	
 	
 	

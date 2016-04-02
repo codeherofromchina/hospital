@@ -19,8 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hospital.exception.TradeErrorException;
 import com.hospital.pojo.Department;
+import com.hospital.pojo.Doctor;
 import com.hospital.pojo.Schedule;
 import com.hospital.service.DepartmentService;
+import com.hospital.service.DoctorService;
 import com.hospital.service.ScheduleService;
 import com.hospital.tools.DateUtil;
 /**
@@ -35,6 +37,8 @@ public class ScheduleAction {
 	private ScheduleService scheduleService;
 	@Resource(name="defaultDepartmentServiceImpl")
 	private DepartmentService departmentService;
+	@Resource(name = "defaultDoctorServiceImpl")
+	private DoctorService doctorService;
 	
 	/**
 	 * 科室排班页面
@@ -54,6 +58,52 @@ public class ScheduleAction {
 		// 设置传入的科室编号
 		if(StringUtils.isNotEmpty(deptCode)){
 			mv.addObject("deptCode", deptCode);
+		}
+		
+		return mv;
+	}
+	
+	
+	/**
+	 * 获取医生更多排班信息
+	 * @param request
+	 * @param deptCode	医生所在科室编码
+	 * @param doctorCode 医生编码
+	 * @return
+	 */
+	@RequestMapping("/moreDoctorSchedules")
+	public ModelAndView moreDoctorSchedules(HttpServletRequest request,String deptCode,String doctorCode){
+		ModelAndView mv = new ModelAndView_velocity(request,"moreDoctorSchedules");
+		
+		try{
+			if(StringUtils.isNotEmpty(deptCode) && StringUtils.isNotEmpty(doctorCode)){
+				// 获取科室信息
+				Department department = departmentService.queryByDeptCode(deptCode);
+				if(department!=null){
+					mv.addObject("department", department);
+					
+					// 获取医生信息
+					Doctor doctor = doctorService.queryDoctorByCode(department.getDepartmentCode(),doctorCode);
+					if(doctor!=null){
+						mv.addObject("doctor", doctor);
+						
+						// 重点，获取医生排班信息
+						Map<String, Object> scheduleData = new HashMap<String, Object>();
+						Date today = new Date();
+						for(int i=0;i<7;++i){
+							Date searchDay = DateUtil.plusSomeDay(today, i);
+							
+							List<Schedule> schedules = scheduleService.queryScheduleByDay(department.getDepartmentCode(), doctor.getDoctorCode(), searchDay);
+							
+							scheduleData.put(DateUtil.formatToShortString(searchDay), schedules);
+						}
+						
+						mv.addObject("scheduleData", JSONObject.fromObject(scheduleData));
+					}
+				}
+			}
+		}catch(Exception ex){
+			logger.error(ex.getMessage());
 		}
 		
 		return mv;

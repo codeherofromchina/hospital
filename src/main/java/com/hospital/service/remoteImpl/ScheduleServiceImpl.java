@@ -1,5 +1,6 @@
 package com.hospital.service.remoteImpl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -65,32 +66,36 @@ public class ScheduleServiceImpl implements ScheduleService {
 	}
 
 	/**
-	 * 
-	 * TODO 需要测试
 	 * 查询科室中医师的某天的某个时间段排班
 	 * 
 	 * @param departmentCode
 	 *            科室代码
 	 * @param doctorCode
 	 *            医生代码
-	 * @param startDate
-	 *            要查询的开始日期
-	 * @param endDate
-	 *            要查询的结束日期
+	 * @param date 
+	 *            要查询的日期
 	 * @return
 	 * @throws TradeErrorException
 	 */
 	public List<Schedule> queryScheduleByDay(String departmentCode,
-			String doctorCode , Date startDate, Date endDate)
+			String doctorCode , Date date )
 			throws TradeErrorException {
-		QueryAdmScheduleRequest request = new QueryAdmScheduleRequest();
+		// 获取科室所有排班
+		List<Schedule> deptSchedules = queryScheduleByDay(departmentCode,date);
+		
+		// 过滤给定医师编码的排班并返回
+		if(deptSchedules!=null && deptSchedules.size() > 0){
+			List<Schedule> doctorSchedule = new ArrayList<Schedule>();
+			for(Schedule schedule:deptSchedules){
+				if(schedule.getDoctorCode().equals(doctorCode)){
+					doctorSchedule.add(schedule);
+				}
+			}
+			
+			return doctorSchedule;
+		}
 
-		request.setDepartmentCode(departmentCode);
-		request.setDoctorCode(doctorCode);
-		request.setStartDate(DateUtil.formatToShortString(startDate));
-		request.setEndDate(DateUtil.formatToShortString(endDate));
-
-		return queryAdmSchedule(request);
+		return null;
 	}
 	
 

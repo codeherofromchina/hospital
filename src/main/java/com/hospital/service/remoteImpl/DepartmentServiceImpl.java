@@ -34,12 +34,12 @@ public class DepartmentServiceImpl implements DepartmentService {
 	 */
 	public List<Department> queryAllDepartments() throws TradeErrorException {
 		// 先从缓存中获取缓存数据，如果不存在，则查询并放入缓存供下次使用
-		List data = DataCacheUtil.getData(DataCacheUtil.CacheKey.ALL_DEPARTMENT_KEY, List.class);
-		if(data!=null){
-			return data;
+		List<Department> allDepts = DataCacheUtil.getData(DataCacheUtil.CacheKey.ALL_DEPARTMENT_KEY, Department.class);
+		if(allDepts!=null){
+			return allDepts;
 		}
 		// 远程查询
-		List<Department> allDepts = queryDepartment(new QueryDepartmentRequest());
+		allDepts = queryDepartment(new QueryDepartmentRequest());
 		// 将远程查询结果放入到缓存中
 		DataCacheUtil.putData(DataCacheUtil.CacheKey.ALL_DEPARTMENT_KEY, allDepts);
 		return allDepts;
@@ -49,16 +49,21 @@ public class DepartmentServiceImpl implements DepartmentService {
 	 * 通过科室编号获取科室信息
 	 */
 	public Department queryByDeptCode(String deptCode) throws TradeErrorException{
+		Department department = null;
 		if(StringUtils.isNotEmpty(deptCode)){
-			QueryDepartmentRequest deptRequest = new QueryDepartmentRequest();
-			deptRequest.setDepartmentCode(deptCode);
-			List<Department> depts = queryDepartment(deptRequest);
-			if(depts!=null && depts.size() > 0){
-				return depts.get(0);
+			// 获取所有科室信息，并从所有中筛选正确的科室
+			List<Department> allDepts = queryAllDepartments();
+			if(allDepts!=null && allDepts.size() > 0){
+				for(Department d:allDepts){
+					if(d.getDepartmentCode().equals(deptCode)){
+						department = d;
+						break;
+					}
+				}
 			}
 		}
 		
-		return null;
+		return department;
 	}
 	
 	/**

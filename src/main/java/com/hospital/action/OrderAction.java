@@ -23,7 +23,6 @@ import com.hospital.pojo.Schedule;
 import com.hospital.service.OrderService;
 import com.hospital.service.ScheduleService;
 import com.hospital.tools.DateUtil;
-import com.hospital.tools.WebUtil;
 /**
  * @author wxd
  *
@@ -55,7 +54,7 @@ public class OrderAction {
 			if(StringUtils.isNotEmpty(deptCode) && StringUtils.isNotEmpty(docCode) && StringUtils.isNotEmpty(date) && StringUtils.isNotEmpty(timeSole)){
 				Date dDate = DateUtil.parseShortStrToDate(date);
 				if(timeSole.equals("S") || timeSole.equals("X") || timeSole.equals("Y")){
-					List<Schedule> schedules = scheduleService.queryScheduleByDay(deptCode,docCode,dDate,dDate);
+					List<Schedule> schedules = scheduleService.queryScheduleByDay(deptCode,docCode,dDate);
 					if(schedules!=null && schedules.size() > 0){
 						boolean breakFlag = false;
 						for(Schedule sc:schedules){

@@ -72,17 +72,17 @@ function getSchedule(deptCode){
 				
 				head += "<th scope='col'>"+getWeek(comDate)+"<p>"+key+"</p></th>";
 				if(sw > 0){
-					t1 += "<td class='ksorder_kyy ksorder_bgcol' onclick='getDoctorList(this,\""+deptCode+"\",\"上午\",\""+key+"\")'>预约<br>剩余:"+sw+"</td>";
+					t1 += "<td class='ksorder_kyy ksorder_bgcol' onclick='getDoctorList(this,\""+deptCode+"\",\"上午\",\""+key+"\")'>预约<br>剩余:有</td>";
 				}else{
 					t1 += "<td>&nbsp;无</td>";
 				}
 				if(xw > 0){
-					t2 += "<td class='ksorder_kyy ksorder_bgcol' onclick='getDoctorList(this,\""+deptCode+"\",\"下午\",\""+key+"\")'>预约<br>剩余:"+xw+"</td>";
+					t2 += "<td class='ksorder_kyy ksorder_bgcol' onclick='getDoctorList(this,\""+deptCode+"\",\"下午\",\""+key+"\")'>预约<br>剩余:有</td>";
 				}else{
 					t2 += "<td>&nbsp;无</td>";
 				}
 				if(ws > 0){
-					t3 += "<td class='ksorder_kyy ksorder_bgcol' onclick='getDoctorList(this,\""+deptCode+"\",\"晚上\",\""+key+"\")'>预约<br>剩余:"+ws+"</td>";
+					t3 += "<td class='ksorder_kyy ksorder_bgcol' onclick='getDoctorList(this,\""+deptCode+"\",\"晚上\",\""+key+"\")'>预约<br>剩余:有</td>";
 				}else{
 					t3 += "<td>&nbsp;无</td>";
 				}
@@ -99,7 +99,7 @@ function getSchedule(deptCode){
 			str += t3;
 			
 			str += "</table></div></div>";
-			str += "<div class='ksorder_cen_l_r'><a href='#' class='ksorder_btn_right'></a></div>";
+			str += "<div class='ksorder_cen_l_r'><a href='javascript:void(0);' class='ksorder_btn_right'></a></div>";
 			$("#ksorder_cen_l").html(str);
 		}
 	},"json");
@@ -112,26 +112,6 @@ function getSchedule(deptCode){
 	
 }
 
-
-
-function getAvailableNum(availabelNumStr){
-	var num = Number(availabelNumStr);
-	if(isNaN(num)){
-		var result = 0;
-		$.each(availabelNumStr.split(","),function(index,obj){
-			var numArr = obj.split(";");
-			if(numArr.length > 1){
-				var n = parseInt(numArr[1]);
-				if(!isNaN(n)){
-					result += n;
-				}
-			}
-		})
-		return result;
-	}else{
-		return num;
-	}
-}
 
 // 获取点击事件中的医生列表并排班到页面中，同时控制点击td中的样式改变
 function getDoctorList(tdObj,deptCode,timeSole,dateStr){

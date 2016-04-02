@@ -1,7 +1,9 @@
 package com.hospital.tools;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,9 +18,6 @@ public class DataCacheUtil {
 	// 缓存的数据
 	private static Map<CacheKey, Object> cacheData = new HashMap<CacheKey, Object>();
 	
-	public final static String ALL_DOCTORS_KEY = "all_doctor";
-	
-	
 	/**
 	 * 获取缓存数据
 	 * @param key
@@ -28,10 +27,16 @@ public class DataCacheUtil {
 		return cacheData.get(key);
 	}
 	
-	public synchronized static <T> T getData(CacheKey key,Class<T> c){
-		return (T)cacheData.get(key);
+	public synchronized static <T> List<T> getData(CacheKey key,Class<T> c){
+		return (List<T>)cacheData.get(key);
 	}
 	
+	/**
+	 * 清除当前所有缓存数据
+	 */
+	public synchronized static void clearData(){
+		cacheData.clear();
+	}
 	
 	/**
 	 * 放置要缓存的数据，如果存在则替换更新
@@ -67,11 +72,15 @@ public class DataCacheUtil {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		DataCacheUtil.putData(DataCacheUtil.CacheKey.ALL_DOCTORS_KEY, "myData");
+		List<String> data = new ArrayList<String>();
+		data.add("myData");
+		data.add("myGradle");
+		DataCacheUtil.putData(DataCacheUtil.CacheKey.ALL_DOCTORS_KEY, data);
 		
-		String data = DataCacheUtil.getData(DataCacheUtil.CacheKey.ALL_DOCTORS_KEY, String.class);
+		List<String> cacheData= DataCacheUtil.getData(DataCacheUtil.CacheKey.ALL_DOCTORS_KEY, String.class);
 		
-		System.out.println(data);
-		
+		for(String str:cacheData){
+			System.out.println(str);
+		}
 	}
 }

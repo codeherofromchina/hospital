@@ -1,5 +1,6 @@
 package com.hospital.action;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -123,10 +124,9 @@ public class DoctorAction {
 	
 	
 	/**
-	 * 未测试  TODO
 	 * 用于科室医生页面使用
 	 * @param deptCode  科室编号  如果为空，则查询所有科室
-	 * @param pageNo   当前页码  默认1页 ，设置默认每页10个医生，不可编辑
+	 * @param pageNo   当前页码  默认1页 ，设置默认每页10个(不可编辑)医生，
 	 * @return
 	 */
 	@RequestMapping("asyncDoctorDetailByDepartmentCode")
@@ -179,61 +179,65 @@ public class DoctorAction {
 				_result.put("pageNum", pageNum); // 当前页码
 				int fromIndex = (pageNum - 1) * 10;
 				int toIndex = fromIndex + 10;
+				
+				//  声明放置医生和医生排班信息的列表 {"doctor":医生实体信息,"schedules":排班列表信息}
+				List<Map<String, Object>> doctorsInfo = new ArrayList<Map<String,Object>>();
 
+				// 获取分页后的医生列表
 				List<Doctor> subList = doctors.subList(fromIndex, toIndex>size?size:toIndex);
-
 				
-				Date startDate = new Date();
-				Date endDate = DateUtil.plusSomeDay(startDate, 2);
+				// 查询今天至两天后的医生排班信息
+				Date today = new Date();
 				
-				/*for(Doctor doctor:subList){
+				for(Doctor doctor:subList){
+					Map<String, Object> tmpMap = new HashMap<String, Object>();
+					
+					List<Schedule> doctorSchedules = new ArrayList<Schedule>();
 					try {
-						Map<String,List<Schedule>> _tmp = new HashMap<String, List<Schedule>>();
-						
-						List<Schedule> queryScheduleByDay = scheduleService.queryScheduleByDay(deptCode, doctor.getDoctorCode(), "S", startDate, endDate);
-						
-						if(queryScheduleByDay!=null && queryScheduleByDay.size() > 0){
-							_tmp.put("S", queryScheduleByDay);
-						}
-						
-						List<Schedule> queryScheduleByDay2 = scheduleService.queryScheduleByDay(deptCode, doctor.getDoctorCode(), "X", startDate, endDate);
-						if(queryScheduleByDay2!=null && queryScheduleByDay2.size() > 0){
-							_tmp.put("X", queryScheduleByDay2);
-						}
-						List<Schedule> queryScheduleByDay3 = scheduleService.queryScheduleByDay(deptCode, doctor.getDoctorCode(), "Y", startDate, endDate);
-						if(queryScheduleByDay3!=null && queryScheduleByDay3.size() > 0){
-							_tmp.put("Y", queryScheduleByDay3);
-						}
-						
-						
-						
-						if(_tmp.size() > 0){
-							Collection<List<Schedule>> values = _tmp.values();
-							for(List<Schedule> l:values){
-								Schedule schedule = l.get(0);
+						// 最多获取四天外的排班信息,由于一次只能查询到一天的排班信息，所有分多次查询
+						boolean setDoctorInfoFlag = true;
+						for(int i=0;i<5;++i){
+							Date searchDate = DateUtil.plusSomeDay(today, i);
+							List<Schedule> searchSchedules = scheduleService.queryScheduleByDay(doctor.getDepartmentCode(), doctor.getDoctorCode(), searchDate);
+							// 如果排班信息存在,则放入到医生排班键中
+							if( searchSchedules!=null && searchSchedules.size() >0){
+								if(setDoctorInfoFlag){ // 丰富医生实体信息内容
+									// 从排班信息中获取医生比较更详细的信息(包括 医生级别、医生级别编码、出诊级别)
+									Schedule schedule = searchSchedules.get(0);
+									doctor.setDoctorTitleCode(schedule.getDoctorTitleCode());
+									doctor.setDoctorTitle(schedule.getDoctorTitle());
+									doctor.setDoctorSessType(schedule.getDoctorSessType());
+									
+									setDoctorInfoFlag = false;
+									
+								}
 								
-								doctor.setDoctorSpec(schedule.getDoctorSpec());
-								doctor.setDoctorTitleCode(schedule.getDoctorTitleCode());
-								doctor.setDoctorTitle(schedule.getDoctorTitle());
-								
-								break;
+								// 放入到要返回的数据模型中
+								doctorSchedules.addAll(searchSchedules);
+
+								// 数据模型中只需要最少三条排班信息即可
+								if(doctorSchedules.size() >= 2){
+									doctorSchedules = doctorSchedules.subList(0, 2);
+									break;
+								}
 							}
 							
-							
-							_result.put(doctor.getDoctorCode(), _tmp);
 						}
-						
 					} catch (TradeErrorException e) {
 						logger.error("查询医生排班信息错误["+e.getMessage()+"]");
 					}
-				}*/
+					tmpMap.put("schedules", doctorSchedules);
+					
+					
+					tmpMap.put("doctor", doctor);
+					doctorsInfo.add(tmpMap);
+				}
 				
-				
-				_result.put("doctors", subList);
+				_result.put("doctors", doctorsInfo);
 			}
 		}
 		
 		return JSONObject.fromObject(_result).toString();
 	}
-
+	
 }

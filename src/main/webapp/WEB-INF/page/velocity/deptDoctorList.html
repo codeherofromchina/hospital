@@ -39,24 +39,26 @@ function queryDoctors(deptCode,pageNo){
 				listEle += "<div class='doctor-card clearfix'>";
 				listEle += "<div class='info-pic'><img src='http://hiphotos.baidu.com/dpp/pic/item/9f2f070828381f309e3425d5af014c086e06f099.jpg'></div>";
 				listEle += "<div class='infos'><div class='info-title' style='margin-top:-10px;'>";
-				listEle += "<div>"+obj.doctorName+"</div>";
-				listEle += "<span class='doctor-medtitle'>"+obj.doctorTitle+"</span>";
+				listEle += "<div>"+obj.doctor.doctorName+"</div>";
+				listEle += "<span class='doctor-medtitle'>"+obj.doctor.doctorTitle+"</span>";
 				listEle += "<p class='info-hospittal'>";
-				listEle += "<span><a href='javascript:void(0);'>"+obj.departmentName+"</a></span>";
-				listEle += "<span><a href='javascript:void(0);'>"+obj.serivceName+"</a></span>";
-				listEle += "<span><a href='javascript:void(0);'>"+obj.doctorSessType+"</a></span>";
+				listEle += "<span><a href='javascript:void(0);'>"+obj.doctor.departmentName+"</a></span>";
+				listEle += "<span><a href='javascript:void(0);'>"+obj.doctor.doctorSessType+"</a></span>";
 				listEle += "</p>";
 						
-				listEle += "<table cellspacing='0' cellpadding='0'><tr class='doctor-good'>";
-				listEle += "<td class='first-td' valign='top'>擅长诊治:</td>";
-				listEle += "<td class='last-td' valign='top'>"+obj.doctorSpec+"</td>";
-				listEle += "</tr></table>";
 				listEle += "</div></div>";
 				
 				listEle += "<div class='appointment-time'><ul>";
-				listEle += "<li><span class='appointment-day'>周四</span><span>03/24</span><span>上午</span><a href='#' target='_blank' class='more-time-chose'><span class='appointment-click'>立即预约</span></a></li>";
-				listEle += "<li><span class='appointment-day'>周二</span><span>03/29</span><span>下午</span><a href='#' target='_blank' class='more-time-chose'><span class='appointment-click'>立即预约</span></a></li>";
-				listEle += "<li><a href='#' class='more-time-chose' target='_blank'><span style='margin:0 1px;'>更多时段&nbsp;&gt;</span></a></li>";
+				
+				if(obj.schedules){
+					for(var n=0;n<obj.schedules.length;++n){
+						var sche = obj.schedules[n];
+						listEle += "<li><span class='appointment-day'>"+getWeekShotName(new Date(sche.serviceDate))+"</span><span>"+getDateShortFormat(new Date(sche.serviceDate))+"</span><span>"+sche.sessionName+"</span><a href='$!{webPath}/search/order/bookOrder.htm?deptCode="+sche.departmentCode+"&docCode="+sche.doctorCode+"&date="+sche.serviceDate+"&timeSole="+strToLetter(sche.sessionName)+"' target='_blank' class='more-time-chose'><span class='appointment-click'>立即预约</span></a></li>";
+					}
+					if(obj.schedules.length > 0){
+						listEle += "<li><a href='$!{webPath}/search/schedule/moreDoctorSchedules.htm?deptCode="+obj.doctor.departmentCode+"&doctorCode="+obj.doctor.doctorCode+"' class='more-time-chose' target='_blank'><span style='margin:0 1px;'>更多时段&nbsp;&gt;</span></a></li>";
+					}
+				}
 				listEle += "</ul></div>";
 				
 				listEle += "</div>";
