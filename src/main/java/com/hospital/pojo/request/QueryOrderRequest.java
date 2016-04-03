@@ -16,7 +16,7 @@ public class QueryOrderRequest extends ParentRequest {
 	public String cardNo;
 	// 卡类型
 	@XStreamAlias("CardType")
-	public String cardType;
+	public String cardType = "";
 	// 证件类型
 	@XStreamAlias("CredTypeCode")
 	public String credTypeCode;

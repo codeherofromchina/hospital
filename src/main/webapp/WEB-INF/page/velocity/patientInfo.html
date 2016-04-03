@@ -66,34 +66,43 @@
 </div>
 <div class="other_top_menu">
 	<div class="ksgh_c_right">
-		#if($!{order})
-			<h4>预约成功！</h4>
+		#if($!{success})
+			<h4>查询成功！</h4>
 			<table>
 				<tr>
-					<td>挂号序号</td><td>$!{order.seqCode}</td>
+					<td>病人ID</td><td>$!{patient.patientID}</td>
 				</tr>
 				<tr>
-					<td>预约单号</td><td>$!{order.orderCode}</td>
+					<td>病人姓名</td><td>$!{patient.patientName}</td>
 				</tr>
 				<tr>
-					<td>就诊时间段</td><td>$!{order.admitRange}</td>
+					<td>性别</td><td>$!{patient.sex}</td>
 				</tr>
 				<tr>
-					<td>挂号费</td><td>$!{order.regFee}</td>
+					<td>出生日期</td><td>$!{patient.DOB}</td>
 				</tr>
 				<tr>
-					<td>就诊地点</td><td>$!{order.admitAddress}</td>
+					<td>病案号</td><td>$!{patient.documentID}</td>
 				</tr>
 				<tr>
-					<td>预约单内容</td><td>$!{order.orderContent}</td>
+					<td>家庭住址</td><td>$!{patient.address}</td>
 				</tr>
 				<tr>
-					<td>交易流水号</td><td>$!{order.transactionId}</td>
+					<td>证件类型</td><td>$!{patient.IDTypeDesc}</td>
+				</tr>
+				<tr>
+					<td>证件号</td><td>$!{patient.IDNo}</td>
+				</tr>
+				<tr>
+					<td>是否医保</td><td>#if($!{patient.YBFlag} == 1) 是 #else 不是 #end </td>
+				</tr>
+				<tr>
+					<td>病人类型描述</td><td>$!{patient.patType}</td>
 				</tr>
 			</table>
 			
 		#else
-			<h4>预约失败！</h4>
+			<h4>查询失败！</h4>
 			<p><font color="red">$!{errMsg}</font></p>
 		#end
 	</div>
