@@ -150,14 +150,28 @@ function getDoctorList(tdObj,deptCode,timeSole,dateStr){
 					doctorHtml += "<dd>"+obj["departmentName"]+"</dd>";
 					doctorHtml += "<dd><h4>"+obj["doctorTitle"]+"</h4></dd>";
 					if(!ableNumFlag){
-						doctorHtml += "<p>剩余号："+obj["availableNum"]+"</p>";
+						doctorHtml += "<dd class='sd-dd'><span class='sd-title-span'>预约时段：</span>";
+						
+						$.each(obj["availableNum"].split(","),function(index,obj){
+							var numArr = obj.split(";");
+							if(numArr.length > 1 &&  parseInt(numArr[1]) > 0){
+								doctorHtml += "<span class='sd-time-span'>"+numArr[0]+"</span>";
+							}
+						})
+						
+						doctorHtml += "</dd>";
+					}else{
+						doctorHtml += "<dd class='sd-dd'><span class='sd-title-span'>预约时段：</span>";
+						
+						doctorHtml += "<span class='sd-time-span'>"+obj["startTime"]+"-"+obj["endTime"]+"</span>";
+						doctorHtml += "</dd>";
 					}
 					doctorHtml += "</dl>";
 					doctorHtml += "<p class='ksorder_dr1_p'>";
-					doctorHtml += "<span class='ksorder_dr1spa'>挂号费：<b>&yen;"+obj["regFee"]+"</b></span>";
-					doctorHtml += "<span class='ksorder_dr1spa'>诊查费：<b>&yen;"+obj["checkupFee"]+"</b></span>";
-					doctorHtml += "<span class='ksorder_dr1spa'>服务费：<b>&yen;"+obj["serviceFee"]+"</b></span>";
-					doctorHtml += "<span class='ksorder_dr1spa'>其他费用：<b>&yen;"+obj["otherFee"]+"</b></span>";
+					doctorHtml += "<span class='ksorder_dr1spa'>挂号费：<b>&yen;"+(obj["regFee"]==""?"0":obj["regFee"])+"</b></span>";
+					doctorHtml += "<span class='ksorder_dr1spa'>诊查费：<b>&yen;"+(obj["checkupFee"]==""?"0":obj["checkupFee"])+"</b></span>";
+					doctorHtml += "<span class='ksorder_dr1spa'>服务费：<b>&yen;"+(obj["serviceFee"]==""?"0":obj["serviceFee"])+"</b></span>";
+					doctorHtml += "<span class='ksorder_dr1spa'>其他费用：<b>&yen;"+(obj["otherFee"]==""?"0":obj["otherFee"])+"</b></span>";
 					if(ableNumFlag){
 						doctorHtml += "<span class='ksorder_dr1spa2'>剩余号：<b>"+aNum+"</b></span>";
 					}
@@ -249,7 +263,7 @@ function getDoctorList(tdObj,deptCode,timeSole,dateStr){
 	
 <div id="ksorder_time">
 	<div class="ksorder_time_title" id="ksorder_time_title_nothing" style="display:block;">
-    	<p class="ksorder_t_p"><font color="red">请选择科室以查看科室排班信息</font></p>
+    	<p class="ksorder_t_p" style="color: #ff7400; font-style: normal;  font-size: 12px; text-align:center; padding:30px 0;"><font >请选择科室以查看科室排班信息</font></p>
     </div>
 	<div class="ksorder_time_title" id="ksorder_time_title_have" style="display:none;">
     	<p class="ksorder_t_p" id="sechedu_table_title_info">科室排班表</p>

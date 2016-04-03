@@ -65,36 +65,37 @@
 	</div>
 </div>
 <div class="other_top_menu">
-	<div class="ksgh_c_right">
+	<div class="order-result-wrap">
 		#if($!{order})
-			<h4>预约成功！</h4>
-			<table>
-				<tr>
-					<td>挂号序号</td><td>$!{order.seqCode}</td>
-				</tr>
-				<tr>
-					<td>预约单号</td><td>$!{order.orderCode}</td>
-				</tr>
-				<tr>
-					<td>就诊时间段</td><td>$!{order.admitRange}</td>
-				</tr>
-				<tr>
-					<td>挂号费</td><td>$!{order.regFee}</td>
-				</tr>
-				<tr>
-					<td>就诊地点</td><td>$!{order.admitAddress}</td>
-				</tr>
-				<tr>
-					<td>预约单内容</td><td>$!{order.orderContent}</td>
-				</tr>
-				<tr>
-					<td>交易流水号</td><td>$!{order.transactionId}</td>
-				</tr>
-			</table>
-			
+			<h4 class="success-tip">预约成功！</h4>
+			<div class="table-wrap">
+				<table>
+					<tr>
+						<th>挂号序号：</th><td>$!{order.seqCode}</td>
+					</tr>
+					<tr>
+						<th>预约单号：</th><td>$!{order.orderCode}</td>
+					</tr>
+					<tr>
+						<th>就诊时间段：</th><td>$!{order.admitRange}</td>
+					</tr>
+					<tr>
+						<th>挂号费：</th><td>$!{order.regFee}</td>
+					</tr>
+					<tr>
+						<th>就诊地点：</th><td>$!{order.admitAddress}</td>
+					</tr>
+					<tr>
+						<th>预约单内容：</th><td>$!{order.orderContent}</td>
+					</tr>
+					<tr>
+						<th>交易流水号：</th><td>$!{order.transactionId}</td>
+					</tr>
+				</table>
+			</div>
 		#else
-			<h4>预约失败！</h4>
-			<p><font color="red">$!{errMsg}</font></p>
+			<h4 class="fail-tip">预约失败！</h4>
+			<p>$!{errMsg}</p>
 		#end
 	</div>
 </div>

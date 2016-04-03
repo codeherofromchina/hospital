@@ -15,23 +15,42 @@ $(function(){
 	#if($!{_params.deptCode})
 		// 查询当前科室的医生列表
 		queryDoctors('$!{_params.deptCode}',1,'$!{_params.doctorName}');
+		$("#deptList_A_$!{_params.deptCode}").addClass("active");
 	#else
 		// 查询所有科室的医生列表
 		queryDoctors('',1,'$!{_params.doctorName}');
+		$("#deptList_A_aaa_dfdf_all").addClass("active");
 	#end
 	
 	$("a[id^='deptList_A_']").click(function(){
+		
+		$("a[id^='deptList_A_']").removeClass("active");
+		$(this).addClass("active");
+		
 		var code = $(this).attr("code");
-		$("#currentDeptCode").val(code);
+		$("#currentDeptCode").val(code); 
 		$("#currentDoctorName").val("");
 		queryDoctors(code,1,'');
 	})
 	
+	
+	// 展开更多科室或者收起科室
+	$("#moreOrLess").click(function(){
+		var height = $(".yiyuanxz_dh1 dl dd").css("height");
+		var h = parseInt(height);
+		if(h < 100){
+			$(".yiyuanxz_dh1 dl dd").css("height","auto");
+			$(this).html("收起更多>");
+		}else{
+			$(".yiyuanxz_dh1 dl dd").css("height","60px");
+			$(this).html("展开更多>");
+		}
+	});
 })
 
 // 查询医生列表
 function queryDoctors(deptCode,pageNo,doctorName){
-	$("#doctor-info-list").html("<li><font color='blue'>正在查找，请稍后。。。</font></li>");
+	$("#doctor-info-list").html("<li class='tip'><font color='blue'>正在查找，请稍后。。。</font></li>");
 	
 	$.post("$!{webPath}/search/doctor/asyncDoctorDetailByDepartmentCode.htm",{deptCode:deptCode,doctorName:doctorName,pageNo:pageNo},function(data){
 		$("#doctor-info-list").html(""); // 清空医生内容区
@@ -45,7 +64,7 @@ function queryDoctors(deptCode,pageNo,doctorName){
 				listEle += "<li class='doctor-info-single'>";
 				listEle += "<div class='doctor-card clearfix'>";
 				listEle += "<div class='info-pic'><img src='http://hiphotos.baidu.com/dpp/pic/item/9f2f070828381f309e3425d5af014c086e06f099.jpg'></div>";
-				listEle += "<div class='infos'><div class='info-title' style='margin-top:-10px;'>";
+				listEle += "<div class='infos'><div class='info-title'>";
 				listEle += "<div>"+obj.doctor.doctorName+"</div>";
 				listEle += "<span class='doctor-medtitle'>"+obj.doctor.doctorTitle+"</span>";
 				listEle += "<p class='info-hospittal'>";
@@ -160,13 +179,14 @@ function setPage(totalPages,startPage){
 <div id="yiyuanxz_dh">
 	<div class="yiyuanxz_dh1">
 		<dl class="yiyuanxz_dh1_dl">
-			<dt><span>科室选择</span><a id="deptList_A_aaa_dfdf" href="javascript:void(0);" code="" class="yiyuanxz_dt_all">全部</a></dt>
+			<dt style="width:132px;border-right: 1px solid #dcdddd;"><span>科室选择</span><a id="deptList_A_aaa_dfdf_all" href="javascript:void(0);" code="" class="yiyuanxz_dt_all">全部</a></dt>
 			<dd>
 				#foreach($dept in $allDepts)
 					<li><a href="javascript:void(0);" id="deptList_A_$!{dept.departmentCode}" code="$!{dept.departmentCode}">$!{dept.departmentName}</a></li>
 				#end
 			</dd>
 		</dl>
+		<div class="more-con" style="padding-left:159px;"><a id="moreOrLess" href="javascript:void(0);">展开更多&gt;</a></div>
 	</div>
 </div>
 <!-- 隐藏域，当前科室，医生姓名 -->
