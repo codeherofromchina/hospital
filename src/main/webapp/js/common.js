@@ -1,4 +1,7 @@
+var webRootPath = "";
 $(function(){
+	webRootPath = $("#rootWebPath").val() + "/";
+	
 	autoComplete(1,"words"); // 科室医生表单栏自动提示
 	
 	$(document).click(function(){ 
@@ -49,16 +52,16 @@ $(function(){
 		
 		// 如果选择的是科室
 		if(wnhValue=="科室"){
-			$.post("search/department/asyncQueryDepartmentByName.htm",{deptName:wordsValue},function(data){
+			$.post(webRootPath + "search/department/asyncQueryDepartmentByName.htm",{deptName:wordsValue},function(data){
 				if(data.success){
-					  window.location.href="search/schedule/department.htm?deptCode="+data.result.departmentCode; 
+					  window.location.href=webRootPath + "search/schedule/department.htm?deptCode="+data.result.departmentCode; 
 				}else{
 					alertMsg(data.msg);
 				}
 			},"json");
 		}else if(wnhValue == "医生"){
 			// 如果选择的是医生
-			window.location.href="search/doctor/deptDoctorList.htm?doctorName="+wordsValue; 
+			window.location.href=webRootPath + "search/doctor/deptDoctorList.htm?doctorName="+wordsValue; 
 		}else{
 			// 如果其他
 			alertMsg("页面错误，请尝试刷新后重新操作");
@@ -189,7 +192,7 @@ function getAvailableNum(availabelNumStr){
 //自动提示 ,flagNum分别科室为1(全部科室信息)、2（全部医生信息）、3（科室医生信息）,id为要自动提示的控件
 function autoComplete(flagNum,id,deptVal){
 	if(flagNum==1){
-		$.post("search/department/asyncAllDepartments.htm",function(data){
+		$.post(webRootPath + "search/department/asyncAllDepartments.htm",function(data){
 			if(data.success){
 				var arr = new Array();
 				
@@ -201,7 +204,7 @@ function autoComplete(flagNum,id,deptVal){
 			}
 		},"json");
 	}else if(flagNum==2){
-		$.post("search/doctor/asyncAllDoctors.htm",function(data){
+		$.post(webRootPath + "search/doctor/asyncAllDoctors.htm",function(data){
 			if(data.success){
 				var arr = new Array();
 				
@@ -213,7 +216,7 @@ function autoComplete(flagNum,id,deptVal){
 			}
 		},"json");
 	}else if(flagNum==3){
-		$.post("search/doctor/asyncDoctorsByDeparmentName.htm",{deptName:deptVal},function(data){
+		$.post(webRootPath + "search/doctor/asyncDoctorsByDeparmentName.htm",{deptName:deptVal},function(data){
 			if(data.success){
 				var arr = new Array();
 				

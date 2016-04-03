@@ -38,7 +38,7 @@ public class PatientServiceImpl implements PatientService{
 	}
 	
 	/**
-	 * 通过就医卡号获取患者信息
+	 * 通过就诊卡号获取患者信息
 	 */
 	@Override
 	public Patient getPatInfoByCardNo(String cardNo) throws TradeErrorException {

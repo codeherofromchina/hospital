@@ -429,6 +429,18 @@ public class ServiceHelper {
 		System.out.println(order.toString());*/
 	}
 	
+	/**
+	 * 判断返回的xml是否是成功的交易结果
+	 * @param resultXml
+	 * @return
+	 * @throws TradeErrorException
+	 */
+	public static boolean isSuccessTradeResult(String resultXml) throws TradeErrorException {
+		JSONObject resultJsonObject = ObjectTransUtil.xmlStringToBean(resultXml);
+		isTradeSuccess(resultJsonObject);
+		
+		return true;
+	}
 
 	/*
 	 * 判断此次请求是否产生正确的结果

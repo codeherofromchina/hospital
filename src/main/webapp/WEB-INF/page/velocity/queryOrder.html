@@ -2,13 +2,45 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>XXXX医院挂号系统</title><!-- 全部科室 -->
+<title>XXXX医院挂号系统</title>
 <link type="text/css" rel="stylesheet" href="${webPath}/css/main.css"/>
 <link type="text/css" rel="stylesheet" href="${webPath}/css/common.css"/>
 <link type="text/css" rel="stylesheet" href="${webPath}/jquery-ui-1.11.4/jquery-ui.min.css"/>
 <script type="text/javascript" src="${webPath}/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="${webPath}/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="${webPath}/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="${webPath}/js/common.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#submit-order").click(function(){
+		// 检查表单信息
+		$("span[class='wrong']").hide();
+		
+		var cardNo = $("#id-card-num").val();
+		if(cardNo.trim()==""){
+			$("#id-card-num-wrong-info").show();
+			return;
+		}
+		
+		var startDate = $("#startDate-input").val();
+		if(startDate.trim()==""){
+			$("#startDate-input-wrong-info").show();
+			return;
+		}
+		
+		var endDate = $("#endDate-input").val();
+		if(endDate.trim()==""){
+			$("#endDate-input-wrong-info").show();
+			return;
+		}
+		
+		// 提交表单
+		$("#historyOrderForm").submit();
+	})
+	
+})
+
+</script>
 </head>
 <body>
 <input type="hidden" id="rootWebPath" value="$!{webPath}" />
@@ -56,7 +88,7 @@
 <div id="index_nav_border">
 	<div id="index_nav">
 		<ul class="index_nav_ul">
-			<li class="index_nav_lic"><a href="$!{webPath}/search/department/findAllDepartment.htm">全部科室</a></li>
+			<li><a href="$!{webPath}/search/department/findAllDepartment.htm">全部科室</a></li>
 			<li><a href="${webPath}/search/schedule/department.htm">科室排班</a></li>
 			<li><a href="$!{webPath}/search/doctor/deptDoctorList.htm">科室医生</a></li>
 		</ul>
@@ -65,18 +97,93 @@
 		</div>
 	</div>
 </div>
-<div class="other_top_menu">
-	<div class="ksgh_c_right">
-		<p class="ksgh_c_right_p"><a name="ks1"></a><span>所有科室</span></p>
-		<div class="ksgh_c_inner">
-			#foreach($dept in $allDepartments)
-				<a href="${webPath}/search/schedule/department.htm?deptCode=${dept.departmentCode}">$!{dept.departmentName}</a>
-			#end
-		</div>				
+
+<div class="wrap">
+	<div class="title">
+		<p>预约记录信息查询</p>
+	</div>
+	<div class="container">
+		<div class="write-list">
+			<p class="doctor-title">
+				请填写必要信息<span>(输入的信息，我们将为你保密)</span>
+				<span class="right-info"><span>*</span>为必填项</span>
+			</p>
+			<form method="post" id="historyOrderForm" action="$!{webPath}/search/order/historyOrder.htm">
+				<table>
+					<tr>
+						<td class="label">
+							证件类型
+						</td>
+						<td class="essential-mark">
+							<span class="star-red">*</span>
+						</td>
+						<td>
+							<div class="widget-input" id="widget-input-name">
+								<select name="cardFlag">
+									<option value="1">身份证</option>
+									<option value="0">就诊卡</option>
+								</select>
+								<span class="wrong" id="timeRange-wrong-info" style="display:none"><i class="instant-state fa fa-times-circle"></i><i id="name-wrong-info">请选择证件类型</i></span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							证件号
+						</td>
+						<td class="essential-mark">
+							<span class="star-red">*</span>
+						</td>
+						<td>
+							<div class="widget-input">
+								<input type="text" name="cardNum" id="id-card-num" style=""><span class="wrong" id="id-card-num-wrong-info" style="display:none"><i class="instant-state fa fa-times-circle"></i><i>请输入证件号</i></span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							开始日期
+						</td>
+						<td class="essential-mark">
+							<span class="star-red">*</span>
+						</td>
+						<td>
+							<div class="widget-input">
+								<input type="text" style="width:120px;" onClick="WdatePicker({readOnly:true,maxDate:'#F{$dp.$D(\'endDate-input\')}'})" class="Wdate" name="startDate" id="startDate-input" ><span class="wrong" id="startDate-input-wrong-info" style="display:none"><i class="instant-state fa fa-times-circle"></i><i>请选取开始日期</i></span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							结束日期
+						</td>
+						<td class="essential-mark">
+							<span class="star-red">*</span>
+						</td>
+						<td>
+							<div class="widget-input">
+								<input type="text" style="width:120px;" onClick="WdatePicker({readOnly:true,minDate:'#F{$dp.$D(\'startDate-input\')}'})" class="Wdate" name="endDate" id="endDate-input" style=""><span class="wrong" id="endDate-input-wrong-info" style="display:none"><i class="instant-state fa fa-times-circle"></i><i>请选取结束日期</i></span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						</td>
+						<td>
+						</td>
+						<td>
+							<div class="widget-input submit-button" style="margin-top:-5px;">
+								<span id="submit-order" class="submit-but action">提交查询</span>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
 	</div>
 </div>
-	
-	
+
+
 <div class="footer-box clear path">
 	<div class="footer-img-box">
 		<div class="footer-img-left">
@@ -123,6 +230,5 @@
 		</div>
 	</div>
 </div>
-
 </body>
 </html>

@@ -56,7 +56,7 @@
 <div id="index_nav_border">
 	<div id="index_nav">
 		<ul class="index_nav_ul">
-			<li class="index_nav_lic"><a href="$!{webPath}/search/department/findAllDepartment.htm">全部科室</a></li>
+			<li><a href="$!{webPath}/search/department/findAllDepartment.htm">全部科室</a></li>
 			<li><a href="${webPath}/search/schedule/department.htm">科室排班</a></li>
 			<li><a href="$!{webPath}/search/doctor/deptDoctorList.htm">科室医生</a></li>
 		</ul>
@@ -66,16 +66,16 @@
 	</div>
 </div>
 <div class="other_top_menu">
-	<div class="ksgh_c_right">
-		<p class="ksgh_c_right_p"><a name="ks1"></a><span>所有科室</span></p>
-		<div class="ksgh_c_inner">
-			#foreach($dept in $allDepartments)
-				<a href="${webPath}/search/schedule/department.htm?deptCode=${dept.departmentCode}">$!{dept.departmentName}</a>
-			#end
-		</div>				
+	<div class="order-result-wrap">
+		#if($!{success})
+			<h4 class="success-tip">取消预约成功！</h4>
+			<p><a class="ksbz_kscx" style="background: #4ab4ed none repeat scroll 0 0;margin-left:0px;" href="$!{webPath}/">返回首页</a></p>
+		#else
+			<h4 class="fail-tip">取消预约失败！</h4>
+			<p>$!{msg}</p>
+		#end
 	</div>
 </div>
-	
 	
 <div class="footer-box clear path">
 	<div class="footer-img-box">

@@ -29,7 +29,7 @@ public class PatientAction {
 	 * 
 	 * @param request
 	 * @param cardNo
-	 *            患者就医卡的卡号
+	 *            患者就诊卡的卡号
 	 * @return
 	 */
 	@RequestMapping("searchPatInfo")
@@ -43,12 +43,12 @@ public class PatientAction {
 	 * 
 	 * @param request
 	 * @param cardNo
-	 *            患者就医卡的卡号
+	 *            患者就诊卡的卡号
 	 * @return
 	 */
 	@RequestMapping("patientInfo")
 	public ModelAndView patientInfo(HttpServletRequest request, String cardNo) {
-		ModelAndView mv = new ModelAndView_velocity("patientInfo");
+		ModelAndView mv = new ModelAndView_velocity(request,"patientInfo");
 		
 		if(StringUtils.isNotEmpty(cardNo)){
 			try {
@@ -62,7 +62,7 @@ public class PatientAction {
 			}
 		}else{
 			mv.addObject("success", false);
-			mv.addObject("msg", "就医卡号不能为空！");
+			mv.addObject("msg", "就诊卡号不能为空！");
 		}
 		logger.info("cardNo:" + cardNo);
 

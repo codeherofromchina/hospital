@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.hospital.exception.TradeErrorException;
 import com.hospital.pojo.Order;
 import com.hospital.pojo.request.BookServiceRequest;
+import com.hospital.pojo.request.CancelOrderRequest;
 import com.hospital.pojo.request.OPAppArriveRequest;
 import com.hospital.pojo.request.QueryOrderRequest;
 import com.hospital.pojo.stub.RegistrationServiceSoap;
@@ -54,6 +55,20 @@ public class OrderServiceImpl implements OrderService{
 	}
 	
 	/**
+	 * 取消已经预约挂的单号
+	 * @param orderCode 已经预约的单号
+	 */
+	@Override
+	public boolean cancelOrder(String orderCode) throws TradeErrorException {
+		CancelOrderRequest request = new CancelOrderRequest();
+		request.setOrderCode(orderCode);
+		
+		return cancelOrder(request);
+		
+	}
+	
+	
+	/**
 	 * 根据身份证号查询病人预约挂号信息
 	 * @param idCard 身份证号
 	 * @param startDate 记录开始时间
@@ -73,13 +88,6 @@ public class OrderServiceImpl implements OrderService{
 		request.setQueryDateFlag("ORG");
 		
 		return queryOrder(request);
-		
-		
-		
-		
-		
-		
-		
 	}
 	
 	/**
@@ -159,5 +167,22 @@ public class OrderServiceImpl implements OrderService{
 			logger.info("request msg is ["+requestXML+"] and response msg is ["+orderXml+"]");
 		}
 		return ServiceHelper.parseXmlToOrder(orderXml);
+	}
+	
+	
+	/**
+	 * 取消预约订单请求
+	 * @param request
+	 * @return
+	 * @throws TradeErrorException
+	 */
+	private boolean cancelOrder(CancelOrderRequest request) throws TradeErrorException{
+		String requestXML = ObjectTransUtil.beanToXMLString(request);
+		String resultXml = registrationService.opRegistration(requestXML);
+		if(logger.isInfoEnabled()){
+			logger.info("request msg is ["+requestXML+"] and response msg is ["+resultXml+"]");
+		}
+		
+		return ServiceHelper.isSuccessTradeResult(resultXml);
 	}
 }

@@ -56,7 +56,7 @@
 <div id="index_nav_border">
 	<div id="index_nav">
 		<ul class="index_nav_ul">
-			<li class="index_nav_lic"><a href="$!{webPath}/search/department/findAllDepartment.htm">全部科室</a></li>
+			<li><a href="$!{webPath}/search/department/findAllDepartment.htm">全部科室</a></li>
 			<li><a href="${webPath}/search/schedule/department.htm">科室排班</a></li>
 			<li><a href="$!{webPath}/search/doctor/deptDoctorList.htm">科室医生</a></li>
 		</ul>
@@ -66,16 +66,41 @@
 	</div>
 </div>
 <div class="other_top_menu">
-	<div class="ksgh_c_right">
-		<p class="ksgh_c_right_p"><a name="ks1"></a><span>所有科室</span></p>
-		<div class="ksgh_c_inner">
-			#foreach($dept in $allDepartments)
-				<a href="${webPath}/search/schedule/department.htm?deptCode=${dept.departmentCode}">$!{dept.departmentName}</a>
-			#end
-		</div>				
+	<div class="order-result-wrap order-result-td-wrap">
+		#if($!{success})
+			<h4 class="success-tip">查询成功！</h4>
+			<div class="table-wrap" style="width:auto">
+				#foreach($order in $historyOrder)
+				<div class="table-inner">
+					<table>
+						<tr>
+							<th width="11%">预约单号:</th><td width="17%">$!{order.orderCode}</td><th width="11%">申请日期:</th><td width="17%">$!{order.orderApptDate}</td>
+							<th width="11%">状态:</th><td width="17%">#if($!{order.orderStatus}=="normal") 正常 #elseif($!{order.orderStatus}=="cancel") 已退号 #end</td>
+							<td rowspan="4" width="16%">#if($!{order.allowRefundFlag}=="Y") <a href="$!{webPath}/search/order/cancelOrder.htm?orderCode=$!{order.orderCode}" class="submit-but">取消预约</a> #end</td>
+						</tr>
+						<tr>
+							<th>预约人:</th><td>$!{order.orderApptUser}</td>
+							<th>就诊日期:</th><td>$!{order.admitDate}</td><th>就诊科室:</th><td>$!{order.department}</td>
+						</tr>
+						<tr>
+							<th>医生:</th><td>$!{order.doctor}</td><th>医生职称:</th><td>$!{order.doctorTitle}</td>
+							<th>总费用:</th><td>&yen;$!{order.regFee}</td>
+						</tr>
+						<tr>
+							<th>就诊序号:</th><td>$!{order.seqCode}</td>
+							<th>就诊时段:</th><td>$!{order.sessionName}</td>
+							<th>支付状态:</th><td>#if($!{order.payFlag}=="TB") 未支付 #elseif($!{order.payFlag}=="P") 已支付 #elseif($!{order.payFlag}=="R") 已退费 #end</td>
+						</tr>
+					</table>
+				</div>
+				#end
+			</div>
+		#else
+			<h4 class="fail-tip">查询失败！</h4>
+			<p>$!{errMsg}</p>
+		#end
 	</div>
 </div>
-	
 	
 <div class="footer-box clear path">
 	<div class="footer-img-box">

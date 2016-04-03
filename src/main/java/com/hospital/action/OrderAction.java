@@ -44,6 +44,34 @@ public class OrderAction {
 		return mv;
 	}
 	
+
+	/**
+	 * 取消预约
+	 * @param request
+	 * @param orderCode	预约单号
+	 * @return
+	 */
+	@RequestMapping("/cancelOrder")
+	public ModelAndView cancelOrder(HttpServletRequest request,String orderCode){
+		ModelAndView mv = new ModelAndView_velocity(request, "cancelOrder");
+		
+		if(StringUtils.isNotEmpty(orderCode)){
+			try {
+				boolean cancelOrderFlag = orderService.cancelOrder(orderCode);
+				mv.addObject("success", cancelOrderFlag);
+			} catch (TradeErrorException e) {
+				logger.error("取消订单失败[errMsg:"+e.getMessage()+"]");
+				mv.addObject("success", false);
+				mv.addObject("msg", e.getMessage());
+			}
+		}else{
+			mv.addObject("success", false);
+			mv.addObject("msg", "预约单号获取失败！");
+		}
+		
+		return mv;
+	}
+	
 	/**
 	 * 查询患者预约记录页面
 	 * @param request
@@ -68,12 +96,12 @@ public class OrderAction {
 				modelMap.put("historyOrder", orderList);
 			}else{
 				modelMap.put("success", false);
-				modelMap.put("msg", "查询失败，参数不完整或日期格式错误。");
+				modelMap.put("errMsg", "查询失败，参数不完整或日期格式错误。");
 			}
 		}catch(Exception ex){
 			logger.error("查询预约记录错误。[errMsg:"+ex.getMessage()+"]");
 			modelMap.put("success", false);
-			modelMap.put("msg", ex.getMessage());
+			modelMap.put("errMsg", ex.getMessage());
 		}
 		
 		mv.addAllObjects(modelMap);
@@ -144,7 +172,7 @@ public class OrderAction {
 	 * 预约挂号
 	 * @param request
 	 * @param scheduleItemCode 门诊排班项代码
-	 * @param cardNo	就医卡号
+	 * @param cardNo	就诊卡号
 	 * @param admitRange	就诊时间段
 	 * @return
 	 */

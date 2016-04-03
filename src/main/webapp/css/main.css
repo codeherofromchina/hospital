@@ -738,8 +738,8 @@ _background: url(../images/ksgh_jt_1.png) 171px center no-repeat;}
 .container .write-list table tr td .widget-wrong .instant-state-wrong{margin-bottom:3px;vertical-align:middle;}
 .container .write-list table tr td .widget-input{clear:both;overflow:hidden;margin:7px 0;}
 .container .write-list table tr td .widget-input .captcha-but{display:inline-block;padding:7px 16px;background-color:#ccc;color:#fff;vertical-align:bottom;text-align:center;cursor:pointer;}
-.container .write-list table tr td .widget-input .submit-but{display:inline-block;margin-top:10px;padding:0 69px;height:37px;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;background-color:#fecd09;color:#fff;font-size:17px;line-height:37px;cursor:pointer;}
-.container .write-list table tr td .widget-input .submit-but:hover{background:#fec009;}
+.container .write-list table tr td .widget-input .submit-but,.order-result-td-wrap  .submit-but{display:inline-block;margin-top:10px;padding:0 69px;height:37px;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;background-color:#fecd09;color:#fff;font-size:17px;line-height:37px;cursor:pointer;}
+.container .write-list table tr td .widget-input .submit-but:hover,.order-result-td-wrap  .submit-but action:hover{background:#fec009;}
 .container .write-list table tr td .widget-input #id-card,.container .write-list table tr td .widget-input #patient-name,.container .write-list table tr td .widget-input #phone-number{width:215px;}
 .container .write-list table tr td .widget-input #contact-address,.container .write-list table tr td .widget-input #disease-name,.container .write-list table tr td .widget-input #insurance-card,.container .write-list table tr td .widget-input #patient-id-card,.container .write-list table tr td .widget-input #patient-id-card-password{width:351px;}
 .container .write-list table tr td .widget-input input[type=text],.container .write-list table tr td .widget-input input[type=password],.container .write-list table tr td .widget-input select{padding-left:7px;width:283px;height:33px;border:1px solid #d7d7d7;color:#333;font-size:14px;}
@@ -813,6 +813,21 @@ _background: url(../images/ksgh_jt_1.png) 171px center no-repeat;}
 .order-result-wrap table{ width:100%}
 .order-result-wrap table td,.order-result-wrap table th{ padding:6px 10px;text-align:left; vertical-align:top }
 .order-result-wrap table th{ width:80px; text-align:right; font-weight:normal; padding-right:0}
+.order-result-td-wrap .table-wrap .table-inner{ border-bottom:1px solid #f0f0f0; padding:8px 3px; margin-bottom:10px;}
+.order-result-td-wrap .table-inner tr:last-child td,.order-result-td-wrap .table-inner tr:last-child th{ padding-bottom:15px}
+.order-result-td-wrap  .submit-but{ font-size:12px; height:28px; line-height:28px; padding:0 15px; margin:40px 0 0 30px; border-radius:2px; background:#f5f5f5; color:#333; border:1px solid #f0f0f0;}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

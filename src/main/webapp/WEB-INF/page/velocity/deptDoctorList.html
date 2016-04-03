@@ -63,7 +63,7 @@ function queryDoctors(deptCode,pageNo,doctorName){
 			$.each(data.doctors, function(index, obj) {
 				listEle += "<li class='doctor-info-single'>";
 				listEle += "<div class='doctor-card clearfix'>";
-				listEle += "<div class='info-pic'><img src='http://hiphotos.baidu.com/dpp/pic/item/9f2f070828381f309e3425d5af014c086e06f099.jpg'></div>";
+				listEle += "<div class='info-pic'><img src='$!{webPath}/images/doctor-m.png'></div>";
 				listEle += "<div class='infos'><div class='info-title'>";
 				listEle += "<div>"+obj.doctor.doctorName+"</div>";
 				listEle += "<span class='doctor-medtitle'>"+obj.doctor.doctorTitle+"</span>";
@@ -119,10 +119,10 @@ function setPage(totalPages,startPage){
         }
     });
 }
-
 </script>
 </head>
 <body>
+<input type="hidden" id="rootWebPath" value="$!{webPath}" />
 <div class="ui-widget" id="top_alert_div" style="display:none;">
 	<div class="ui-state-highlight ui-corner-all" style="border-radius:0;padding:0.7em;">
 		<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
@@ -133,7 +133,7 @@ function setPage(totalPages,startPage){
 	<div class="dbnav_context">
 		<p class="dbnav_context_left"><img src="http://img.bjguahao.gov.cn/ws/1.0/hs/images/dbnav.png"><span>010-114/116114电话预约</span></p>
 		<div class="top_help">
-			<a href="javascript:void(0);">患者信息查询</a>
+			<a href="${webPath}/search/patient/searchPatInfo.htm">患者信息查询</a>
 			<a href="javascript:void(0);">帮助中心</a>
 		</div>
 	</div>
@@ -141,7 +141,7 @@ function setPage(totalPages,startPage){
 <div id="top">
 	<div class="top_left">
 		<a href="$!{webPath}/index.htm"><img src="http://img.bjguahao.gov.cn/ws/1.0/hs/images/logo.jpg">
-			<h2 class="top_h2">北京市预约挂号统一平台</h2>
+			<h2 class="top_h2">XXX医院预约挂号服务平台</h2>
 		</a>
 	</div>
 	<div class="top_search">
@@ -172,7 +172,7 @@ function setPage(totalPages,startPage){
 			<li class="index_nav_lic"><a href="$!{webPath}/search/doctor/deptDoctorList.htm">科室医生</a></li>
 		</ul>
 		<div class="index_nav_right">
-			<a target="_blank" href="#">预约记录通道</a>
+			<a target="_blank" href="$!{webPath}/search/order/queryOrder.htm">预约记录通道</a>
 		</div>
 	</div>
 </div>
@@ -209,7 +209,7 @@ function setPage(totalPages,startPage){
 			<ul>
 				<li><span class="phone">4000-191-191</span></li>
 				<li><span class="mail">邮箱：baiduyisheng@baidu.com</span></li>
-				<li><a href="#" target="_blank">联系客服</a></li>
+				<li><a href="javascript:void(0);">联系客服</a></li>
 			</ul>
 		</div>
 		<ul class="footer-img-right">
@@ -238,11 +238,11 @@ function setPage(totalPages,startPage){
 	<div class="footer-container-box">
 		<div class="footer-container">
 			<div style="overflow:hidden">
-				<dd class="footer-container-left">©2016 Baidu <a href="#" target="_blank">使用百度前必读</a> 京ICP证030173号</dd>
+				<dd class="footer-container-left">©2016 Baidu <a href="javascript:void(0);">使用百度前必读</a> 京ICP证030173号</dd>
 				<dd class="footer-container-right">
-				<a href="#" target="_blank"><span>帮助 |</span></a>
-				<a href="#" target="_blank"><span> 用户协议 |</span></a>
-				<a href="#" target="_blank"><span> 意见反馈<span></span></span></a>
+				<a href="javascript:void(0);"><span>帮助 |</span></a>
+				<a href="javascript:void(0);"><span> 用户协议 |</span></a>
+				<a href="javascript:void(0);"><span> 意见反馈<span></span></span></a>
 				</dd>
 			</div>
 		</div>

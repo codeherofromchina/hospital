@@ -37,8 +37,13 @@ public interface OrderService {
 	 */
 	public List<Order> queryOrderByIdCard(String idCard,Date startDate,Date endDate) throws TradeErrorException;
 	
-	
-	
+	/**
+	 * 取消已经预约的信息
+	 * @param orderCode	预约单号
+	 * @return
+	 * @throws TradeErrorException
+	 */
+	public boolean cancelOrder(String orderCode) throws TradeErrorException;
 	
 
 	/**
