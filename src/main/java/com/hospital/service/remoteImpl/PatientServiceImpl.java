@@ -37,5 +37,15 @@ public class PatientServiceImpl implements PatientService{
 		return ServiceHelper.parseXmlToPatient(patInfoXml);
 	}
 	
+	/**
+	 * 通过就医卡号获取患者信息
+	 */
+	@Override
+	public Patient getPatInfoByCardNo(String cardNo) throws TradeErrorException {
+		GetPatInfoRequest request = new GetPatInfoRequest();
+		request.setPatientCard(cardNo);
+		
+		return getPatInfo(request);
+	}
 	
 }
