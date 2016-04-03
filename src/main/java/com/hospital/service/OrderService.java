@@ -1,5 +1,6 @@
 package com.hospital.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.hospital.exception.TradeErrorException;
@@ -15,14 +16,30 @@ import com.hospital.pojo.request.QueryOrderRequest;
  */
 public interface OrderService {
 
+	
 	/**
-	 * 查询病人预约挂号信息
-	 * 
-	 * @param request
+	 * 根据就诊卡号查询病人预约挂号信息
+	 * @param cardNo 就诊卡号
+	 * @param startDate 记录开始时间
+	 * @param endDate	记录结束时间
 	 * @return
 	 * @throws TradeErrorException
 	 */
-	public List<Order> queryOrder(QueryOrderRequest request) throws TradeErrorException;
+	public List<Order> queryOrderByCardNo(String cardNo,Date startDate,Date endDate) throws TradeErrorException;
+	
+	/**
+	 * 根据身份证号查询病人预约挂号信息
+	 * @param idCard 身份证号
+	 * @param startDate 记录开始时间
+	 * @param endDate	记录结束时间
+	 * @return
+	 * @throws TradeErrorException
+	 */
+	public List<Order> queryOrderByIdCard(String idCard,Date startDate,Date endDate) throws TradeErrorException;
+	
+	
+	
+	
 
 	/**
 	 * 病人取号后，HIS向预约机构发送已取号的消息。（当预约机构在自己的系统中存储排班信息和预约记录时使用）

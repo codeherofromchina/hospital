@@ -8,13 +8,10 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import net.sf.json.JSONObject;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hospital.exception.TradeErrorException;
@@ -35,6 +32,55 @@ public class OrderAction {
 	private OrderService orderService;
 	@Resource(name="defaultScheduleService")
 	private ScheduleService scheduleService;
+	
+	/**
+	 * 查询患者预约记录页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/queryOrder")
+	public ModelAndView queryOrderPage(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView_velocity(request, "queryOrder");
+		return mv;
+	}
+	
+	/**
+	 * 查询患者预约记录页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/historyOrder")
+	public ModelAndView historyOrder(HttpServletRequest request,String cardNum,String cardFlag,String startDate,String endDate){
+		ModelAndView mv = new ModelAndView_velocity(request, "historyOrder");
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		try{
+			Date sDate = DateUtil.parseShortStrToDate(startDate);
+			Date eDate = DateUtil.parseShortStrToDate(endDate);
+			if(StringUtils.isNotEmpty(cardNum) && sDate!=null && eDate != null){
+				List<Order> orderList = null;
+				if("1".equals(cardFlag)){ // 身份证查询
+					orderList = orderService.queryOrderByIdCard(cardNum, sDate, eDate);
+				}else{ // 就诊卡号查询
+					orderList = orderService.queryOrderByCardNo(cardNum, sDate, eDate);
+				}
+				
+				modelMap.put("success", true);
+				modelMap.put("historyOrder", orderList);
+			}else{
+				modelMap.put("success", false);
+				modelMap.put("msg", "查询失败，参数不完整或日期格式错误。");
+			}
+		}catch(Exception ex){
+			logger.error("查询预约记录错误。[errMsg:"+ex.getMessage()+"]");
+			modelMap.put("success", false);
+			modelMap.put("msg", ex.getMessage());
+		}
+		
+		mv.addAllObjects(modelMap);
+		return mv;
+	}
+	
+	
 	
 	/**
 	 * 预约医生页面 
@@ -95,7 +141,6 @@ public class OrderAction {
 	
 	
 	/**
-	 * TODO   到这里了，需要请求预约挂号并返回结果到页面 IN HERE
 	 * 预约挂号
 	 * @param request
 	 * @param scheduleItemCode 门诊排班项代码
@@ -163,45 +208,5 @@ public class OrderAction {
 		return mv;
 	}
 	
-	
-	/**
-	 * TODO
-	 * 查询病人预约挂号信息
-	 * @return
-	 */
-	@RequestMapping("pat_orders")
-	public ModelAndView patientOrders(){
-		ModelAndView mv = new ModelAndView_velocity( "patientOrders");
-
-		return mv;
-	}
-	
-	/**
-	 * TODO
-	 * 病人取号确认
-	 * @return
-	 */
-	@RequestMapping("confirm_order")
-	public ModelAndView OPAppArrive(){
-		ModelAndView mv = new ModelAndView_velocity("confirmOrder");
-
-		return mv;
-	}
-	
-	/**
-	 * TODO
-	 * 取消预约的订单
-	 * @return
-	 */
-	@RequestMapping("cancel_order")
-	@ResponseBody
-	public String cancelOrder(){
-		Map<String, Object> _result = new HashMap<String, Object>();
-		_result.put("success", true);
-		_result.put("msg", "OK");
-		
-		
-		return JSONObject.fromObject(_result).toString();
-	}
 	
 }

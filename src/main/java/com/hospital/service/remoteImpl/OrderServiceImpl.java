@@ -1,5 +1,6 @@
 package com.hospital.service.remoteImpl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import com.hospital.pojo.request.OPAppArriveRequest;
 import com.hospital.pojo.request.QueryOrderRequest;
 import com.hospital.pojo.stub.RegistrationServiceSoap;
 import com.hospital.service.OrderService;
+import com.hospital.tools.DateUtil;
 import com.hospital.tools.ObjectTransUtil;
 import com.hospital.tools.ServiceHelper;
 
@@ -28,6 +30,57 @@ public class OrderServiceImpl implements OrderService{
 	private final Logger logger = Logger.getLogger(getClass());
 	@Resource(name = "registrationServiceSoap")
 	private RegistrationServiceSoap registrationService;
+	
+	
+	/**
+	 * 根据就诊卡号查询病人预约挂号信息
+	 * @param cardNo 就诊卡号
+	 * @param startDate 记录开始时间
+	 * @param endDate	记录结束时间
+	 * @return
+	 * @throws TradeErrorException
+	 */
+	@Override
+	public List<Order> queryOrderByCardNo(String cardNo, Date startDate, Date endDate) throws TradeErrorException {
+		QueryOrderRequest request = new QueryOrderRequest();
+		
+		request.setCardNo(cardNo);
+		request.setCardType("02");
+		request.setExtUserID("zz01");
+		request.setOrderApptStartDate(DateUtil.formatToShortString(startDate));
+		request.setOrderApptEndDate(DateUtil.formatToShortString(endDate));
+		
+		return queryOrder(request);
+	}
+	
+	/**
+	 * 根据身份证号查询病人预约挂号信息
+	 * @param idCard 身份证号
+	 * @param startDate 记录开始时间
+	 * @param endDate	记录结束时间
+	 * @return
+	 * @throws TradeErrorException
+	 */
+	@Override
+	public List<Order> queryOrderByIdCard(String idCard, Date startDate, Date endDate) throws TradeErrorException {
+		
+		QueryOrderRequest request = new QueryOrderRequest();
+		
+		request.setIdCardNo(idCard);
+		request.setExtUserID("zz01");
+		request.setOrderApptStartDate(DateUtil.formatToShortString(startDate));
+		request.setOrderApptEndDate(DateUtil.formatToShortString(endDate));
+		request.setQueryDateFlag("ORG");
+		
+		return queryOrder(request);
+		
+		
+		
+		
+		
+		
+		
+	}
 	
 	/**
 	 * 查询患者预约记录

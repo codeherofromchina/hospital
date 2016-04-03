@@ -23,35 +23,8 @@ $(function(){
 		// 提交表单
 		$("#bookServiceForm").submit();
 	})
-	
-	// 无卡预约提交
-	$("#submit-order-nocard").click(function(){
-		$("span[class='wrong']").hide();
-		// 检查表单信息  身份证号、患者姓名、手机号码
-		var idCard = $("#id-card-nocard").val();
-		if(idCard.trim()==""){
-			$("#id-card-wrong-info-nocard").show();
-			return;
-		}
-		
-		var mobileNo = $("#id-mobileNo").val();
-		if(mobileNo.trim()==""){
-			$("#id-mobileNo-wrong-info").show();
-			return;
-		}
-		
-		var patientName = $("#patientName").val();
-		if(patientName.trim()==""){
-			$("#patientName-wrong-info").show();
-			return;
-		}
-		
-		
-		// 提交表单
-		$("#bookServiceForm_noCard").submit();
-	})
-	
 })
+
 
 </script>
 </head>
@@ -111,91 +84,14 @@ $(function(){
 </div>
 
 <div class="wrap">
-	<div class="title">
-		#if(!$!{success})
-			<p>未查找到预约信息，请重新操作</p>
-		#end
-	</div>
-	#if($!{success})
 	<div class="container">
-		<p class="doctor-title">要预约的医生</p>
-		<div class="doctor-info">
-			<div class="info-pic">
-				<img src="http://hiphotos.baidu.com/dpp/pic/item/f703738da97739121256d072ff198618367ae2b5.jpg">
-			</div>
-			<div class="infos">
-				<div class="info-title">
-					<div>
-						$!{schedule.doctorName}
-					</div>
-					<div class="info-doc">
-						<span class="doctor-medtitle">$!{schedule.doctorTitle}</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><i></i><span>$!{schedule.doctorSessType}</span>
-					</div>
-				</div>
-				<p class="info-hospittal">
-					<span>$!{schedule.departmentName}</span>
-				</p>
-				<p class="info-pos" title="费用">
-					<span>挂号费：</span><font>&yen;#if($!{schedule.regFee}=="") 0 #else $!{schedule.regFee} #end</font>
-					<span>诊查费：</span><font>&yen;#if($!{schedule.checkupFee}=="") 0 #else $!{schedule.checkupFee} #end</font>
-					<br/>
-					<span>服务费：</span><font>&yen;#if($!{schedule.serviceFee}=="") 0 #else $!{schedule.serviceFee} #end</font>
-					<span>其他费用：</span><font>&yen;#if($!{schedule.otherFee}=="") 0 #else $!{schedule.otherFee} #end</font>
-				</p>
-			</div>
-			<div class="time-and-pay">
-				<span class="info-time"><span>就诊时间：</span>
-				$!{schedule.serviceDate}
-				#if($!{schedule.weekDay}==1)
-					(星期一)
-				#elseif($!{schedule.weekDay}==2)
-					(星期二)
-				#elseif($!{schedule.weekDay}==3)
-					(星期三)
-				#elseif($!{schedule.weekDay}==4)
-					(星期四)
-				#elseif($!{schedule.weekDay}==5)
-					(星期五)
-				#elseif($!{schedule.weekDay}==6)
-					(星期六)
-				#else
-					(星期日)
-				#end
-				$!{schedule.sessionName}</span><br>
-				<span class="pay-info"></span>
-			</div>
-		</div>
 		<div class="write-list">
 			<p class="doctor-title">
-				请填写预约信息<span>(输入的预约信息，我们将为你保密)</span>
+				请填写查询信息<span>(输入的查询信息，我们将为你保密)</span>
 				<span class="right-info"><span>*</span>为必填项</span>
 			</p>
-			<form method="post" id="bookServiceForm" action="$!{webPath}/search/order/bookService.htm">
-				<input type="hidden" name="scheduleItemCode" value="$!{schedule.scheduleItemCode}"/>
+			<form method="post" id="bookServiceForm" action="$!{webPath}/search/patient/patientInfo.htm">
 				<table>
-					#set ($columnArray = $schedule.availableNum.split(",")) 
-					#if($columnArray.size() > 1)
-						<tr>
-							<td class="label">
-								就诊时间段
-							</td>
-							<td class="essential-mark">
-								<span class="star-red">*</span>
-							</td>
-							<td>
-								<div class="widget-input" id="widget-input-name">
-									<select name="admitRange" id="admitRange-select" style="">
-										#foreach($word in $!{columnArray})  
-											#set ($w = $word.split(";")) 
-											<option>$w.get(0)</option>
-							            #end 
-									</select>
-									
-									<span class="wrong" id="timeRange-wrong-info" style="display:none"><i class="instant-state fa fa-times-circle"></i><i id="name-wrong-info">请选中就诊时间段</i></span>
-								</div>
-							</td>
-						</tr>
-					#end
 					<tr id="id-card-tr" style="">
 						<td class="label">
 							就医卡号
@@ -216,109 +112,7 @@ $(function(){
 						</td>
 						<td>
 							<div class="widget-input submit-button" style="margin-top:-5px;">
-								<span id="submit-order" class="submit-but action">提交预约单</span>
-							</div>
-						</td>
-					</tr>
-				</table>
-			</form>
-		</div>
-		<!-- 无卡预约 -->
-		<div class="write-list">
-			<p class="doctor-title">
-				请填写预约信息<span>(输入的预约信息，我们将为你保密)</span>
-				<span class="right-info"><span>*</span>为必填项</span>
-			</p>
-			<form method="post" id="bookServiceForm_noCard" action="$!{webPath}/search/order/bookServiceNoCard.htm">
-				<input type="hidden" name="scheduleItemCode" value="$!{schedule.scheduleItemCode}"/>
-				<table>
-					#set ($columnArray = $schedule.availableNum.split(",")) 
-					#if($columnArray.size() > 1)
-						<tr>
-							<td class="label">
-								就诊时间段
-							</td>
-							<td class="essential-mark">
-								<span class="star-red">*</span>
-							</td>
-							<td>
-								<div class="widget-input" id="widget-input-name">
-									<select name="admitRange" id="admitRange-select-nocard" style="">
-										#foreach($word in $!{columnArray})  
-											#set ($w = $word.split(";")) 
-											<option>$w.get(0)</option>
-							            #end 
-									</select>
-									
-									<span class="wrong" id="timeRange-wrong-info-nocard" style="display:none"><i class="instant-state fa fa-times-circle"></i><i id="name-wrong-info">请选择就诊时间段</i></span>
-								</div>
-							</td>
-						</tr>
-					#end
-					<tr id="id-card-tr-nocard" style="">
-						<td class="label">
-							身份证号
-						</td>
-						<td class="essential-mark">
-							<span class="star-red">*</span>
-						</td>
-						<td>
-							<div class="widget-input">
-								<input type="text" name="iDCardNo" id="id-card-nocard" style=""><span class="wrong" id="id-card-wrong-info-nocard" style="display:none"><i class="instant-state fa fa-times-circle"></i><i>请输入就医卡号</i></span>
-							</div>
-						</td>
-					</tr>
-					<tr id="patientName-tr" style="">
-						<td class="label">
-							姓名
-						</td>
-						<td class="essential-mark">
-							<span class="star-red">*</span>
-						</td>
-						<td>
-							<div class="widget-input">
-								<input type="text" name="patientName" id="patientName" style=""><span class="wrong" id="patientName-wrong-info" style="display:none"><i class="instant-state fa fa-times-circle"></i><i>请输入患者姓名</i></span>
-							</div>
-						</td>
-					</tr>
-					<tr id="id-card-tr" style="">
-						<td class="label">
-							性别
-						</td>
-						<td class="essential-mark">
-							<span class="star-red">*</span>
-						</td>
-						<td>
-							<div class="widget-input">
-								<select name="gender">
-									<option value="1">男</option>
-									<option value="2">女</option>
-								</select>
-								<span class="wrong" id="id-gender-wrong-info" style="display:none"><i class="instant-state fa fa-times-circle"></i><i>请选择性别</i></span>
-							</div>
-						</td>
-					</tr>
-					<tr id="mobileNo-tr" style="">
-						<td class="label">
-							手机
-						</td>
-						<td class="essential-mark">
-							<span class="star-red">*</span>
-						</td>
-						<td>
-							<div class="widget-input">
-								<input type="text" name="mobileNo" id="id-mobileNo" style=""><span class="wrong" id="id-mobileNo-wrong-info" style="display:none"><i class="instant-state fa fa-times-circle"></i><i>请输入手机号码</i></span>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-						</td>
-						<td>
-						</td>
-						<td>
-							<div class="widget-input submit-button" style="margin-top:-5px;">
-								<span id="submit-order-nocard" class="submit-but action">提交预约单</span>
+								<span id="submit-order" class="submit-but action">查询患者信息</span>
 							</div>
 						</td>
 					</tr>
@@ -326,7 +120,6 @@ $(function(){
 			</form>
 		</div>
 	</div>
-	#end
 </div>
 
 
