@@ -67,9 +67,9 @@ function getSchedule(deptCode){
 					$.each(result[key],function(index,obj){
 						if(obj["sessionName"]=="上午"){
 							sw += getAvailableNum(obj["availableNum"]);
-						}else if(obj["sessionName"]=="下午"){
+						}else if(obj["sessionName"]=="下午"　|| obj["sessionName"]=="中午"){
 							xw += getAvailableNum(obj["availableNum"]);
-						}else{
+						}else if(obj["sessionName"]=="晚上"){
 							ws += getAvailableNum(obj["availableNum"]);
 						}			
 					})
@@ -131,14 +131,14 @@ function getDoctorList(tdObj,deptCode,timeSole,dateStr){
 			var ts ;
 			if(timeSole=="上午"){
 				ts = "S";
-			}else if(timeSole=="下午"){
+			}else if(timeSole=="下午" ||　timeSole=="中午"){
 				ts = "X";
 			}else{
 				ts = "Y";
 			}
 			
 			$.each(result[dateStr],function(index,obj){
-				if(obj["sessionName"] == timeSole){
+				if(obj["sessionName"] == timeSole || ("下午"==timeSole &&　obj["sessionName"]=="中午")){
 					var aNum = Number(obj["availableNum"]);
 					var ableNumFlag = true;
 					if(isNaN(aNum)){
@@ -196,7 +196,7 @@ function getDoctorList(tdObj,deptCode,timeSole,dateStr){
 <div class="ui-widget" id="top_alert_div" style="display:none;">
 	<div class="ui-state-highlight ui-corner-all" style="border-radius:0;padding:0.7em;">
 		<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
-		<strong>警告!</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span id="top_alert_div_msg">Sample ui-state-highlight style.</span></p>
+		<strong>警告!</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span id="top_alert_div_msg">警告信息</span></p>
 	</div>
 </div>
 <div id="dbnav">

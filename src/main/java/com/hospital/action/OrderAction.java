@@ -116,7 +116,7 @@ public class OrderAction {
 	 * @param deptCode	科室编号
 	 * @param docCode	医生编号
 	 * @param date	预约日期
-	 * @param timeSole 预约时间（S：上午  X：下午    Y：夜晚）,用单独字母表示
+	 * @param timeSole 预约时间（S：上午  X：下午、中午    Y：夜晚）,用单独字母表示
 	 * @return
 	 */
 	@RequestMapping("/bookOrder")
@@ -139,7 +139,7 @@ public class OrderAction {
 									}
 									break;
 								case 'X':
-									if("下午".equals(sc.getSessionName())){
+									if("下午".equals(sc.getSessionName()) || "中午".equals(sc.getSessionName())){
 										breakFlag = true;
 									}
 									break;
