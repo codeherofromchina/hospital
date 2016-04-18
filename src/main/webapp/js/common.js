@@ -235,7 +235,7 @@ function completeArr(arr,id){
 	try{
 		$("#"+id).autocomplete( "destroy" );
 	}catch(e){
-		console.log(e.message);
+		//console.log(e.message);
 	}
 	$("#"+id).autocomplete({
 		source: arr,
@@ -274,7 +274,7 @@ function alertMsg(msg){
 		// 清除定时器，预防上次操作还没有过3秒后又操作引起bug
 		clearTimeout(commonJsTimeOutVari);
 	}catch(ex){
-		console.log(ex.message);
+		//console.log(ex.message);
 	}
 	
 	// 定时3秒后隐藏警告信息

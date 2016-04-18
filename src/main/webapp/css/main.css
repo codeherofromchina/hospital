@@ -241,7 +241,7 @@ border-radius:3px;
 }
 
 .footer-box .footer-img-box .footer-img-left {
-	width: 459px;
+	width: 350px;
 	float: left;
 	height: 104px;
 	border-right: 1px solid #b7b7b7
@@ -291,9 +291,10 @@ border-radius:3px;
 
 .footer-box .footer-img-box .footer-img-right {
 	float: left;
-	padding-left: 20px;
+	padding-left: 60px;
 	color: #666;
-	font-size: 12px
+	font-size: 12px;
+	width:580px;
 }
 
 .footer-box .footer-img-box .footer-img-right img {
@@ -304,12 +305,12 @@ border-radius:3px;
 .footer-box .footer-img-box .footer-img-right p {
 	line-height: 12px;
 	text-align: left;
-	margin-left: 12px
+	
 }
 
 .footer-box .footer-img-box .footer-img-right .image-hospital {
 	display: inline-block;
-	width: 311px;
+	width: 580px;
 	float: left
 }
 
@@ -319,11 +320,12 @@ border-radius:3px;
 
 .footer-box .footer-img-box .footer-img-right .image-hospital li {
 	float: left;
-	height: 36px;
-	margin-left: 12px;
+	width:100px; text-align:left;
+	margin-right: 12px;
 	margin-top: 10px
 }
-
+.footer-img-right .image-hospital li a{ color:#6da7fb}
+.footer-img-right .image-hospital li a:hover{ text-decoration:underline}
 .footer-box .footer-img-box .footer-img-right .image-mec {
 	float: left;
 	width: 164px;
