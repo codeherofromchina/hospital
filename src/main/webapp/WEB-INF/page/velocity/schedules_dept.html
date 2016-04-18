@@ -5,7 +5,7 @@
 <meta name="renderer" content="webkit"> 
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 <title>河北省中医院预约挂号网站</title>
-<link type="text/css" rel="stylesheet" href="${webPath}/css/main.css?v=3"/>
+<link type="text/css" rel="stylesheet" href="${webPath}/css/main.css?v=4"/>
 <link type="text/css" rel="stylesheet" href="${webPath}/css/common.css"/>
 <link type="text/css" rel="stylesheet" href="${webPath}/jquery-ui-1.11.4/jquery-ui.min.css"/>
 <script type="text/javascript" src="${webPath}/js/jquery-1.9.1.js"></script>
@@ -51,26 +51,22 @@ function getSchedule(deptCode){
 		if(data.success){
 			var result = data.result;
 			
-			var str = "<div class='ksorder_cen_l_l'><a href='javascript:void(0);' class='ksorder_btn_left'></a><ul><li>上午</li><li>下午</li><li>晚上</li></ul></div>";
+			var str = "<div class='ksorder_cen_l_l'><a href='javascript:void(0);' class='ksorder_btn_left'></a><ul><li>上午</li><li>下午</li></ul></div>";
 			str += "<div class='ksorder_cen_l_table'><div class='ksorder_cen_l_t_c' style='width: 659px;'><table border='0' cellpadding='0' cellspacing='0'>"
 			var head = "<tr>"; // table标题
 			var t1 = "<tr>";// 上午内容
 			var t2 = "<tr>"; // 下午内容
-			var t3 = "<tr>"; // 晚上内容
 			for(var i =0;i<7;++i){
 				var comDate = addDate(now,i);
 				var key = getDateFormat(comDate);
 				var sw = 0;
 				var xw = 0;
-				var ws = 0;
 				if(result[key]){
 					$.each(result[key],function(index,obj){
 						if(obj["sessionName"]=="上午"){
 							sw += getAvailableNum(obj["availableNum"]);
-						}else if(obj["sessionName"]=="下午"　|| obj["sessionName"]=="中午"){
+						}else if(obj["sessionName"]=="下午"){
 							xw += getAvailableNum(obj["availableNum"]);
-						}else if(obj["sessionName"]=="晚上"){
-							ws += getAvailableNum(obj["availableNum"]);
 						}			
 					})
 				}
@@ -86,22 +82,16 @@ function getSchedule(deptCode){
 				}else{
 					t2 += "<td>&nbsp;无</td>";
 				}
-				if(ws > 0){
-					t3 += "<td class='ksorder_kyy ksorder_bgcol' onclick='getDoctorList(this,\""+deptCode+"\",\"晚上\",\""+key+"\")'>预约<br>剩余:有</td>";
-				}else{
-					t3 += "<td>&nbsp;无</td>";
-				}
 			}
 			
-			head += "<tr>"; 
-			t1 += "<tr>";
-			t2 += "<tr>"; 
-			t3 += "<tr>"; 
+			head += "</tr>"; 
+			t1 += "</tr>";
+			t2 += "</tr>"; 
+			
 			
 			str += head;
 			str += t1;
 			str += t2;
-			str += t3;
 			
 			str += "</table></div></div>";
 			str += "<div class='ksorder_cen_l_r'><a href='javascript:void(0);' class='ksorder_btn_right'></a></div>";
@@ -131,14 +121,12 @@ function getDoctorList(tdObj,deptCode,timeSole,dateStr){
 			var ts ;
 			if(timeSole=="上午"){
 				ts = "S";
-			}else if(timeSole=="下午" ||　timeSole=="中午"){
+			}else if(timeSole=="下午"){
 				ts = "X";
-			}else{
-				ts = "Y";
 			}
 			
 			$.each(result[dateStr],function(index,obj){
-				if(obj["sessionName"] == timeSole || ("下午"==timeSole &&　obj["sessionName"]=="中午")){
+				if(obj["sessionName"] == timeSole ){
 					var aNum = Number(obj["availableNum"]);
 					var ableNumFlag = true;
 					if(isNaN(aNum)){
@@ -172,8 +160,6 @@ function getDoctorList(tdObj,deptCode,timeSole,dateStr){
 					doctorHtml += "<p class='ksorder_dr1_p'>";
 					doctorHtml += "<span class='ksorder_dr1spa'>挂号费：<b>&yen;"+(obj["regFee"]==""?"0":obj["regFee"])+"</b></span>";
 					doctorHtml += "<span class='ksorder_dr1spa'>诊查费：<b>&yen;"+(obj["checkupFee"]==""?"0":obj["checkupFee"])+"</b></span>";
-					doctorHtml += "<span class='ksorder_dr1spa'>服务费：<b>&yen;"+(obj["serviceFee"]==""?"0":obj["serviceFee"])+"</b></span>";
-					doctorHtml += "<span class='ksorder_dr1spa'>其他费用：<b>&yen;"+(obj["otherFee"]==""?"0":obj["otherFee"])+"</b></span>";
 					if(ableNumFlag){
 						doctorHtml += "<span class='ksorder_dr1spa2'>剩余号：<b>"+aNum+"</b></span>";
 					}

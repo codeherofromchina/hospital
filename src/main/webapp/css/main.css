@@ -454,15 +454,15 @@ border-radius:3px;
 .ksorder_time_ckb{display: inline-block;width: 110px;height: 25px;float: right;color: #fff;font-size: 14px;line-height: 25px;background:url(../images/yuepaib_small.jpg) 108px center #4ab4ed no-repeat;text-align: center;border-radius: 4px; -moz-border-radius:4px;-webkit-border-radius:4px;    padding-right: 9px;}
 .ksorder_time_center{width:1000px;overflow:hidden;margin:0 auto;}
 .ksorder_cen_l{width:728px;float:left;    border-left: 1px solid #e5e5e5;}
-.ksorder_cen_l_l{width:34px;float:left;height:325px;background:#f2f8ff;font-size:14px;    border-bottom: 1px solid #e5e5e5;}
+.ksorder_cen_l_l{width:34px;float:left;height:229px;background:#f2f8ff;font-size:14px;    border-bottom: 1px solid #e5e5e5;}
 .ksorder_cen_l_l ul,.ksorder_cen_l_l a{float:left;}
 
 .ksorder_btn_left{display:inline-block;width:34px;height:47px;background:url(../images/left.jpg) no-repeat;}
 .ksorder_cen_l_l .ksorder_btn_left.dasabled{background:url(../images/left_1.jpg) no-repeat;}
 .ksorder_cen_l_l ul li{width:34px;height:90px;line-height:90px;text-align:center;    }
-.ksorder_cen_l_table{float:left;width:658px;height:325px;overflow: hidden;position:relative;border-right: 1px solid #dcdddd;border-bottom: 1px solid #e5e5e5;}
-.ksorder_cen_l_t_c{width:999em;height:326px;position:absolute;left:0;}
-.ksorder_cen_l_table table{width:659px;height:326px;background:#e5e5e5;font-size:14px;float:left; }
+.ksorder_cen_l_table{float:left;width:658px;height:230px;overflow: hidden;position:relative;border-right: 1px solid #dcdddd;border-bottom: 1px solid #e5e5e5;}
+.ksorder_cen_l_t_c{width:999em;height:230px;position:absolute;left:0;}
+.ksorder_cen_l_table table{width:659px;height:230px;background:#e5e5e5;font-size:14px;float:left; }
 .ksorder_cen_l_table table th{background:#f8fafc;height:44px;width:94px;color:#868686;    font-weight: normal;border:1px solid #dcdddd;border-bottom: none;border-right: none;font-size:12px;}
 .ksorder_cen_l_table table tr{border-bottom:none;}
 .ksorder_cen_l_table table td{background:#fff;width:94px;height:90px;text-align:center;border:1px solid #e5e5e5;    padding: 0 6px;border-bottom: none;border-right: none;font-size:12px;}
@@ -471,7 +471,7 @@ border-radius:3px;
 .ksorder_cen_l_table table .ksorder_bgcol{background:#4ab4ed;color:#fff;}
 .ksorder_cen_l_table table .ksorder_ym{background:#fafafa;cursor:pointer;color:#868686;}
 .ksorder_cen_l_table table .ksorder_ym1{background:#e3e4e5;}
-.ksorder_cen_l_r{width:34px;float:left;height:325px;background:#f2f8ff; border-bottom: 1px solid #e5e5e5;}
+.ksorder_cen_l_r{width:34px;float:left;height:229px;background:#f2f8ff; border-bottom: 1px solid #e5e5e5;}
 .ksorder_btn_right{display:inline-block;width:34px;height:47px;background:url(../images/right.jpg) no-repeat;}
 .ksorder_cen_l_r .ksorder_btn_right.dasabled{background:url(../images/right_1.jpg) no-repeat;}
 /*右边预约规则*/
@@ -488,7 +488,7 @@ border-radius:3px;
 .ksorder_cen_r_bottom dl{width:234px;overflow:hidden;margin-bottom:12px;}
 .ksorder_cen_r_bottom dl dt,.ksorder_cen_r_bottom dl dd{float:left;}
 .ksorder_cen_r_bottom dl dd{width:200px;}*/
-.ksorder_cen_r_top{width:263px;height:305px;font-size:14px;overflow:auto;padding: 9px 0;}
+.ksorder_cen_r_top{width:263px;height:211px;font-size:14px;overflow:auto;padding: 9px 0;}
 .ksorder_cen_r_top dl{width:234px;overflow:hidden;margin-bottom:12px;    margin-top: 8px;}
 .ksorder_cen_r_top dl dt,.ksorder_cen_r_top dl dd{float:left;}
 .ksorder_cen_r_top dl dt{font-size:15px;}

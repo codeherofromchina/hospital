@@ -22,7 +22,7 @@ $(function(){
 		if(deptVal==""){
 			autoComplete(2,"doctor_fast_search");
 		}else{
-			autoComplete(3,"doctor_fast_search",deptVal);
+			//autoComplete(3,"doctor_fast_search",deptVal);
 		}
 	})
 	
@@ -47,10 +47,15 @@ $(function(){
 	// 快速查询患者信息按钮事件
 	$("#search_patInfo_btn").click(function(){
 		var cardNo = $("#search_patInfo_value").val();
+		var regIdCard = /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i;
 		if(cardNo.trim() == ""){
-			alertMsg("就诊卡号不能为空。");
+			alertMsg("身份证号不能为空。");
+		}else if(!regIdCard.test(cardNo.trim())){
+			alertMsg("身份证号格式错误。");
 		}else{
-			window.location.href="${webPath}/search/patient/patientInfo.htm?cardNo="+cardNo;
+			var endDate = getDateFormat(new Date());
+			var startDate = getDateFormat(addDate(endDate,-7));
+			window.location.href="$!{webPath}/search/order/historyOrder.htm?cardFlag=1&cardNum="+cardNo+"&startDate="+startDate+"&endDate="+endDate;
 		}
 	})
 	
@@ -169,9 +174,9 @@ $(function(){
 			<a class="ksbz_kscx" id="fast_search_btn" href="javascript:void(0)">快速查询</a>
 		</div>
 		<div class="ksyuyue ksbz_help">
-			<h2><span>患者信息快速查询</span></h2>
+			<h2><span>预约记录快速查询</span></h2>
 			<p>
-				<span class="ksbz_h_a">就诊卡号：</span>
+				<span class="ksbz_h_a">身份证号：</span>
 				<input type="text" id="search_patInfo_value" class="ksyuyue_p_select" />
 			</p>
 			<a class="ksbz_kscx" id="search_patInfo_btn" href="javascript:void(0);">快速查询</a>

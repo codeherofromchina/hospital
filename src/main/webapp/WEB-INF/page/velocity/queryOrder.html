@@ -18,8 +18,17 @@ $(function(){
 		// 检查表单信息
 		$("span[class='wrong']").hide();
 		
+		var cardFlag = $("#cardFlag_select").val();
+		
+		
+		var regIdCard = /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i;
 		var cardNo = $("#id-card-num").val();
-		if(cardNo.trim()==""){
+		if(cardNo.trim()=="" ){
+			$("#id-card-num-wrong-info").show();
+			return;
+		}
+		
+		if(cardFlag=='1' && !regIdCard.test(cardNo)){
 			$("#id-card-num-wrong-info").show();
 			return;
 		}
@@ -121,7 +130,7 @@ $(function(){
 						</td>
 						<td>
 							<div class="widget-input" id="widget-input-name">
-								<select name="cardFlag">
+								<select name="cardFlag" id="cardFlag_select">
 									<option value="1">身份证</option>
 									<option value="0">就诊卡</option>
 								</select>
@@ -138,7 +147,7 @@ $(function(){
 						</td>
 						<td>
 							<div class="widget-input">
-								<input type="text" name="cardNum" id="id-card-num" style=""><span class="wrong" id="id-card-num-wrong-info" style="display:none"><i class="instant-state fa fa-times-circle"></i><i>请输入证件号</i></span>
+								<input type="text" name="cardNum" id="id-card-num" style=""><span class="wrong" id="id-card-num-wrong-info" style="display:none"><i class="instant-state fa fa-times-circle"></i><i>请输入正确证件号</i></span>
 							</div>
 						</td>
 					</tr>

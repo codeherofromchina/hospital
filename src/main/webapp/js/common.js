@@ -244,6 +244,13 @@ function completeArr(arr,id){
 	$("#"+id).focus(function(){
 		$("#"+id).autocomplete( "search", $("#"+id).val());
 	})
+	if("department_fast_search"==id){
+		$("#"+id).autocomplete({
+			select: function( event, ui ) {
+				autoComplete(3,"doctor_fast_search",ui.item.value)
+			}
+		});
+	}
 }
 
 

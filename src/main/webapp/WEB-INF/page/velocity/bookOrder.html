@@ -31,22 +31,27 @@ $(function(){
 		$("span[class='wrong']").hide();
 		// 检查表单信息  身份证号、患者姓名、手机号码
 		var idCard = $("#id-card-nocard").val();
-		if(idCard.trim()==""){
+		var regIdCard = /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i;
+		if(idCard.trim()=="" || !regIdCard.test(idCard)){
 			$("#id-card-wrong-info-nocard").show();
 			return;
 		}
 		
-		var mobileNo = $("#id-mobileNo").val();
-		if(mobileNo.trim()==""){
-			$("#id-mobileNo-wrong-info").show();
-			return;
-		}
 		
 		var patientName = $("#patientName").val();
 		if(patientName.trim()==""){
 			$("#patientName-wrong-info").show();
 			return;
 		}
+		
+		var mobileNo = $("#id-mobileNo").val();
+		 var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+		if(mobileNo.trim()=="" || !reg.test(mobileNo)){
+			$("#id-mobileNo-wrong-info").show();
+			return;
+		}
+		
+		
 		
 		
 		// 提交表单
@@ -143,9 +148,6 @@ $(function(){
 				<p class="info-pos" title="费用">
 					<span>挂号费：</span><font>&yen;#if($!{schedule.regFee}=="") 0 #else $!{schedule.regFee} #end</font>
 					<span>诊查费：</span><font>&yen;#if($!{schedule.checkupFee}=="") 0 #else $!{schedule.checkupFee} #end</font>
-					<br/>
-					<span>服务费：</span><font>&yen;#if($!{schedule.serviceFee}=="") 0 #else $!{schedule.serviceFee} #end</font>
-					<span>其他费用：</span><font>&yen;#if($!{schedule.otherFee}=="") 0 #else $!{schedule.otherFee} #end</font>
 				</p>
 			</div>
 			<div class="time-and-pay">
@@ -171,6 +173,7 @@ $(function(){
 			</div>
 		</div>
 	</div>
+	<!-- 
 	<div class="title">
 		<p>有卡预约</p>
 	</div>
@@ -236,6 +239,7 @@ $(function(){
 			</form>
 		</div>
 	</div>
+	-->
 	<div class="title">
 		<p>无卡预约</p>
 	</div>
@@ -281,7 +285,7 @@ $(function(){
 						</td>
 						<td>
 							<div class="widget-input">
-								<input type="text" name="iDCardNo" id="id-card-nocard" style=""><span class="wrong" id="id-card-wrong-info-nocard" style="display:none"><i class="instant-state fa fa-times-circle"></i><i>请输入就诊卡号</i></span>
+								<input type="text" name="iDCardNo" id="id-card-nocard" style=""><span class="wrong" id="id-card-wrong-info-nocard" style="display:none"><i class="instant-state fa fa-times-circle"></i><i>请输入正确的身份证号</i></span>
 							</div>
 						</td>
 					</tr>
@@ -324,7 +328,7 @@ $(function(){
 						</td>
 						<td>
 							<div class="widget-input">
-								<input type="text" name="mobileNo" id="id-mobileNo" style=""><span class="wrong" id="id-mobileNo-wrong-info" style="display:none"><i class="instant-state fa fa-times-circle"></i><i>请输入手机号码</i></span>
+								<input type="text" name="mobileNo" id="id-mobileNo" style=""><span class="wrong" id="id-mobileNo-wrong-info" style="display:none"><i class="instant-state fa fa-times-circle"></i><i>请输入正确的手机号码</i></span>
 							</div>
 						</td>
 					</tr>
