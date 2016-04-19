@@ -96,7 +96,9 @@ public class Schedule {
 		return sessionName;
 	}
 	public void setSessionName(String sessionName) {
-		this.sessionName = sessionName;
+		if(sessionName!=null){
+			this.sessionName = sessionName.trim();
+		}
 	}
 	public String getStartTime() {
 		return startTime;

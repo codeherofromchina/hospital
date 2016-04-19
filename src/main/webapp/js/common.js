@@ -61,7 +61,7 @@ $(function(){
 			},"json");
 		}else if(wnhValue == "医生"){
 			// 如果选择的是医生
-			window.location.href=webRootPath + "search/doctor/deptDoctorList.htm?doctorName="+wordsValue; 
+			window.location.href=webRootPath + "search/doctor/deptDoctorList.htm?doctorName="+encodeURI(wordsValue); 
 		}else{
 			// 如果其他
 			alertMsg("页面错误，请尝试刷新后重新操作");

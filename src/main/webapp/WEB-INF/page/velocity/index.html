@@ -34,13 +34,13 @@ $(function(){
 		if(deptName!=""){
 			$.post("$!{webPath}/search/department/asyncQueryDepartmentByName.htm",{deptName:deptName},function(data){
 				if(data.success){
-					  window.location.href="$!{webPath}/search/doctor/deptDoctorList.htm?deptCode="+data.result.departmentCode +"&doctorName=" + doctorName; 
+					  window.location.href="$!{webPath}/search/doctor/deptDoctorList.htm?deptCode="+data.result.departmentCode +"&doctorName=" + encodeURI(doctorName); 
 				}else{
 					alertMsg(data.msg);
 				}
 			},"json");
 		}else{
-			window.location.href="$!{webPath}/search/doctor/deptDoctorList.htm?doctorName="+doctorName; 
+			window.location.href="$!{webPath}/search/doctor/deptDoctorList.htm?doctorName="+encodeURI(doctorName); 
 		}
 	})
 	
