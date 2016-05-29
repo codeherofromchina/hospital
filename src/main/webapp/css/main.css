@@ -819,10 +819,10 @@ _background: url(../images/ksgh_jt_1.png) 171px center no-repeat;}
 .order-result-td-wrap .table-inner tr:last-child td,.order-result-td-wrap .table-inner tr:last-child th{ padding-bottom:15px}
 .order-result-td-wrap  .submit-but{ font-size:12px; height:28px; line-height:28px; padding:0 15px; margin:40px 0 0 30px; border-radius:2px; background:#f5f5f5; color:#333; border:1px solid #f0f0f0;}
 
+.book-notice-wrap{ text-align:left; font-size:15px; line-height:28px; font-family:"Hiragino Sans GB","Microsoft YaHei","微软雅黑","宋体",Arial,Verdana,sans-serif; text-indent:20px; padding-bottom:50px}
+.book-notice-wrap .main-title{ text-align:center; font-weight:bold; text-indent:2em; font-size:20px; margin:25px 0 10px;}
 
-
-
-
+.book-notice-wrap .title{ margin:10px 0; font-weight:bold}
 
 
 

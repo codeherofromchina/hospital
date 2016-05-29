@@ -25,6 +25,7 @@ import com.hospital.service.DepartmentService;
 import com.hospital.service.DoctorService;
 import com.hospital.service.ScheduleService;
 import com.hospital.tools.DateUtil;
+import com.hospital.tools.WebUtil;
 /**
  * @author wxd
  *
@@ -69,10 +70,12 @@ public class ScheduleAction {
 	 * @param request
 	 * @param deptCode	医生所在科室编码
 	 * @param doctorCode 医生编码
+	 * @param week 在之前跳过几个7天，可以跳过最大3个7天最多，默认0标识不加7天，
+	 * 							例如要查询今天过后第8-14天的排班，则此参数是1，第15-21天的排班则是2，第22-28天的排班就是3
 	 * @return
 	 */
 	@RequestMapping("/moreDoctorSchedules")
-	public ModelAndView moreDoctorSchedules(HttpServletRequest request,String deptCode,String doctorCode){
+	public ModelAndView moreDoctorSchedules(HttpServletRequest request,String deptCode,String doctorCode,String week){
 		ModelAndView mv = new ModelAndView_velocity(request,"moreDoctorSchedules");
 		
 		try{
@@ -87,11 +90,25 @@ public class ScheduleAction {
 					if(doctor!=null){
 						mv.addObject("doctor", doctor);
 						
+						int iSkipSevenNumDay = 0;
+						try{
+							if(StringUtils.isNotEmpty(week)){
+								iSkipSevenNumDay = Integer.parseInt(week);
+								if(iSkipSevenNumDay<0){
+									iSkipSevenNumDay = 0;
+								}else if(iSkipSevenNumDay > 3){
+									iSkipSevenNumDay = 3;
+								}
+							}
+						}catch(NumberFormatException ex){}
+						
+						
 						// 重点，获取医生排班信息
 						Map<String, Object> scheduleData = new HashMap<String, Object>();
 						Date today = new Date();
-						for(int i=0;i<7;++i){
-							Date searchDay = DateUtil.plusSomeDay(today, i);
+						// 不包含今天的挂号信息，所以从1开始，查询未来7天的挂号信息
+						for(int i=1;i<8;++i){
+							Date searchDay = DateUtil.plusSomeDay(today, iSkipSevenNumDay*7 +  i);
 							
 							List<Schedule> schedules = scheduleService.queryScheduleByDay(department.getDepartmentCode(), doctor.getDoctorCode(), searchDay);
 							
@@ -105,6 +122,9 @@ public class ScheduleAction {
 		}catch(Exception ex){
 			logger.error(ex.getMessage());
 		}
+		
+		// 参数回写
+		WebUtil.writeBackParams(request);
 		
 		return mv;
 	}

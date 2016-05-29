@@ -4,115 +4,20 @@
 <meta charset="utf-8">
 <meta name="renderer" content="webkit"> 
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
-<title>河北省中医院预约挂号网站</title>
+<title>河北省中医院预约挂号网站</title><!-- 全部科室 -->
 <link type="text/css" rel="stylesheet" href="${webPath}/css/main.css?v=3"/>
 <link type="text/css" rel="stylesheet" href="${webPath}/css/common.css"/>
 <link type="text/css" rel="stylesheet" href="${webPath}/jquery-ui-1.11.4/jquery-ui.min.css"/>
 <script type="text/javascript" src="${webPath}/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="${webPath}/jquery-ui-1.11.4/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${webPath}/js/common.js"></script>
-<script type="text/javascript">
-var data = $!{scheduleData};
-
-$(function(){
-	// 组织医生排班信息表格
-	typeSettingSchedule(data);
-	
-})
-
-function typeSettingSchedule(scheduleData){
-	var table = "";
-	var now = getDateFormat(new Date());
-	table += "<table border='0' cellpadding='0' cellspacing='0'>"
-	var head = "<tr>"; // table标题
-	var t1 = "<tr>";// 上午内容
-	var t2 = "<tr>"; // 下午内容
-	var t3 = "<tr>"; // 晚上内容
-	for(var i =1;i<8;++i){
-		var comDate;
-		#if($!{_params.week})
-			comDate = addDate(now,$!{_params.week} * 7 + i);
-		#else
-			comDate = addDate(now,i);
-		#end
-		var key = getDateFormat(comDate);
-		var sw = 0;
-		var xw = 0;
-		var ws = 0;
-		if(scheduleData[key]){
-			$.each(scheduleData[key],function(index,obj){
-				if(obj["sessionName"]=="上午"){
-					sw += getAvailableNum(obj["availableNum"]);
-				}else if(obj["sessionName"]=="下午"){
-					xw += getAvailableNum(obj["availableNum"]);
-				}else{
-					ws += getAvailableNum(obj["availableNum"]);
-				}
-			})
-		}
-		
-		head += "<th scope='col'>"+getWeek(comDate)+"<p>"+key+"</p></th>";
-		if(sw > 0){
-			t1 += "<td class='ksorder_kyy ksorder_bgcol' onclick='orderHospital(\"$!{department.departmentCode}\",\"$!{doctor.doctorCode}\",\""+key+"\",\"S\")'>预约<br>剩余:有</td>";
-		}else{
-			t1 += "<td>&nbsp;无</td>";
-		}
-		if(xw > 0){
-			t2 += "<td class='ksorder_kyy ksorder_bgcol' onclick='orderHospital(\"$!{department.departmentCode}\",\"$!{doctor.doctorCode}\",\""+key+"\",\"X\")'>预约<br>剩余:有</td>";
-		}else{
-			t2 += "<td>&nbsp;无</td>";
-		}
-		if(ws > 0){
-			t3 += "<td class='ksorder_kyy ksorder_bgcol' onclick='orderHospital(\"$!{department.departmentCode}\",\"$!{doctor.doctorCode}\",\""+key+"\",\"Y\")'>预约<br>剩余:有</td>";
-		}else{
-			t3 += "<td>&nbsp;无</td>";
-		}
-	}
-	
-	head += "<tr>"; 
-	t1 += "<tr>";
-	t2 += "<tr>"; 
-	t3 += "<tr>"; 
-	
-	table += head;
-	table += t1;
-	table += t2;
-	table += t3;
-	
-	table += "</table>";
-	
-	$("#tableContainer").html(table);
-}
-
-// 预约
-function orderHospital(deptCode,doctorCode,date,timeSole){
-	window.location.href="${webPath}/search/order/bookOrder.htm?deptCode="+deptCode+"&docCode="+doctorCode+"&date="+date+"&timeSole=" + timeSole; 
-}
-</script>
 </head>
 <body>
-#set($Integer=0)
-#if($!{_params.week})
-	#set($preWeek = $Integer.parseInt($_params.week) - 1)
-	#set($nextWeek = $Integer.parseInt($_params.week) + 1)
-#else
-	#set($preWeek = -1)
-	#set($nextWeek = 1)
-#end
 <input type="hidden" id="rootWebPath" value="$!{webPath}" />
 <div class="ui-widget" id="top_alert_div" style="display:none;">
 	<div class="ui-state-highlight ui-corner-all" style="border-radius:0;padding:0.7em;">
 		<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
 		<strong>警告!</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span id="top_alert_div_msg">Sample ui-state-highlight style.</span></p>
-	</div>
-</div>
-<div id="dbnav">
-	<div class="dbnav_context">
-		<p class="dbnav_context_left"><img src="http://img.bjguahao.gov.cn/ws/1.0/hs/images/dbnav.png"><span>010-114/116114电话预约</span></p>
-		<div class="top_help">
-			<a href="${webPath}/search/patient/searchPatInfo.htm">患者信息查询</a>
-			<a href="javascript:void(0);">帮助中心</a>
-		</div>
 	</div>
 </div>
 <div id="top">
@@ -146,87 +51,41 @@ function orderHospital(deptCode,doctorCode,date,timeSole){
 		<ul class="index_nav_ul">
 			<li><a href="$!{webPath}/search/department/findAllDepartment.htm">全部科室</a></li>
 			<li><a href="${webPath}/search/schedule/department.htm">科室排班</a></li>
-			<li class="index_nav_lic"><a href="$!{webPath}/search/doctor/deptDoctorList.htm">科室医生</a></li>
+			<li><a href="$!{webPath}/search/doctor/deptDoctorList.htm">科室医生</a></li>
 		</ul>
 		<div class="index_nav_right">
 			<a target="_blank" href="$!{webPath}/search/order/queryOrder.htm">预约记录通道</a>
 		</div>
 	</div>
 </div>
-
-<!-- 这里是医生内容区 -->
-<div class="wrap" style="padding-top:20px;">
-	<div class="container" style=" padding:0">
-		<div class="doctor-info">
-			<div class="info-pic">
-				<img src="$!{webPath}/images/doctor-m.png">
-			</div>
-			<div class="infos">
-				<div class="info-title">
-					<div>
-						$!{doctor.doctorName}
-					</div>
-					<div class="info-doc">
-						<span class="doctor-medtitle">$!{doctor.doctorTitle}</span> &nbsp;&nbsp;&nbsp;&nbsp;<i></i><span>$!{doctor.doctorSessType}</span>
-					</div>
-				</div>
-				<p class="info-hospittal">
-					<span>河北省中医院</span>$!{department.departmentName}
-				</p>
-			</div>
-		</div>
+<div class="other_top_menu">
+	<div class="book-notice-wrap">
+	<div>
+		<p class="main-title">预约挂号须知</p>
+<p>尊敬的各位患者朋友们，感谢您使用河北省中医院网上预约挂号系统，为了使您就诊更顺畅，请您在预约之前仔细阅读本注意事项。</p>
+<p class="title">一、信息登记</p>
+<p>我院电话预约和网上预约挂号采取实名制，用户首次预约必须登记就诊人的真实有效基本信息，包括就诊人员的真实姓名、身份证号、性别、手机号码等信息，就诊人员到医院就诊时须提供与预约登记实名信息一致的本人有效证件和手机号码，否则医院不能提供相应的诊疗服务。</p>
+<p class="title">二、预约服务</p>
+<p>1.请务必填写真实有效的手机号码，预约成功后我们将对本手机发送预约成功提示短信，且手机号码为取号及取消预约的唯一凭证。如果您未收到"预约成功短信"，请拨打0311-69095114联系。</p>
+<p>2.每天可预约次日号源的服务时间截止到18:00之前，具体时间以0311-69095114服务电话查询或网站公示为准。</p>
+<p>3.因不同疾病诊察时间不等，此预约时间仅为参考，请您提前半小时到医院收费处办卡取号就诊。</p>
+<p>4.目前预约挂号平台暂不支持网上缴费，也不额外收取预约费，仅收取与现场挂号相同的挂号诊查费。</p>
+<p class="title">三、取消预约</p>
+<p>1.如您因故不能按时就诊，请务必在就诊日前一天15:00前拨打0311-69095114取消预约。</p>
+<p>2.网上取消预约，需进入到您我院预约挂号页面操作。</p>
+<p>3.累计爽约达到3次将进入系统爽约黑名单，此后3个月内将无法享受预约挂号服务。</p>
+<p class="title">四、预约查询</p>
+<p>您可以在本网站界面查询，也可拨打0311-69095114通过相关信息进行查询。　　</p>
+<p class="title">五、预约限制</p>
+<p>同一患者实名(有效证件号或手机号)在同一就诊日、同一医生只能预约1次；在同一就诊日的预约总量不可超过3次。</p>
+<p class="title">六、就诊流程</p>
+<p>1.无我院就诊卡患者必须在预约当天提前到医院门诊收费窗口办卡取号就诊。有我院就诊卡的患者可以到门诊收费窗口取号就诊，卡中余额充足者可在自助机及医生站取号就诊。</p>
+<p>2.患者到医院就诊时应提供与预约信息一致的本人实名有效证件及手机号码，对所提供实名证件及手机号码与预约信息不符的，当次预约号源作废，由医院为患者重新安排挂号就诊。
+预约挂号最终解释权归河北省中医院。</p>
+</div>
 	</div>
 </div>
 
-<!-- 这里是排班内容区 -->
-<div id="ksorder_time">
-	<div class="ksorder_time_title">
-    	<p class="ksorder_t_p">医生排班表</p>
-    </div>
-    <div class="ksorder_time_center">
-    	<div class="ksorder_cen_l">
-    		<div class="ksorder_cen_l_l">
-    			#if($!{preWeek} < 0  )
-	            	<a href="javascript:void(0);" class="ksorder_btn_left no-order-left"></a>
-	            #else
-	            	<a href="$!{webPath}/search/schedule/moreDoctorSchedules.htm?deptCode=$!{_params.deptCode}&doctorCode=$!{_params.doctorCode}&week=$!{preWeek}" class="ksorder_btn_left"></a>
-    			#end
-            	<ul>
-                    <li>上午</li>
-                    <li>下午</li>
-                    <li>晚上</li>
-                </ul>
-            </div>
-            <div class="ksorder_cen_l_table">
-            	<div class="ksorder_cen_l_t_c" id="tableContainer" style="width: 659px;">
-            		<!-- 这里通过js放置医生排班信息 -->
-                </div>
-            </div>
-            <div class="ksorder_cen_l_r">
-            	#if(3 < $!{nextWeek} )
-            		<a href="javascript:void(0);" class="ksorder_btn_right no_order_right"></a>
-            	#else
-            		<a href="$!{webPath}/search/schedule/moreDoctorSchedules.htm?deptCode=$!{_params.deptCode}&doctorCode=$!{_params.doctorCode}&week=$!{nextWeek}" class="ksorder_btn_right"></a>
-            	#end
-            </div>
-    	</div>
-    	<div class="ksorder_cen_r">
-            <div class="ksorder_cen_r_top">
-                <h4>预约规则</h4>
-                <ul>
-                    <li><span>更新时间：</span>每日0:00更新</li>
-                    <li><span>预约周期：</span>30 天</li>
-                    <li><span>停挂时间：</span> 下午15:00停止次日预约挂号 （周五15:00后停挂至下周一）</li>
-                    <li><span>退号时间：</span> 就诊前一工作日15:00前取消</li>
-                </ul>
-	            <dl>
-	            	<dt>特殊规则</dt>
-	                <dd>无</dd>
-	            </dl>
-            </div>
-        </div>
-    </div>
-</div>	
 
 <div class="footer-box clear path">
 	<div class="footer-img-box">
@@ -316,5 +175,6 @@ function orderHospital(deptCode,doctorCode,date,timeSole){
 	</div>
 	
 </div>
+
 </body>
 </html>

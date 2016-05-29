@@ -243,7 +243,8 @@ public class DoctorAction {
 					try {
 						// 最多获取2天外的排班信息,由于一次只能查询到一天的排班信息，所有分多次查询
 						boolean setDoctorInfoFlag = true;
-						for(int i=0;i<3;++i){
+						// 从1开始，跳过今天的排班信息，患者不能在网上挂当天的号
+						for(int i=1;i<4;++i){ 
 							Date searchDate = DateUtil.plusSomeDay(today, i);
 							List<Schedule> searchSchedules = scheduleService.queryScheduleByDay(doctor.getDepartmentCode(), doctor.getDoctorCode(), searchDate);
 							// 如果排班信息存在,则放入到医生排班键中

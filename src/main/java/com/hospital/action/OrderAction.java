@@ -236,5 +236,15 @@ public class OrderAction {
 		return mv;
 	}
 	
-	
+	/**
+	 * 预约挂号须知
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/bookNotice")
+	public ModelAndView bookNotice(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView_velocity(request, "bookNotice");
+		
+		return mv;
+	}
 }

@@ -51,7 +51,11 @@ $(function(){
 			return;
 		}
 		
-		
+		// 检查协议是否同意
+		if(!$("#notice_must_noCard").is(':checked')){
+			$("#notice_must_noCard-wrong-info").show();
+			return;
+		}
 		
 		
 		// 提交表单
@@ -329,6 +333,20 @@ $(function(){
 						<td>
 							<div class="widget-input">
 								<input type="text" name="mobileNo" id="id-mobileNo" style=""><span class="wrong" id="id-mobileNo-wrong-info" style="display:none"><i class="instant-state fa fa-times-circle"></i><i>请输入正确的手机号码</i></span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						</td>
+						<td>
+						</td>
+						<td>
+							<div class="widget-input submit-button" style="margin-top:-5px;">
+								<label>
+									<input type="checkbox" id="notice_must_noCard" checked="checked"/> 同意<a href="$!{webPath}/search/order/bookNotice.htm" target="_blank"><font color="blue">《预约挂号须知》</font></a>
+								</label>
+								<span class="wrong" id="notice_must_noCard-wrong-info" style="display:none"><i class="instant-state fa fa-times-circle"></i><i>需同意预约挂号须知</i></span>
 							</div>
 						</td>
 					</tr>

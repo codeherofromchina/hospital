@@ -14,7 +14,7 @@
 <script type="text/javascript">
 $(function(){
 	#if($!{deptCode})
-		getSchedule('$!{deptCode}');
+		getSchedule('$!{deptCode}',0);
 	#end
 	
 	// 展开更多科室或者收起科室
@@ -34,24 +34,47 @@ $(function(){
 	$("a[id^='deptName_A']").click(function(){
 		$("a[id^='deptName_A']").removeClass("active");
 		var code = $(this).attr("code");
-		getSchedule(code);
+		getSchedule(code,0);
 	})
 })
 
 // 异步获取科室排班信息
-function getSchedule(deptCode){
+function getSchedule(deptCode,week){
 	$("#deptName_A_"+deptCode).addClass("active");
 	var deptName = $("#deptName_A_"+deptCode).html();
 	// 先隐藏医生显示部分
 	$("#ksorder_djgh_doctor").hide();
 	
+	var iWeek = 0;
+	if(week){
+		var aNum = Number(week);
+		if(!isNaN(aNum)){
+			iWeek = aNum;
+		}
+	}
+	
+	if(iWeek < 0 ){
+		iWeek = 0;
+	}else if(iWeek > 3){
+		iWeek = 3;
+	}
+	
+	
 	// 这里获取科室排班信息
-	var now = getDateFormat(new Date());
+	var now = getDateFormat(addDate(getDateFormat(new Date()),iWeek*7 + 1));
 	$.post("$!{webPath}/search/schedule/asyncScheduleNDaysDapartment.htm",{departmentCode:deptCode,sDate:now,n:7},function(data){
 		if(data.success){
 			var result = data.result;
 			
-			var str = "<div class='ksorder_cen_l_l'><a href='javascript:void(0);' class='ksorder_btn_left'></a><ul><li>上午</li><li>下午</li></ul></div>";
+			var str = "<div class='ksorder_cen_l_l'>";
+			if(iWeek > 0){
+				str += "<a href='javascript:getSchedule(\""+deptCode+"\","+(iWeek-1)+");' class='ksorder_btn_left'></a>";
+			}else{
+				/// aaaa 
+				str += "<a href='javascript:void(0);' class='ksorder_btn_left left_order_no'></a>";
+			}
+			str += "<ul><li>上午</li><li>下午</li></ul>";
+			str += "</div>";
 			str += "<div class='ksorder_cen_l_table'><div class='ksorder_cen_l_t_c' style='width: 659px;'><table border='0' cellpadding='0' cellspacing='0'>"
 			var head = "<tr>"; // table标题
 			var t1 = "<tr>";// 上午内容
@@ -94,7 +117,12 @@ function getSchedule(deptCode){
 			str += t2;
 			
 			str += "</table></div></div>";
-			str += "<div class='ksorder_cen_l_r'><a href='javascript:void(0);' class='ksorder_btn_right'></a></div>";
+			if(iWeek < 3){
+				str += "<div class='ksorder_cen_l_r'><a href='javascript:getSchedule(\""+deptCode+"\","+(iWeek+1)+");' class='ksorder_btn_right'></a></div>";
+			}else{
+				/// aaaaaa 
+				str += "<div class='ksorder_cen_l_r'><a href='javascript:void(0);' class='ksorder_btn_right no_order_right'></a></div>";
+			}
 			$("#ksorder_cen_l").html(str);
 		}
 	},"json");
@@ -160,9 +188,6 @@ function getDoctorList(tdObj,deptCode,timeSole,dateStr){
 					doctorHtml += "<p class='ksorder_dr1_p'>";
 					doctorHtml += "<span class='ksorder_dr1spa'>挂号费：<b>&yen;"+(obj["regFee"]==""?"0":obj["regFee"])+"</b></span>";
 					doctorHtml += "<span class='ksorder_dr1spa'>诊查费：<b>&yen;"+(obj["checkupFee"]==""?"0":obj["checkupFee"])+"</b></span>";
-					if(ableNumFlag){
-						doctorHtml += "<span class='ksorder_dr1spa2'>剩余号：<b>"+aNum+"</b></span>";
-					}
 					doctorHtml += "</p>";
 					doctorHtml += "<p class='ksorder_dr1_p2'><a href='$!{webPath}/search/order/bookOrder.htm?deptCode="+obj["departmentCode"]+"&docCode="+obj["doctorCode"]+"&date="+obj["serviceDate"]+"&timeSole="+ts+"' class='ksorder_dr1_syhy'>预约挂号</a></p>";
 					doctorHtml += "</div>";
@@ -352,7 +377,7 @@ function getDoctorList(tdObj,deptCode,timeSole,dateStr){
                 <h4>预约规则</h4>
                 <ul>
                     <li><span>更新时间：</span>每日0:00更新</li>
-                    <li><span>预约周期：</span>91天</li>
+                    <li><span>预约周期：</span>30天</li>
                     <li><span>停挂时间：</span> 下午15:00停止次日预约挂号 （周五15:00后停挂至下周一）</li>
                     <li><span>退号时间：</span> 就诊前一工作日15:00前取消</li>
                 </ul>
