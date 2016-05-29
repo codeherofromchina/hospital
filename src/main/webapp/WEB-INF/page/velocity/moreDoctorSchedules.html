@@ -187,7 +187,7 @@ function orderHospital(deptCode,doctorCode,date,timeSole){
     	<div class="ksorder_cen_l">
     		<div class="ksorder_cen_l_l">
     			#if($!{preWeek} < 0  )
-	            	<a href="javascript:void(0);" class="ksorder_btn_left no-order-left"></a>
+	            	<a href="javascript:void(0);" class="ksorder_btn_left no_order_left"></a>
 	            #else
 	            	<a href="$!{webPath}/search/schedule/moreDoctorSchedules.htm?deptCode=$!{_params.deptCode}&doctorCode=$!{_params.doctorCode}&week=$!{preWeek}" class="ksorder_btn_left"></a>
     			#end

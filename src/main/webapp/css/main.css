@@ -458,6 +458,7 @@ border-radius:3px;
 .ksorder_cen_l_l ul,.ksorder_cen_l_l a{float:left;}
 
 .ksorder_btn_left{display:inline-block;width:34px;height:47px;background:url(../images/left.jpg) no-repeat;}
+.no_order_left{ background:url(../images/left-grey.jpg) no-repeat;}
 .ksorder_cen_l_l .ksorder_btn_left.dasabled{background:url(../images/left_1.jpg) no-repeat;}
 .ksorder_cen_l_l ul li{width:34px;height:90px;line-height:90px;text-align:center;    }
 .ksorder_cen_l_table{float:left;width:658px;height:230px;overflow: hidden;position:relative;border-right: 1px solid #dcdddd;border-bottom: 1px solid #e5e5e5;}
@@ -473,6 +474,7 @@ border-radius:3px;
 .ksorder_cen_l_table table .ksorder_ym1{background:#e3e4e5;}
 .ksorder_cen_l_r{width:34px;float:left;height:229px;background:#f2f8ff; border-bottom: 1px solid #e5e5e5;}
 .ksorder_btn_right{display:inline-block;width:34px;height:47px;background:url(../images/right.jpg) no-repeat;}
+.no_order_right{background:url(../images/right-grey.jpg) no-repeat;}
 .ksorder_cen_l_r .ksorder_btn_right.dasabled{background:url(../images/right_1.jpg) no-repeat;}
 /*右边预约规则*/
 .ksorder_cen_r{width:262px;overflow:hidden;padding-left:4px;border:1px solid #dcdddd;float:left;}
@@ -513,7 +515,7 @@ border-radius:3px;
  margin-bottom: 4px;  padding: 0 3px;}
 .ksorder_dr1_dl dd h4{font-size:14px;}
 .ksorder_dr1_dl dd p{color:#969292;  width: 384px;}
-.ksorder_dr1_p{ width:140px;border-right: 1px dashed #ccc;float:left;font-size:13px;     padding: 5px 0px 5px 33px;overflow: hidden;}
+.ksorder_dr1_p{ width:140px;float:left;font-size:13px;     padding: 28px 0px 5px 33px;overflow: hidden;}
 .ksorder_dr1_p span{display:block;color:#868686;padding-bottom: 5px;}
 .ksorder_dr1_p .ksorder_dr1spa b{color:#e36e65;font-weight:normal;}
 .ksorder_dr1_p .ksorder_dr1spa2 b{color:#fec109;font-weight:normal;}
