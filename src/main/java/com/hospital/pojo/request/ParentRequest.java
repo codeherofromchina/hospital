@@ -29,7 +29,7 @@ public abstract class ParentRequest {
 	protected String hospitalId = "";
 	// 操作员代码
 	@XStreamAlias("ExtUserID")
-	protected String extUserID = "";
+	protected String extUserID = "wzyy01";
 
 	public String getTradeCode() {
 		return tradeCode;

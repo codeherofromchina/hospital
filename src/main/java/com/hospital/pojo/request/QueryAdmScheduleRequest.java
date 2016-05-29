@@ -30,7 +30,7 @@ public class QueryAdmScheduleRequest {
 	protected String extOrgCode = "";
 	// 操作员代码
 	@XStreamAlias("ExtUserID")
-	protected String extUserID = "zz01";
+	protected String extUserID = "wzyy01";
 	// 开始日期 (YYYY-MM-DD)
 	@XStreamAlias("StartDate")
 	private String startDate;

@@ -47,7 +47,7 @@ public class OrderServiceImpl implements OrderService{
 		
 		request.setCardNo(cardNo);
 		request.setCardType("02");
-		request.setExtUserID("zz01");
+		request.setExtUserID("wzyy01");
 		request.setOrderApptStartDate(DateUtil.formatToShortString(startDate));
 		request.setOrderApptEndDate(DateUtil.formatToShortString(endDate));
 		
@@ -82,7 +82,7 @@ public class OrderServiceImpl implements OrderService{
 		QueryOrderRequest request = new QueryOrderRequest();
 		
 		request.setIdCardNo(idCard);
-		request.setExtUserID("zz01");
+		request.setExtUserID("wzyy01");
 		request.setOrderApptStartDate(DateUtil.formatToShortString(startDate));
 		request.setOrderApptEndDate(DateUtil.formatToShortString(endDate));
 		request.setQueryDateFlag("ORG");

@@ -26,7 +26,7 @@ public class OPAppArriveRequest {
 	public String orderCode;
 	// 操作员工号
 	@XStreamAlias("ExtUserID")
-	public String extUserID;
+	public String extUserID = "wzyy01";
 	// 取号日期(YYYY-MM-DD)
 	@XStreamAlias("PayDate")
 	public String payDate;

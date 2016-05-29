@@ -32,7 +32,7 @@ public class BookServiceRequest {
 	protected String hospitalId = "";
 	// 操作员代码
 	@XStreamAlias("ExtUserID")
-	protected String extUserID = "zz01";
+	protected String extUserID = "wzyy01";
 	
 	//交易流水号
 	@XStreamAlias("TransactionId")
