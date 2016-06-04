@@ -1,5 +1,6 @@
 package com.hospital.service.remoteImpl;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,6 +15,7 @@ import com.hospital.pojo.request.QueryDepartmentGroupRequest;
 import com.hospital.pojo.request.QueryDepartmentRequest;
 import com.hospital.pojo.stub.RegistrationServiceSoap;
 import com.hospital.service.DepartmentService;
+import com.hospital.tools.CommUtil;
 import com.hospital.tools.DataCacheUtil;
 import com.hospital.tools.ObjectTransUtil;
 import com.hospital.tools.ServiceHelper;
@@ -40,6 +42,11 @@ public class DepartmentServiceImpl implements DepartmentService {
 		}
 		// 远程查询
 		allDepts = queryDepartment(new QueryDepartmentRequest());
+		// 排序
+		if(allDepts!=null){
+			Collections.sort(allDepts);
+		}
+		
 		// 将远程查询结果放入到缓存中
 		DataCacheUtil.putData(DataCacheUtil.CacheKey.ALL_DEPARTMENT_KEY, allDepts);
 		return allDepts;

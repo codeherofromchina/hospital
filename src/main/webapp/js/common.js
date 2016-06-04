@@ -200,7 +200,7 @@ function autoComplete(flagNum,id,deptVal){
 					arr.push(obj.departmentName);
 				})
 				
-				completeArr(arr.unique4(),id);
+				completeArr(arr,id);
 			}
 		},"json");
 	}else if(flagNum==2){
@@ -258,7 +258,7 @@ function completeArr(arr,id){
 Array.prototype.unique4 = function()
 {
 	this.sort(function(a,b){
-        return  b - a ;
+        return  a - b ;
 	});
 	var re=[this[0]];
 	for(var i = 1; i < this.length; i++)
@@ -268,6 +268,7 @@ Array.prototype.unique4 = function()
 			re.push(this[i]);
 		}
 	}
+	
 	return re;
 }
 

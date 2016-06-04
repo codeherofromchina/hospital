@@ -3,13 +3,15 @@ package com.hospital.pojo;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import com.hospital.tools.CommUtil;
+
 /**
  * 医院科室简单对象信息
  * 
  * @author wxd
  *
  */
-public class Department {
+public class Department implements Comparable<Department>{
 	// 科室代码
 	private String departmentCode;
 	// 科室名称
@@ -45,5 +47,13 @@ public class Department {
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this,
 				ToStringStyle.MULTI_LINE_STYLE);
+	}
+
+	@Override
+	public int compareTo(Department o) {
+		if(o == null){
+			return -1;
+		}
+		return CommUtil.compareChineseStr(this.getDepartmentName(), o.getDepartmentName());
 	}
 }
