@@ -19,7 +19,6 @@ import com.hospital.service.DoctorService;
 import com.hospital.tools.DataCacheUtil;
 import com.hospital.tools.ObjectTransUtil;
 import com.hospital.tools.ServiceHelper;
-import com.sun.org.apache.bcel.internal.classfile.Code;
 
 /**
  * 医生接口服务实现类

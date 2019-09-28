@@ -16,6 +16,6 @@ public interface PatientService {
 	 * @return
 	 * @throws TradeErrorException
 	 */
-	public Patient getPatInfoByCardNo(String cardNo)
+	Patient getPatInfoByCardNo(String cardNo)
 			throws TradeErrorException;
 }

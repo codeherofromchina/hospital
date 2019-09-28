@@ -49,7 +49,6 @@ public class Department implements Comparable<Department>{
 				ToStringStyle.MULTI_LINE_STYLE);
 	}
 
-	@Override
 	public int compareTo(Department o) {
 		if(o == null){
 			return -1;

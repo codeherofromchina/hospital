@@ -14,7 +14,7 @@ public class QueryDepartmentRequest extends ParentRequest {
 	// 号别
 	@XStreamAlias("SessType")
 	private String sessType;
-	// 一级科室代码
+	// 一级科室代码 TODO 修改为DepartmentGroupCode
 	@XStreamAlias("DepartmentCode")
 	private String departmentCode;
 
