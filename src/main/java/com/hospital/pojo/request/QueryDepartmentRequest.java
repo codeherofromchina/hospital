@@ -5,40 +5,47 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
  * 查询二级科室请求信息
- * 
- * @author wxd
  *
+ * @author wxd
  */
 @XStreamAlias("Request")
 public class QueryDepartmentRequest extends ParentRequest {
-	// 号别
-	@XStreamAlias("SessType")
-	private String sessType;
-	// 一级科室代码 TODO 修改为DepartmentGroupCode
-	@XStreamAlias("DepartmentCode")
-	private String departmentCode;
+    // 科室类别
+    @XStreamAlias("DepartmentType")
+    private String departmentType;
+    // 科室代码
+    @XStreamAlias("DepartmentCode")
+    private String departmentCode;
+    // 一级科室代码
+    @XStreamAlias("DepartmentGroupCode")
+    private String departmentGroupCode;
 
-	public QueryDepartmentRequest() {
-		// 初始化的同时设置交易代码为通过卡号获取患者疾病信息编码
-		this.tradeCode = TradeCode.QUERYDEPARTMENT.getCode();
-	}
+    public QueryDepartmentRequest() {
+        // 初始化的同时设置交易代码为通过卡号获取患者疾病信息编码
+        this.tradeCode = TradeCode.QUERYDEPARTMENT.getCode();
+    }
 
-	public String getSessType() {
-		return sessType;
-	}
+    public String getDepartmentCode() {
+        return departmentCode;
+    }
 
-	public void setSessType(String sessType) {
-		this.sessType = sessType;
-	}
+    public void setDepartmentCode(String departmentCode) {
+        this.departmentCode = departmentCode;
+    }
 
-	public String getDepartmentCode() {
-		return departmentCode;
-	}
+    public String getDepartmentType() {
+        return departmentType;
+    }
 
-	public void setDepartmentCode(String departmentCode) {
-		this.departmentCode = departmentCode;
-	}
-	
-	
-	
+    public void setDepartmentType(String departmentType) {
+        this.departmentType = departmentType;
+    }
+
+    public String getDepartmentGroupCode() {
+        return departmentGroupCode;
+    }
+
+    public void setDepartmentGroupCode(String departmentGroupCode) {
+        this.departmentGroupCode = departmentGroupCode;
+    }
 }

@@ -30,19 +30,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link OPRegistration }
+     * Create an instance of {@link HIPMessageServerResponse }
      * 
      */
-    public OPRegistration createOPRegistration() {
-        return new OPRegistration();
+    public HIPMessageServerResponse createHIPMessageServerResponse() {
+        return new HIPMessageServerResponse();
     }
 
     /**
-     * Create an instance of {@link OPRegistrationResponse }
+     * Create an instance of {@link HIPMessageServer }
      * 
      */
-    public OPRegistrationResponse createOPRegistrationResponse() {
-        return new OPRegistrationResponse();
+    public HIPMessageServer createHIPMessageServer() {
+        return new HIPMessageServer();
     }
 
 }

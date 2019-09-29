@@ -25,7 +25,7 @@ public interface OrderService {
 	 * @return
 	 * @throws TradeErrorException
 	 */
-	public List<Order> queryOrderByCardNo(String cardNo,Date startDate,Date endDate) throws TradeErrorException;
+	List<Order> queryOrderByCardNo(String cardNo,Date startDate,Date endDate) throws TradeErrorException;
 	
 	/**
 	 * 根据身份证号查询病人预约挂号信息
@@ -35,7 +35,7 @@ public interface OrderService {
 	 * @return
 	 * @throws TradeErrorException
 	 */
-	public List<Order> queryOrderByIdCard(String idCard,Date startDate,Date endDate) throws TradeErrorException;
+	List<Order> queryOrderByIdCard(String idCard,Date startDate,Date endDate) throws TradeErrorException;
 	
 	/**
 	 * 取消已经预约的信息
@@ -43,7 +43,7 @@ public interface OrderService {
 	 * @return
 	 * @throws TradeErrorException
 	 */
-	public boolean cancelOrder(String orderCode) throws TradeErrorException;
+	boolean cancelOrder(String orderCode) throws TradeErrorException;
 	
 
 	/**
@@ -53,7 +53,7 @@ public interface OrderService {
 	 * @return
 	 * @throws TradeErrorException
 	 */
-	public Order opAppArrive(OPAppArriveRequest request) throws TradeErrorException;
+	Order opAppArrive(OPAppArriveRequest request) throws TradeErrorException;
 	
 	
 	/**
@@ -64,7 +64,7 @@ public interface OrderService {
 	 * @return
 	 * @throws TradeErrorException
 	 */
-	public Order bookService(String scheduleItemCode,String cardNo,String admitRange) throws TradeErrorException;
+	Order bookService(String scheduleItemCode,String cardNo,String admitRange) throws TradeErrorException;
 	
 	/**
 	 * 无卡预约挂号
@@ -77,6 +77,6 @@ public interface OrderService {
 	 * @return
 	 * @throws TradeErrorException
 	 */
-	public Order bookService(String scheduleItemCode,String admitRange,String iDCardNo,String patientName,String mobileNo,String gender) throws TradeErrorException;
+	Order bookService(String scheduleItemCode,String admitRange,String iDCardNo,String patientName,String mobileNo,String gender) throws TradeErrorException;
 	
 }

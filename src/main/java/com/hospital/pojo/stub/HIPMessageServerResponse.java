@@ -9,16 +9,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>anonymous complex type的 Java 类。
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>以下模式片段指定包含在此类中的预期内容。
  * 
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="OPRegistrationResult" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="HIPMessageServerResult" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,36 +29,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "opRegistrationResult"
+    "hipMessageServerResult"
 })
-@XmlRootElement(name = "OPRegistrationResponse")
-public class OPRegistrationResponse {
+@XmlRootElement(name = "HIPMessageServerResponse")
+public class HIPMessageServerResponse {
 
-    @XmlElement(name = "OPRegistrationResult", required = true)
-    protected String opRegistrationResult;
+    @XmlElement(name = "HIPMessageServerResult", required = true)
+    protected String hipMessageServerResult;
 
     /**
-     * Gets the value of the opRegistrationResult property.
+     * 获取hipMessageServerResult属性的值。
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getOPRegistrationResult() {
-        return opRegistrationResult;
+    public String getHIPMessageServerResult() {
+        return hipMessageServerResult;
     }
 
     /**
-     * Sets the value of the opRegistrationResult property.
+     * 设置hipMessageServerResult属性的值。
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setOPRegistrationResult(String value) {
-        this.opRegistrationResult = value;
+    public void setHIPMessageServerResult(String value) {
+        this.hipMessageServerResult = value;
     }
 
 }

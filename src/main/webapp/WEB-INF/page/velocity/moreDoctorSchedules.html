@@ -26,7 +26,7 @@ function typeSettingSchedule(scheduleData){
 	table += "<table border='0' cellpadding='0' cellspacing='0'>"
 	var head = "<tr>"; // table标题
 	var t1 = "<tr>";// 上午内容
-	var t2 = "<tr>"; // 下午内容
+	var t2 = "<tr>"; // 下午中午内容
 	var t3 = "<tr>"; // 晚上内容
 	for(var i =1;i<8;++i){
 		var comDate;
@@ -39,31 +39,37 @@ function typeSettingSchedule(scheduleData){
 		var sw = 0;
 		var xw = 0;
 		var ws = 0;
+		var timeSole = "Y";
 		if(scheduleData[key]){
 			$.each(scheduleData[key],function(index,obj){
 				if(obj["sessionName"]=="上午"){
-					sw += getAvailableNum(obj["availableNum"]);
-				}else if(obj["sessionName"]=="下午"){
-					xw += getAvailableNum(obj["availableNum"]);
-				}else{
-					ws += getAvailableNum(obj["availableNum"]);
+					sw += getAvailableNum(obj["availableLeftNum"]);
+                    timeSole = "S";
+				} else if(obj["sessionName"]=="下午"){
+					xw += getAvailableNum(obj["availableLeftNum"]);
+                    timeSole = "X";
+				} else if (obj["sessionName"]=="中午") {
+                    xw += getAvailableNum(obj["availableLeftNum"]);
+                    timeSole = "M";
+				} else {
+					ws += getAvailableNum(obj["availableLeftNum"]);
 				}
 			})
 		}
 		
 		head += "<th scope='col'>"+getWeek(comDate)+"<p>"+key+"</p></th>";
 		if(sw > 0){
-			t1 += "<td class='ksorder_kyy ksorder_bgcol' onclick='orderHospital(\"$!{department.departmentCode}\",\"$!{doctor.doctorCode}\",\""+key+"\",\"S\")'>预约<br>剩余:有</td>";
+			t1 += "<td class='ksorder_kyy ksorder_bgcol' onclick='orderHospital(\"$!{department.departmentCode}\",\"$!{doctor.doctorCode}\",\""+key+"\",\""+timeSole+"\")'>预约<br>剩余:有</td>";
 		}else{
 			t1 += "<td>&nbsp;无</td>";
 		}
 		if(xw > 0){
-			t2 += "<td class='ksorder_kyy ksorder_bgcol' onclick='orderHospital(\"$!{department.departmentCode}\",\"$!{doctor.doctorCode}\",\""+key+"\",\"X\")'>预约<br>剩余:有</td>";
+			t2 += "<td class='ksorder_kyy ksorder_bgcol' onclick='orderHospital(\"$!{department.departmentCode}\",\"$!{doctor.doctorCode}\",\""+key+"\",\""+timeSole+"\")'>预约<br>剩余:有</td>";
 		}else{
 			t2 += "<td>&nbsp;无</td>";
 		}
 		if(ws > 0){
-			t3 += "<td class='ksorder_kyy ksorder_bgcol' onclick='orderHospital(\"$!{department.departmentCode}\",\"$!{doctor.doctorCode}\",\""+key+"\",\"Y\")'>预约<br>剩余:有</td>";
+			t3 += "<td class='ksorder_kyy ksorder_bgcol' onclick='orderHospital(\"$!{department.departmentCode}\",\"$!{doctor.doctorCode}\",\""+key+"\",\""+timeSole+"\")'>预约<br>剩余:有</td>";
 		}else{
 			t3 += "<td>&nbsp;无</td>";
 		}
@@ -167,7 +173,7 @@ function orderHospital(deptCode,doctorCode,date,timeSole){
 						$!{doctor.doctorName}
 					</div>
 					<div class="info-doc">
-						<span class="doctor-medtitle">$!{doctor.doctorTitle}</span> &nbsp;&nbsp;&nbsp;&nbsp;<i></i><span>$!{doctor.doctorSessType}</span>
+						<span class="doctor-medtitle">$!{doctor.doctorTitleCode}</span> &nbsp;&nbsp;&nbsp;&nbsp;<i></i><span>$!{doctor.doctorSessType}</span>
 					</div>
 				</div>
 				<p class="info-hospittal">

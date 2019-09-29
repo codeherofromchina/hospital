@@ -27,6 +27,18 @@ public class GetPatInfoRequest extends ParentRequest {
 	// 病人ID
 	@XStreamAlias("PatientID")
 	protected String patientID;
+	// 联系电话
+	@XStreamAlias("Phone")
+	protected String phone;
+	// 证件类型
+	@XStreamAlias("IDCardType")
+	protected String idCardType;
+	// 身份证号码
+	@XStreamAlias("IDNo")
+	protected String idNo;
+	// 姓名
+	@XStreamAlias("PatientName")
+	protected String patientName;
 
 	public GetPatInfoRequest() {
 		// 初始化的同时设置交易代码为通过卡号获取患者疾病信息编码
@@ -73,6 +85,35 @@ public class GetPatInfoRequest extends ParentRequest {
 		this.patientID = patientID;
 	}
 
-	
-	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getIdCardType() {
+		return idCardType;
+	}
+
+	public void setIdCardType(String idCardType) {
+		this.idCardType = idCardType;
+	}
+
+	public String getIdNo() {
+		return idNo;
+	}
+
+	public void setIdNo(String idNo) {
+		this.idNo = idNo;
+	}
+
+	public String getPatientName() {
+		return patientName;
+	}
+
+	public void setPatientName(String patientName) {
+		this.patientName = patientName;
+	}
 }

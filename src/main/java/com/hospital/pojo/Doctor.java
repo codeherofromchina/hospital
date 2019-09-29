@@ -22,12 +22,10 @@ public class Doctor implements Comparable<Doctor>{
 	private String doctorTitleCode;
 	// 医生职称
 	private String doctorTitle;
-	// 医生专长
-	private String doctorSpec;
+	// 医生简介
+	private String description;
 	// 出诊级别
 	private String doctorSessType;
-	// 专业名称
-	private String serivceName;
 
 	public String getDoctorCode() {
 		return doctorCode;
@@ -61,13 +59,6 @@ public class Doctor implements Comparable<Doctor>{
 		this.doctorTitle = doctorTitle;
 	}
 
-	public String getDoctorSpec() {
-		return doctorSpec;
-	}
-
-	public void setDoctorSpec(String doctorSpec) {
-		this.doctorSpec = doctorSpec;
-	}
 	public String getDepartmentCode() {
 		return departmentCode;
 	}
@@ -84,11 +75,13 @@ public class Doctor implements Comparable<Doctor>{
 		this.departmentName = departmentName;
 	}
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+	public String getDescription() {
+		return description;
 	}
-	
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	public String getDoctorSessType() {
 		return doctorSessType;
@@ -98,13 +91,11 @@ public class Doctor implements Comparable<Doctor>{
 		this.doctorSessType = doctorSessType;
 	}
 
-	public String getSerivceName() {
-		return serivceName;
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
 	}
 
-	public void setSerivceName(String serivceName) {
-		this.serivceName = serivceName;
-	}
 
 	@Override
 	public int compareTo(Doctor o) {

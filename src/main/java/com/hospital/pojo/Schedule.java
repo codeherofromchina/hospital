@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * 排班信息简单对象
- * 
+ *
  * @author wxd
  *
  */
@@ -61,7 +61,11 @@ public class Schedule {
 	// 其它费
 	private String otherFee;
 	// 剩余号数量
-	private String availableNum;
+	private String availableNumStr;
+    // 该时段可预约的总号源数
+    private String availableTotalNum;
+    // 该时段剩余号源数
+    private String availableLeftNum;
 	// 就诊地址
 	private String admitAddress;
 	// 候诊时间范围
@@ -220,13 +224,32 @@ public class Schedule {
 	public void setOtherFee(String otherFee) {
 		this.otherFee = otherFee;
 	}
-	public String getAvailableNum() {
-		return availableNum;
-	}
-	public void setAvailableNum(String availableNum) {
-		this.availableNum = availableNum;
-	}
-	public String getAdmitAddress() {
+
+    public String getAvailableNumStr() {
+        return availableNumStr;
+    }
+
+    public void setAvailableNumStr(String availableNumStr) {
+        this.availableNumStr = availableNumStr;
+    }
+
+    public String getAvailableTotalNum() {
+        return availableTotalNum;
+    }
+
+    public void setAvailableTotalNum(String availableTotalNum) {
+        this.availableTotalNum = availableTotalNum;
+    }
+
+    public String getAvailableLeftNum() {
+        return availableLeftNum;
+    }
+
+    public void setAvailableLeftNum(String availableLeftNum) {
+        this.availableLeftNum = availableLeftNum;
+    }
+
+    public String getAdmitAddress() {
 		return admitAddress;
 	}
 	public void setAdmitAddress(String admitAddress) {
@@ -245,10 +268,10 @@ public class Schedule {
 		this.note = note;
 	}
 
-	
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
 	}
-	
+
 }

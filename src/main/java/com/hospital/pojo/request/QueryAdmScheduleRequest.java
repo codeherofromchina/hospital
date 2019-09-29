@@ -1,6 +1,5 @@
 package com.hospital.pojo.request;
 
-import com.hospital.pojo.enum_.ClientType;
 import com.hospital.pojo.enum_.TradeCode;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
@@ -55,8 +54,8 @@ public class QueryAdmScheduleRequest {
 	private String stopScheduleFlag = "";
 	@XStreamAlias("PatientID")
 	private String patientID = "";
-	@XStreamAlias("EssType")
-	private String essType;
+	@XStreamAlias("SessType")
+	private String sessType;
 
 	public QueryAdmScheduleRequest() {
 		// 初始化的同时设置交易代码为查询排班记录编码
@@ -127,12 +126,12 @@ public class QueryAdmScheduleRequest {
 		this.patientID = patientID;
 	}
 
-	public String getEssType() {
-		return essType;
+	public String getSessType() {
+		return sessType;
 	}
 
-	public void setEssType(String essType) {
-		this.essType = essType;
+	public void setSessType(String sessType) {
+		this.sessType = sessType;
 	}
 
 	public String getTradeCode() {

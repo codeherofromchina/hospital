@@ -16,10 +16,10 @@
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <!-- webService 服务工厂类 -->
-    <bean id="registrationServiceFactory" class="com.hospital.pojo.stub.RegistrationService"></bean>
+    <bean id="registrationServiceFactory" class="com.hospital.pojo.stub.PUB0008"></bean>
     <!--<bean id="registrationServiceFactory" class="com.hospital.tools.TestRegistrationService"></bean> -->
-    <bean id="registrationServiceSoap" factory-bean="registrationServiceFactory"
-          factory-method="getRegistrationServiceSoap"></bean>
+    <bean id="pub0008Soap" factory-bean="registrationServiceFactory"
+          factory-method="getPUB0008Soap"></bean>
 
 
     <!-- quartz 定时任务配置 -->

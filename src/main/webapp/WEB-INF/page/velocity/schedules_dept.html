@@ -65,7 +65,7 @@ function getSchedule(deptCode,week){
 	$.post("$!{webPath}/search/schedule/asyncScheduleNDaysDapartment.htm",{departmentCode:deptCode,sDate:now,n:7},function(data){
 		if(data.success){
 			var result = data.result;
-			
+
 			var str = "<div class='ksorder_cen_l_l'>";
 			if(iWeek > 0){
 				str += "<a href='javascript:getSchedule(\""+deptCode+"\","+(iWeek-1)+");' class='ksorder_btn_left'></a>";
@@ -86,14 +86,14 @@ function getSchedule(deptCode,week){
 				var xw = 0;
 				if(result[key]){
 					$.each(result[key],function(index,obj){
-						if(obj["sessionName"]=="上午"){
-							sw += getAvailableNum(obj["availableNum"]);
-						}else if(obj["sessionName"]=="下午"){
-							xw += getAvailableNum(obj["availableNum"]);
+						if(obj["sessionName"]=="上午") {
+							sw += getAvailableNum(obj["availableLeftNum"]);
+						} else if(obj["sessionName"]=="下午" || obj["sessionName"]=="中午" || obj["sessionName"]=="晚上"){
+							xw += getAvailableNum(obj["availableLeftNum"]);
 						}			
 					})
 				}
-				
+
 				head += "<th scope='col'>"+getWeek(comDate)+"<p>"+key+"</p></th>";
 				if(sw > 0){
 					t1 += "<td class='ksorder_kyy ksorder_bgcol' onclick='getDoctorList(this,\""+deptCode+"\",\"上午\",\""+key+"\")'>预约<br>剩余:有</td>";
@@ -149,13 +149,17 @@ function getDoctorList(tdObj,deptCode,timeSole,dateStr){
 			var ts ;
 			if(timeSole=="上午"){
 				ts = "S";
-			}else if(timeSole=="下午"){
+			} else if (timeSole=="下午") {
 				ts = "X";
-			}
+			} else if (timeSole=="晚上") {
+                ts = "Y";
+            } else if (timeSole=="中午") {
+                ts = "M";
+            }
 			
 			$.each(result[dateStr],function(index,obj){
 				if(obj["sessionName"] == timeSole ){
-					var aNum = Number(obj["availableNum"]);
+					var aNum = Number(obj["availableLeftNum"]);
 					var ableNumFlag = true;
 					if(isNaN(aNum)){
 						ableNumFlag = false;
@@ -167,10 +171,11 @@ function getDoctorList(tdObj,deptCode,timeSole,dateStr){
 					doctorHtml += "<dd>"+obj["doctorName"]+"</dd>";
 					doctorHtml += "<dd>"+obj["departmentName"]+"</dd>";
 					doctorHtml += "<dd><h4>"+obj["doctorTitle"]+"</h4></dd>";
+					console.info("ableNumFlag -> " + ableNumFlag + ", doctorName -> " + obj["doctorName"]);
 					if(!ableNumFlag){
 						doctorHtml += "<dd class='sd-dd'><span class='sd-title-span'>预约时段：</span>";
 						
-						$.each(obj["availableNum"].split(","),function(index,obj){
+						$.each(obj["availableNumStr"].split(","),function(index,obj){
 							var numArr = obj.split(";");
 							if(numArr.length > 1 &&  parseInt(numArr[1]) > 0){
 								doctorHtml += "<span class='sd-time-span'>"+numArr[0]+"</span>";

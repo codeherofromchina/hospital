@@ -177,73 +177,6 @@ $(function(){
 			</div>
 		</div>
 	</div>
-	<!-- 
-	<div class="title">
-		<p>有卡预约</p>
-	</div>
-	<div class="container">
-		<div class="write-list">
-			<p class="doctor-title">
-				请填写预约信息<span>(输入的预约信息，我们将为你保密)</span>
-				<span class="right-info"><span>*</span>为必填项</span>
-			</p>
-			<form method="post" id="bookServiceForm" action="$!{webPath}/search/order/bookService.htm">
-				<input type="hidden" name="scheduleItemCode" value="$!{schedule.scheduleItemCode}"/>
-				<table>
-					#set ($columnArray = $schedule.availableNum.split(",")) 
-					#if($columnArray.size() > 1)
-						<tr>
-							<td class="label">
-								就诊时间段
-							</td>
-							<td class="essential-mark">
-								<span class="star-red">*</span>
-							</td>
-							<td>
-								<div class="widget-input" id="widget-input-name">
-									<select name="admitRange" id="admitRange-select" style="">
-										#foreach($word in $!{columnArray})  
-											#set ($w = $word.split(";")) 
-											#if($w.get(1) != '0')
-												<option>$w.get(0)</option>
-											#end
-							            #end 
-									</select>
-									
-									<span class="wrong" id="timeRange-wrong-info" style="display:none"><i class="instant-state fa fa-times-circle"></i><i id="name-wrong-info">请选中就诊时间段</i></span>
-								</div>
-							</td>
-						</tr>
-					#end
-					<tr id="id-card-tr" style="">
-						<td class="label">
-							就诊卡号
-						</td>
-						<td class="essential-mark">
-							<span class="star-red">*</span>
-						</td>
-						<td>
-							<div class="widget-input">
-								<input type="text" name="cardNo" id="id-card" style=""><span class="wrong" id="id-card-wrong-info" style="display:none"><i class="instant-state fa fa-times-circle"></i><i id="idcard-wrong-info">请输入就诊卡号</i></span>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-						</td>
-						<td>
-						</td>
-						<td>
-							<div class="widget-input submit-button" style="margin-top:-5px;">
-								<span id="submit-order" class="submit-but action">提交预约单</span>
-							</div>
-						</td>
-					</tr>
-				</table>
-			</form>
-		</div>
-	</div>
-	-->
 	<div class="title">
 		<p>无卡预约</p>
 	</div>
@@ -257,29 +190,6 @@ $(function(){
 			<form method="post" id="bookServiceForm_noCard" action="$!{webPath}/search/order/bookServiceNoCard.htm">
 				<input type="hidden" name="scheduleItemCode" value="$!{schedule.scheduleItemCode}"/>
 				<table>
-					#set ($columnArray = $schedule.availableNum.split(",")) 
-					#if($columnArray.size() > 1)
-						<tr>
-							<td class="label">
-								就诊时间段
-							</td>
-							<td class="essential-mark">
-								<span class="star-red">*</span>
-							</td>
-							<td>
-								<div class="widget-input" id="widget-input-name">
-									<select name="admitRange" id="admitRange-select-nocard" style="">
-										#foreach($word in $!{columnArray})  
-											#set ($w = $word.split(";")) 
-											<option>$w.get(0)</option>
-							            #end 
-									</select>
-									
-									<span class="wrong" id="timeRange-wrong-info-nocard" style="display:none"><i class="instant-state fa fa-times-circle"></i><i id="name-wrong-info">请选择就诊时间段</i></span>
-								</div>
-							</td>
-						</tr>
-					#end
 					<tr id="id-card-tr-nocard" style="">
 						<td class="label">
 							身份证号

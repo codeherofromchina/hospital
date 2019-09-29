@@ -1,11 +1,7 @@
 package com.hospital.tools;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.log4j.Logger;
 
@@ -22,149 +18,172 @@ import net.sf.json.JSONObject;
 
 /**
  * 服务层帮助类，将服务类中接口调用返回的字符串转换为响应的对象
- * TODO 此方法需要修改，当数组为一个时候需要调整
- * @author wxd
  *
+ * @author wxd
  */
 public class ServiceHelper {
-	private static Logger logger = Logger.getLogger(ServiceHelper.class);
+    private static Logger logger = Logger.getLogger(ServiceHelper.class);
 
-	/**
-	 * 将病人信息xml字符串转换为病人实体对象
-	 * 
-	 * @param patInfoXml
-	 * @return
-	 * @throws TradeErrorException
-	 */
-	public static Patient parseXmlToPatient(String patInfoXml) throws TradeErrorException {
+    /**
+     * 将病人信息xml字符串转换为病人实体对象
+     *
+     * @param patInfoXml
+     * @return
+     * @throws TradeErrorException
+     */
+    public static Patient parseXmlToPatient(String patInfoXml) throws TradeErrorException {
 
-		JSONObject mapObj = ObjectTransUtil.xmlStringToBean(patInfoXml);
-		isTradeSuccess(mapObj);
+        JSONObject mapObj = ObjectTransUtil.xmlStringToBean(patInfoXml);
+        isTradeSuccess(mapObj);
+        JSONObject patInfos = mapObj.getJSONObject("PatInfos");
+        JSONObject patInfo = patInfos.getJSONObject("PatInfo");
 
-		Patient patient = new Patient();
-		Class<Patient> pClass = Patient.class;
+        Patient patient = new Patient();
+        Class<Patient> pClass = Patient.class;
 
-		reflectSetStringValue(patient,mapObj,pClass);
+        reflectSetStringValue(patient, patInfo, pClass);
 
-		return patient;
+        return patient;
 
-		// 测试信息
-		/*
-		 * String xmlStr = "<Response><ResultCode>0</ResultCode>" +
-		 * "<ResultContent>2</ResultContent><PatientID>3</PatientID>" +
-		 * "<PatientName>4</PatientName><Sex>1</Sex>" +
-		 * "<SexCode>5</SexCode><DOB>6</DOB>" +
-		 * "<DocumentID>7</DocumentID><Address>8</Address>" +
-		 * "<IDTypeCode>0</IDTypeCode><IDTypeDesc>9</IDTypeDesc>" +
-		 * "<IDNo>12</IDNo><YBFlag>13</YBFlag><PatType>14</PatType>" +
-		 * "</Response>"; Patient patient = parseXmlToPatient(xmlStr);
-		 * System.out.println(patient);
-		 */
-	}
-	
+        // 测试信息
+       /* String xmlStr = "<Response><ResultCode>0</ResultCode><ResultContent></ResultContent><PatInfos><PatInfo><PatientID>0000000016</PatientID>" +
+                "<PatientName>mic16</PatientName><Sex>女</Sex><SexCode>2</SexCode><DOB>1996-06-22</DOB><TelephoneNo>12345678901</TelephoneNo>" +
+                "<Mobile/><DocumentID/><Address/><IDTypeCode>1</IDTypeCode><IDTypeDesc/><IDNo/><InsureCardNo/>" +
+                "<AccInfo>-201^^^0^0^0^^16^0000000016^44120^P^PC^1^^-201^^^0^0^0^^16^0000000016^44120^P^PC^1^</AccInfo><AccInfoBalance/>" +
+                "<AccInfoNo/><PatientCard>000000000016</PatientCard><YBFlag>0</YBFlag><PatType>自费</PatType><PatTypeCode>01</PatTypeCode>" +
+                "</PatInfo></PatInfos></Response>";
+        Patient patient = parseXmlToPatient(xmlStr);
+        System.out.println(patient);*/
+    }
 
-	/**
-	 * 将给定字符串转换为科室信息列表
-	 * 
-	 * @param departmentsXml
-	 * @return
-	 * @throws TradeErrorException
-	 */
-	public static List<Department> parseXmlToDepartments(String departmentsXml) throws TradeErrorException {
-		JSONObject tradeMap = ObjectTransUtil.xmlStringToBean(departmentsXml);
-		isTradeSuccess(tradeMap);
 
-		List<Department> _result = new ArrayList<Department>();
-		int recordCount = tradeMap.getInt("RecordCount");
-		if (recordCount > 0) {
-			JSONObject departments = tradeMap.getJSONObject("Departments");
-			JSONArray departmentList = null;
-			if(recordCount == 1 ){
-				departmentList = new JSONArray();
-				departmentList.add(departments.getJSONObject("Department"));
-			}else{
-				departmentList = departments.getJSONArray("Department");
-			}
-			
-			for (int i = 0; i < departmentList.size(); ++i) {
-				JSONObject jsonObject = departmentList.getJSONObject(i);
+    /**
+     * 将给定字符串转换为科室信息列表
+     *
+     * @param departmentsXml
+     * @return
+     * @throws TradeErrorException
+     */
+    public static List<Department> parseXmlToDepartments(String departmentsXml) throws TradeErrorException {
+        JSONObject tradeMap = ObjectTransUtil.xmlStringToBean(departmentsXml);
+        isTradeSuccess(tradeMap);
 
-				Department department = new Department();
+        List<Department> _result = new ArrayList<Department>();
+        int recordCount = tradeMap.getInt("RecordCount");
+        if (recordCount > 0) {
+            JSONObject departments = tradeMap.getJSONObject("Departments");
+            JSONArray departmentList = null;
+            if (recordCount == 1) {
+                departmentList = new JSONArray();
+                departmentList.add(departments.getJSONObject("Department"));
+            } else {
+                departmentList = departments.getJSONArray("Department");
+            }
 
-				String departmentCode = jsonObject.getString("DepartmentCode");
-				department.setDepartmentCode(departmentCode);
+            for (int i = 0; i < departmentList.size(); ++i) {
+                JSONObject jsonObject = departmentList.getJSONObject(i);
 
-				String departmentName = jsonObject.getString("DepartmentName");
-				department.setDepartmentName(departmentName);
+                Department department = new Department();
+                // 科室代码
+                String departmentCode = jsonObject.getString("DepartmentCode");
+                department.setDepartmentCode(departmentCode);
+                // 科室名称
+                String departmentName = jsonObject.getString("DepartmentName");
+                department.setDepartmentName(departmentName);
+                //科室组标志
+                if (jsonObject.containsKey("DepartmentGroup")) {
+                    String departmentGroup = jsonObject.getString("DepartmentGroup");
+                    department.setDepartmentGroup(departmentGroup);
+                }
+                // 科室简介
+                if (jsonObject.containsKey("Description")) {
+                    String description = jsonObject.getString("Description");
+                    department.setDescription(description);
+                }
+                // 科室地理位置
+                if (jsonObject.containsKey("DepartmentAddress")) {
+                    String departmentAddress = jsonObject.getString("DepartmentAddress");
+                    department.setDepartmentAddress(departmentAddress);
+                }
+                // 挂号年龄限制
+                if (jsonObject.containsKey("DepartmentAgeLimit")) {
+                    String departmentAgeLimit = jsonObject.getString("DepartmentAgeLimit");
+                    department.setDepartmentAgeLimit(departmentAgeLimit);
+                }
 
-				if (jsonObject.containsKey("DepartmentGroup")) {
-					String departmentGroup = jsonObject.getString("DepartmentGroup");
-					department.setDepartmentGroup(departmentGroup);
-				}
+                _result.add(department);
+            }
+        }
 
-				_result.add(department);
-			}
-		}
+        return _result;
 
-		return _result;
+        // 测试代码
+        /*
+         * String departmentsXml = "<Response>" + "<ResultCode>0</ResultCode>" +
+         * "<ResultContent></ResultContent>" + "<RecordCount>2</RecordCount>" +
+         * "<Departments>" + "<Department>" +
+         * "<DepartmentCode>1</DepartmentCode>" +
+         * "<DepartmentName>aaa</DepartmentName>" +
+         * "<DepartmentGroup>Y</DepartmentGroup>" + "</Department>" +
+         * "<Department>" + "<DepartmentCode>2</DepartmentCode>" +
+         * "<DepartmentName>bbb</DepartmentName>" +
+         * "<DepartmentGroup></DepartmentGroup>" + "</Department>" +
+         * "</Departments>" + "</Response>"; List<Department> departments =
+         * parseXmlToDepartments(departmentsXml); for(Department d:departments){
+         * System.out.println(d); }
+         */
+    }
 
-		// 测试代码
-		/*
-		 * String departmentsXml = "<Response>" + "<ResultCode>0</ResultCode>" +
-		 * "<ResultContent></ResultContent>" + "<RecordCount>2</RecordCount>" +
-		 * "<Departments>" + "<Department>" +
-		 * "<DepartmentCode>1</DepartmentCode>" +
-		 * "<DepartmentName>aaa</DepartmentName>" +
-		 * "<DepartmentGroup>Y</DepartmentGroup>" + "</Department>" +
-		 * "<Department>" + "<DepartmentCode>2</DepartmentCode>" +
-		 * "<DepartmentName>bbb</DepartmentName>" +
-		 * "<DepartmentGroup></DepartmentGroup>" + "</Department>" +
-		 * "</Departments>" + "</Response>"; List<Department> departments =
-		 * parseXmlToDepartments(departmentsXml); for(Department d:departments){
-		 * System.out.println(d); }
-		 */
-	}
 
-	
-	/**
-	 * 将xml字符串转换为医生实体列表
-	 * 
-	 * @param doctorsXml
-	 * @return
-	 */
-	public static List<Doctor> parseXmlToDoctor(String doctorsXml) throws TradeErrorException {
-		JSONObject doctorsJsonObject = ObjectTransUtil.xmlStringToBean(doctorsXml);
-		isTradeSuccess(doctorsJsonObject);
+    /**
+     * 将xml字符串转换为医生实体列表
+     *
+     * @param doctorsXml
+     * @return
+     */
+    public static List<Doctor> parseXmlToDoctor(String doctorsXml) throws TradeErrorException {
+        JSONObject doctorsJsonObject = ObjectTransUtil.xmlStringToBean(doctorsXml);
+        isTradeSuccess(doctorsJsonObject);
 
-		List<Doctor> _result = new ArrayList<Doctor>();
-		int recordCount = doctorsJsonObject.getInt("RecordCount");
-		if (recordCount > 0) {
-			JSONObject doctors = doctorsJsonObject.getJSONObject("Doctors");
-			JSONArray doctorList = null;
-			if(recordCount == 1){
-				doctorList = new JSONArray();
-				doctorList.add(doctors.getJSONObject("Doctor"));
-			}else{
-				doctorList = doctors.getJSONArray("Doctor");
-			}
-			
-			for (int i = 0; i < doctorList.size(); ++i) {
-				JSONObject jsonObject = doctorList.getJSONObject(i);
+        List<Doctor> _result = new ArrayList<Doctor>();
+        int recordCount = doctorsJsonObject.getInt("RecordCount");
+        if (recordCount > 0) {
+            JSONObject doctors = doctorsJsonObject.getJSONObject("Doctors");
+            JSONArray doctorList = null;
+            if (recordCount == 1) {
+                doctorList = new JSONArray();
+                doctorList.add(doctors.getJSONObject("Doctor"));
+            } else {
+                doctorList = doctors.getJSONArray("Doctor");
+            }
 
-				Doctor doctor = new Doctor();
+            for (int i = 0; i < doctorList.size(); ++i) {
+                JSONObject jsonObject = doctorList.getJSONObject(i);
 
-				String doctorCode = jsonObject.getString("DoctorCode");
-				String doctorName = jsonObject.getString("DoctorName");
-				doctor.setDoctorCode(doctorCode);
-				doctor.setDoctorName(doctorName);
+                Doctor doctor = new Doctor();
 
-				_result.add(doctor);
-			}
-		}
+                String doctorCode = jsonObject.getString("DoctorCode");
+                String doctorName = jsonObject.getString("DoctorName");
+                String doctotLevelCode = jsonObject.getString("DoctotLevelCode");
+                String doctorLevel = jsonObject.getString("DoctorLevel");
+                String deptId = jsonObject.getString("DeptId");
+                String deptName = jsonObject.getString("DeptName");
+//                String description = jsonObject.getString("Description");
+                doctor.setDoctorCode(doctorCode);
+                doctor.setDoctorName(doctorName);
+                doctor.setDoctorTitleCode(doctotLevelCode);
+                doctor.setDoctorTitle(doctorLevel);
+                doctor.setDepartmentCode(deptId);
+                doctor.setDepartmentName(deptName);
+//                doctor.setDescription(description);
 
-		return _result;
-		
-		// 測試代碼
+                _result.add(doctor);
+            }
+        }
+
+        return _result;
+
+        // 測試代碼
 		/*String xmlStr = "<Response>"
 				+ "<ResultCode>0</ResultCode>"
 				+ "<ResultContent></ResultContent>"
@@ -185,46 +204,46 @@ public class ServiceHelper {
 		for (Doctor dt : doctors) {
 			System.out.println(dt);
 		}*/
-	}
-	
-	
-	/**
-	 * 将xml字符串转换为医生实体列表
-	 * 
-	 * @param doctorsXml
-	 * @return
-	 */
-	public static List<Schedule> parseXmlToSchedules(String schedulesXml) throws TradeErrorException {
-		JSONObject schedulesJsonObject = ObjectTransUtil.xmlStringToBean(schedulesXml);
-		isTradeSuccess(schedulesJsonObject);
-		
-		List<Schedule> _result = new ArrayList<Schedule>();
-		int RecordCount = schedulesJsonObject.getInt("RecordCount");
-		if (RecordCount > 0) {
-			JSONObject schedules = schedulesJsonObject.getJSONObject("Schedules");
-			JSONArray scheduleArr = null;
-			if(RecordCount == 1){
-				scheduleArr = new JSONArray();
-				scheduleArr.add(schedules.getJSONObject("Schedule"));
-			}else{
-				scheduleArr = schedules.getJSONArray("Schedule");
-			}
-			
-			Class<Schedule> sClass =  Schedule.class;
-			for (int i = 0; i < scheduleArr.size(); ++i) {
-				JSONObject jsonObject = scheduleArr.getJSONObject(i);
-				
-				Schedule schedule = new Schedule();
-				
-				reflectSetStringValue(schedule,jsonObject,sClass);
-				
-				_result.add(schedule);
-			}
-		}
-		
-		return _result;
-		
-		// 测试代码
+    }
+
+
+    /**
+     * 将xml字符串转换为医生实体列表
+     *
+     * @param schedulesXml
+     * @return
+     */
+    public static List<Schedule> parseXmlToSchedules(String schedulesXml) throws TradeErrorException {
+        JSONObject schedulesJsonObject = ObjectTransUtil.xmlStringToBean(schedulesXml);
+        isTradeSuccess(schedulesJsonObject);
+
+        List<Schedule> _result = new ArrayList<Schedule>();
+        int RecordCount = schedulesJsonObject.getInt("RecordCount");
+        if (RecordCount > 0) {
+            JSONObject schedules = schedulesJsonObject.getJSONObject("Schedules");
+            JSONArray scheduleArr = null;
+            if (RecordCount == 1) {
+                scheduleArr = new JSONArray();
+                scheduleArr.add(schedules.getJSONObject("Schedule"));
+            } else {
+                scheduleArr = schedules.getJSONArray("Schedule");
+            }
+
+            Class<Schedule> sClass = Schedule.class;
+            for (int i = 0; i < scheduleArr.size(); ++i) {
+                JSONObject jsonObject = scheduleArr.getJSONObject(i);
+
+                Schedule schedule = new Schedule();
+
+                reflectSetStringValue(schedule, jsonObject, sClass);
+
+                _result.add(schedule);
+            }
+        }
+
+        return _result;
+
+        // 测试代码
 		/*String xmlStr = "<Response>"
 				+ "<ResultCode>0</ResultCode>"
 				+ "<ResultContent></ResultContent>"
@@ -299,46 +318,49 @@ public class ServiceHelper {
 		for (Schedule dt : doctors) {
 			System.out.println(dt);
 		}*/
-	}
-	
-	
-	
-	/**
-	 * 将xml信息转换为订单实体列表信息
-	 * @param orderListXml
-	 * @return
-	 */
-	public static List<Order> parseXmlToOrders(String orderListXml)  throws TradeErrorException{
-		JSONObject ordersJsonObject = ObjectTransUtil.xmlStringToBean(orderListXml);
-		isTradeSuccess(ordersJsonObject);
+    }
 
-		List<Order> _result = new ArrayList<Order>();
-		int recordCount = ordersJsonObject.getInt("RecordCount");
-		if (recordCount > 0) {
-			JSONObject orders = ordersJsonObject.getJSONObject("Orders");
-			JSONArray ordersArr = null;
-			if(recordCount == 1){
-				ordersArr = new JSONArray();
-				ordersArr.add(orders.getJSONObject("Order"));
-			}else{
-				ordersArr = orders.getJSONArray("Order");
-			}
-			
-			Class<Order> oClass = Order.class;
-			for (int i = 0; i < ordersArr.size(); ++i) {
-				JSONObject jsonObject = ordersArr.getJSONObject(i);
 
-				Order order = new Order();
+    /**
+     * 将xml信息转换为订单实体列表信息
+     *
+     * @param orderListXml
+     * @return
+     */
+    public static List<Order> parseXmlToOrders(String orderListXml) throws TradeErrorException {
+        JSONObject ordersJsonObject = ObjectTransUtil.xmlStringToBean(orderListXml);
+        isTradeSuccess(ordersJsonObject);
 
-				reflectSetStringValue(order, jsonObject, oClass);
+        List<Order> _result = new ArrayList<Order>();
+        int recordCount = ordersJsonObject.getInt("RecordCount");
+        if (recordCount > 0) {
+            JSONObject orders = ordersJsonObject.getJSONObject("Orders");
+            JSONArray ordersArr = null;
+            if (recordCount == 1) {
+                ordersArr = new JSONArray();
+                ordersArr.add(orders.getJSONObject("Order"));
+            } else {
+                ordersArr = orders.getJSONArray("Order");
+            }
+            Set<String> orderCodeSet = new HashSet<String>();
+            Class<Order> oClass = Order.class;
+            for (int i = 0; i < ordersArr.size(); ++i) {
+                JSONObject jsonObject = ordersArr.getJSONObject(i);
 
-				_result.add(order);
-			}
-		}
+                Order order = new Order();
 
-		return _result;
-		
-		// 测试代码
+                reflectSetStringValue(order, jsonObject, oClass);
+                String orderCode = order.getOrderCode();
+                if (!orderCodeSet.contains(orderCode)) {
+                    orderCodeSet.add(orderCode);
+                    _result.add(order);
+                }
+            }
+        }
+
+        return _result;
+
+        // 测试代码
 		/*String xmlStr = "<Response>"
 				+ "<ResultCode>0</ResultCode>"
 				+ "<ResultContent></ResultContent>"
@@ -398,23 +420,24 @@ public class ServiceHelper {
 		for(Order o:orderList){
 			System.out.println(o.toString());
 		}*/
-	}
-	
-	
-	/**
-	 * 将xml信息转换为订单实体信息
-	 * @param orderListXml
-	 * @return
-	 */
-	public static Order parseXmlToOrder(String orderXml) throws TradeErrorException {
-		JSONObject orderJsonObject = ObjectTransUtil.xmlStringToBean(orderXml);
-		isTradeSuccess(orderJsonObject);
+    }
 
-		Order _result = new Order();
-		reflectSetStringValue(_result, orderJsonObject, Order.class);
-		return _result;
-		
-		// 测试代码
+
+    /**
+     * 将xml信息转换为订单实体信息
+     *
+     * @param orderXml
+     * @return
+     */
+    public static Order parseXmlToOrder(String orderXml) throws TradeErrorException {
+        JSONObject orderJsonObject = ObjectTransUtil.xmlStringToBean(orderXml);
+        isTradeSuccess(orderJsonObject);
+
+        Order _result = new Order();
+        reflectSetStringValue(_result, orderJsonObject, Order.class);
+        return _result;
+
+        // 测试代码
 		/*String orderXml = "<Response>"
 				+ "<ResultCode>0</ResultCode>"
 				+ "<ResultContent></ResultContent>"
@@ -427,57 +450,58 @@ public class ServiceHelper {
 		
 		Order order = parseXmlToOrder(orderXml);
 		System.out.println(order.toString());*/
-	}
-	
-	/**
-	 * 判断返回的xml是否是成功的交易结果
-	 * @param resultXml
-	 * @return
-	 * @throws TradeErrorException
-	 */
-	public static boolean isSuccessTradeResult(String resultXml) throws TradeErrorException {
-		JSONObject resultJsonObject = ObjectTransUtil.xmlStringToBean(resultXml);
-		isTradeSuccess(resultJsonObject);
-		
-		return true;
-	}
+    }
 
-	/*
-	 * 判断此次请求是否产生正确的结果
-	 */
-	private static void isTradeSuccess(Map<String, Object> tradeMap) throws TradeErrorException {
-		if (tradeMap == null) {
-			throw new TradeErrorException("需要正确格式的xml内容");
-		}
-		if (!ResultCode.getResultCode(String.valueOf(tradeMap.get("ResultCode"))).getResult()) {
-			throw new TradeErrorException(String.valueOf(tradeMap.get("ResultContent")));
-		}
-	}
-	
-	
-	/*
-	 * 利用反射设置对象的set值
-	 * @param obj	要设值的对象
-	 * @param jsonObject  json对象
-	 * @param clazz	设值的对象类型
-	 */
-	public static void reflectSetStringValue(Object obj,JSONObject jsonObject,Class clazz){
-		Set keySet = jsonObject.keySet();
-		Iterator keys = keySet.iterator();
+    /**
+     * 判断返回的xml是否是成功的交易结果
+     *
+     * @param resultXml
+     * @return
+     * @throws TradeErrorException
+     */
+    public static boolean isSuccessTradeResult(String resultXml) throws TradeErrorException {
+        JSONObject resultJsonObject = ObjectTransUtil.xmlStringToBean(resultXml);
+        isTradeSuccess(resultJsonObject);
 
-		while (keys.hasNext()) {
-			String next = (String) keys.next();
-			String value = jsonObject.getString(next);
-			if (value != null) {
-				try {
-					Method method = clazz.getMethod("set" + next, String.class);
-					method.invoke(obj, value);
-				} catch (Exception e) {
-					logger.warn(e.getMessage());
-				}
-			}
+        return true;
+    }
 
-		}
-	}
+    /*
+     * 判断此次请求是否产生正确的结果
+     */
+    private static void isTradeSuccess(Map<String, Object> tradeMap) throws TradeErrorException {
+        if (tradeMap == null) {
+            throw new TradeErrorException("需要正确格式的xml内容");
+        }
+        if (!ResultCode.getResultCode(String.valueOf(tradeMap.get("ResultCode"))).getResult()) {
+            throw new TradeErrorException(String.valueOf(tradeMap.get("ResultContent")));
+        }
+    }
+
+
+    /*
+     * 利用反射设置对象的set值
+     * @param obj	要设值的对象
+     * @param jsonObject  json对象
+     * @param clazz	设值的对象类型
+     */
+    public static void reflectSetStringValue(Object obj, JSONObject jsonObject, Class clazz) {
+        Set keySet = jsonObject.keySet();
+        Iterator keys = keySet.iterator();
+
+        while (keys.hasNext()) {
+            String next = (String) keys.next();
+            String value = jsonObject.getString(next);
+            if (value != null) {
+                try {
+                    Method method = clazz.getMethod("set" + next, String.class);
+                    method.invoke(obj, value);
+                } catch (Exception e) {
+                    logger.warn(e.getMessage());
+                }
+            }
+
+        }
+    }
 
 }

@@ -68,7 +68,7 @@ function queryDoctors(deptCode,pageNo,doctorName){
 				listEle += "<div class='info-pic'><img src='$!{webPath}/images/doctor-m.png'></div>";
 				listEle += "<div class='infos'><div class='info-title'>";
 				listEle += "<div>"+obj.doctor.doctorName+"</div>";
-				listEle += "<span class='doctor-medtitle'>"+obj.doctor.doctorTitle+"</span>";
+				listEle += "<span class='doctor-medtitle'>"+(obj.doctor.doctorTitleCode)+"</span>";
 				listEle += "<p class='info-hospittal'>";
 				listEle += "<span><a href='javascript:void(0);'>"+obj.doctor.departmentName+"</a></span>";
 				listEle += "<span><a href='javascript:void(0);'>"+obj.doctor.doctorSessType+"</a></span>";

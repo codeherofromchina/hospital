@@ -34,6 +34,7 @@ public class IndexAction {
 		try {
 			// 获取所有科室并存储到model中供页面使用
 			List<Department> allDepartment = departmentService.queryAllDepartments();
+			allDepartment = allDepartment.subList(0,10);
 			mv.addObject("allDepartment", allDepartment);
 		} catch (TradeErrorException e) {
 			e.printStackTrace();

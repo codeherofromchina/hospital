@@ -36,7 +36,6 @@ public class DepartmentAction {
 	/**
 	 * 异步获取所有科室信息
 	 * @param request
-	 * @param response
 	 * @return
 	 */
 	@RequestMapping("/asyncAllDepartments")
@@ -46,8 +45,8 @@ public class DepartmentAction {
 		_result.put("success", true);
 		
 		try {
-			List<Department> AllDepartments = departmentService.queryAllDepartments();
-			_result.put("result", AllDepartments);
+			List<Department> allDepartments = departmentService.queryAllDepartments();
+			_result.put("result", allDepartments);
 		} catch (TradeErrorException e) {
 			logger.error("获取所有科室组出错["+e.getMessage()+"]");
 			_result.put("success", false);
@@ -61,7 +60,6 @@ public class DepartmentAction {
 	/**
 	 * 根据科室名称异步获取科室信息
 	 * @param request
-	 * @param response
 	 * @return
 	 */
 	@RequestMapping("/asyncQueryDepartmentByName")
@@ -74,8 +72,8 @@ public class DepartmentAction {
 			try {
 				boolean findFlag = false;
 				
-				List<Department> AllDepartments = departmentService.queryAllDepartments();
-				for(Department dept:AllDepartments){
+				List<Department> allDepartments = departmentService.queryAllDepartments();
+				for(Department dept:allDepartments){
 					if(dept.getDepartmentName().equals(deptName)){
 						_result.put("result", dept);
 						findFlag = true;

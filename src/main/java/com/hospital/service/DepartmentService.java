@@ -18,15 +18,14 @@ public interface DepartmentService {
 	/**
 	 * 查询所有科室信息列表
 	 * 
-	 * @param request
 	 * @return
 	 */
-	public List<Department> queryAllDepartments() throws TradeErrorException;
+	List<Department> queryAllDepartments() throws TradeErrorException;
 
 	/**
 	 * 通过科室编号获取科室信息
 	 * @param deptCode
 	 * @return
 	 */
-	public Department queryByDeptCode(String deptCode) throws TradeErrorException;
+	Department queryByDeptCode(String deptCode) throws TradeErrorException;
 }
