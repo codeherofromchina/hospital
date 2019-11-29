@@ -30,8 +30,9 @@ public class PUB0008
         URL url = null;
         WebServiceException e = null;
         try {
+            url = new URL("http://183.196.0.25:8092/csp/hsb/DHC.Published.PUB0008.BS.PUB0008.CLS?WSDL");
 //            url = new URL("http://172.18.20.146/csp/hsb/DHC.Published.PUB0008.BS.PUB0008.cls?wsdl");
-            url = new URL("file:///C:/apache-tomcat-7.0.63/conf/wsdl.xml");
+//            url = new URL("file:///C:/apache-tomcat-7.0.63/conf/wsdl.xml");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
