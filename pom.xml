@@ -13,7 +13,7 @@
 		<spring.version>4.2.2.RELEASE</spring.version>
 		<spring.security.version>3.2.3.RELEASE</spring.security.version>
 		<velocity.version>1.7</velocity.version>
-		<quartz.version>2.1.1</quartz.version>
+		<quartz.version>2.3.2</quartz.version>
 	</properties>
 
 	<dependencies>
